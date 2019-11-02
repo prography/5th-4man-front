@@ -5,9 +5,13 @@
   "dependencies": {
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
+    "immer": "^5.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-redux": "^7.1.1",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,7 +26,10 @@
     ],
     "rules": {
       "react/prefer-stateless-function": 0,
-      "react/jsx-one-expression-per-line": 0
+      "react/jsx-one-expression-per-line": 0,
+      "react/prop-types": 0,
+      "no-underscore-dangle": 0,
+      "import/prefer-default-export": 0
     },
     "env": {
       "browser": true
