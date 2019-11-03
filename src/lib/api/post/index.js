@@ -1,4 +1,4 @@
-export const getPosts = async () => {
+export const getPosts = () => {
   return [
     {
       id: 1,

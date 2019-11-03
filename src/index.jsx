@@ -1,14 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './store/modules';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga/modules';
 
-const devTools =
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware];
+
+const devTools = process.env.NODE_ENV === 'production'
+  ? compose(applyMiddleware(...middlewares))
+  : compose(
+    applyMiddleware(...middlewares),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 const store = createStore(rootReducer, devTools);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

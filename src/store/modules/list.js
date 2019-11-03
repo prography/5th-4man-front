@@ -4,7 +4,10 @@ import produce from 'immer';
 import * as PostsAPI from 'lib/api/post';
 
 //
-const GET_LIST = 'list/GET_LIST';
+export const GET_LIST = 'list/GET_LIST';
+export const GET_LIST_SUCCESS = 'list/GET_LIST_SUCCESS';
+export const GET_LIST_FAILURE = 'list/GET_LIST_FAILURE';
+
 
 export const getList = createAction(GET_LIST, PostsAPI.getPosts);
 
