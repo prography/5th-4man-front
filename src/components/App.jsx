@@ -8,11 +8,12 @@ import NewList from './NewList';
 const App = () => {
     return (
         <>
-         <AppLayout>
-        </AppLayout>
-        <SearchList/>
-             <HotList/>
-             <NewList/>
+            <AppLayout>
+            </AppLayout>
+            <SearchList/>
+            <HotList/>
+            <NewList/>
+            <ListContainer/>
         </>
     )
 };

@@ -4,9 +4,11 @@ import Menu from 'antd/lib/menu';
 import Header from 'antd/lib/layout';
 
 const Applayout = () => {
+
+    
     return (
         <>
-         <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+         <Header style={{ position: 'fixed', width: '100%' }}>
             <Menu
                 mode="horizontal"
                 style={{ lineHeight: '64px', backgroundColor: '#5F76F3', color:"white", display:"flex"}}
