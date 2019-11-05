@@ -3,20 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.25.0",
+    "babel-plugin-import": "^1.12.2",
+    "customize-cra": "^0.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
     "immer": "^5.0.0",
     "react": "^16.11.0",
+    "react-app-rewired": "^2.1.4",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
-    "redux-actions": "^2.6.5"
+    "redux-actions": "^2.6.5",
+    "redux-saga": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -29,7 +34,11 @@
       "react/jsx-one-expression-per-line": 0,
       "react/prop-types": 0,
       "no-underscore-dangle": 0,
-      "import/prefer-default-export": 0
+      "import/prefer-default-export": 0,
+      "no-param-reassign": 0,
+      "default-case": 0,
+      "consistent-return": 0,
+      "react/no-array-index-key": 0
     },
     "env": {
       "browser": true
