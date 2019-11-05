@@ -21,9 +21,18 @@ yarn start
 ```
 
 ## 코딩스타일
-
-에어비엔비의 스타일가이드와 Prettier를 사용합니다.
+에어비엔비의 스타일가이드와 Prettier를 사용합니다. **꼭!** ESlint와 Prettier 설정을 해주세요.
 
 - [ESLint & Prettier 설정방법](https://velog.io/@velopert/eslint-and-prettier-in-react)
-
 - [에어비엔비 스타일가이드](https://github.com/airbnb/javascript)
+
+## 풀리퀘스트(PR) 가이드
+> 자기가 무슨 작업을 했는지 참고할만한 내용을 자세히 적어주세요.
+> 또한 이전 코드와 비교하면서 오타나 필요 없는 코드가 있는지 꼼꼼히 확인해주세요.
+
+##### 체크리스트 ✅
+- 푸쉬 전에는 항상 **ESlint** 체크하기
+- **console.log**는 항상 제거
+- 내가 보기 어려운 코드는 남도 어려움. **주석 꼼꼼히 달기**
+- 문제를 해결했으면 **해결 방안과 원인**도 같이 적어주기
+
