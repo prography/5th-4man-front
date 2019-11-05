@@ -1,26 +1,47 @@
-import React from 'react';
+  
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Card, Avatar, Col } from 'antd';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as listActions from '../store/modules/list';
+import * as teamActions from '../store/reducers/team';
 
-// 리스트 컨테이너
-const ListContainer = ({ list, ListActions }) => {
-  return list.map((key, { title }) => <div key={key}>{title}</div>);
-};
 
-// props 로 넣어줄 스토어 상태값
-const mapStateToProps = ({ list }) => ({
-  list: list.list,
-});
-
-// props 로 넣어줄 액션 생성 함수
-const mapDispatchToProps = dispatch => ({
-  ListActions: bindActionCreators(listActions, dispatch),
-});
-
-// 리덕스 스토어에 연동
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ListContainer);
+const ListContainer = () => {
+  const { isLoading, list } = useSelector(state => state.team);
+  const dispatch = useDispatch();
+  const getList = useCallback(() => {
+    dispatch(teamActions.getTeamListAction());
+  }, [dispatch]);
+  
+  useEffect(() => {
+    getList();
+  }, []);
+  
+  return (
+    <div>
+      {isLoading && <h1>로딩중</h1>}
+      
+      <div>
+        {
+          list.map((item, key) => (
+            <Col span={4}>
+              <Card
+                style={{width:240}}
+                hoverable
+                key={key}
+                cover={<img width="200" height="180" alt="example" src={item.img} />}
+              >
+                <Card.Meta
+                  avatar={<Avatar>{item.objective}</Avatar>}
+                  title={item.title}
+                  description={item.description} 
+                />
+              </Card>
+            </Col>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+export default ListContainer;

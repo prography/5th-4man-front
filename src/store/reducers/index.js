@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import list from './list';
+import team from './team';
 
+// 리듀서들을 하나로 합침
 export default combineReducers({
-  list,
+  team,
 });
