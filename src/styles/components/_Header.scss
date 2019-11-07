@@ -1,0 +1,45 @@
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  display: flex !important;
+  align-items: center;
+  color: #fff;
+
+  .header-inner {
+    width: 64.32%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a.logo {
+    font-family: Spoqa Han Sans Bold;
+    color: #fff;
+    font-size: 0.88rem;
+
+    .point {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+
+      a {
+        display: inline-block;
+        padding: 0 10px;
+        color: #fff;
+      }
+    }
+  }
+}
