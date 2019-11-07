@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Avatar, Col } from 'antd';
+import { Card, Avatar, Col, Row } from 'antd';
 
 import * as teamActions from '../store/reducers/team';
 
@@ -20,24 +20,25 @@ const ListContainer = () => {
       {isLoading && <h1>로딩중</h1>}
 
       <div>
-        {list.map((item, key) => (
-          <Col span={4}>
-            <Card
-              style={{ width: 240 }}
-              hoverable
-              key={key}
-              cover={
-                <img width="200" height="180" alt="example" src={item.img} />
-              }
-            >
-              <Card.Meta
-                avatar={<Avatar>{item.objective}</Avatar>}
-                title={item.title}
-                description={item.description}
-              />
-            </Card>
-          </Col>
-        ))}
+        <Row gutter={16}>
+          {list.map((item, key) => (
+            <Col span={6}>
+              <Card
+                style={{ width: 295, borderRadius: 8 }}
+                hoverable
+                key={key}
+                cover={<img height="200" alt="example" src={item.img} />}
+              >
+                <Card.Meta
+                  style={{ height: 255 }}
+                  avatar={<Avatar>{item.objective}</Avatar>}
+                  title={item.title}
+                  description={item.description}
+                />
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </div>
     </div>
   );
