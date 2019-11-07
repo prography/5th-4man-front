@@ -1,10 +1,8 @@
-  
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Avatar, Col } from 'antd';
+import { Card, Avatar, Col, Row } from 'antd';
 
 import * as teamActions from '../store/reducers/team';
-
 
 const ListContainer = () => {
   const { isLoading, list } = useSelector(state => state.team);
@@ -12,36 +10,37 @@ const ListContainer = () => {
   const getList = useCallback(() => {
     dispatch(teamActions.getTeamListAction());
   }, [dispatch]);
-  
+
   useEffect(() => {
     getList();
   }, []);
-  
+
   return (
     <div>
       {isLoading && <h1>로딩중</h1>}
-      
+
       <div>
-        {
-          list.map((item, key) => (
-            <Col span={4}>
+        <Row gutter={16}>
+          {list.map((item, key) => (
+            <Col span={6}>
               <Card
-                style={{width:240}}
+                style={{ width: 295, borderRadius: 8 }}
                 hoverable
                 key={key}
-                cover={<img width="200" height="180" alt="example" src={item.img} />}
+                cover={<img height="200" alt="example" src={item.img} />}
               >
                 <Card.Meta
+                  style={{ height: 255 }}
                   avatar={<Avatar>{item.objective}</Avatar>}
                   title={item.title}
-                  description={item.description} 
+                  description={item.description}
                 />
               </Card>
             </Col>
-          ))
-        }
+          ))}
+        </Row>
       </div>
     </div>
-  )
-}
+  );
+};
 export default ListContainer;
