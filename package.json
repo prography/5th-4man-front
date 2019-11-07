@@ -9,14 +9,17 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
     "immer": "^5.0.0",
+    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-app-rewired": "^2.1.4",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-actions": "^2.6.5",
-    "redux-saga": "^1.1.1"
+    "redux-saga": "^1.1.1",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -38,7 +41,9 @@
       "no-param-reassign": 0,
       "default-case": 0,
       "consistent-return": 0,
-      "react/no-array-index-key": 0
+      "react/no-array-index-key": 0,
+      "import/no-named-as-default": 0,
+      "import/no-named-as-default-member": 0
     },
     "env": {
       "browser": true
