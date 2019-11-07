@@ -1,0 +1,58 @@
+@font-face {
+  font-family: Spoqa Han Sans;
+  src: url('./fonts/Spoqa Han Sans Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: Spoqa Han Sans Thin;
+  src: url('./fonts/Spoqa Han Sans Thin.woff') format('woff');
+}
+
+@font-face {
+  font-family: Spoqa Han Sans Light;
+  src: url('./fonts/Spoqa Han Sans Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: Spoqa Han Sans Bold;
+  src: url('./fonts/Spoqa Han Sans Bold.woff') format('woff');
+}
+
+$text-color: #272e40;
+
+* {
+  font-family: 'Spoqa Han Sans', 'Sans-serif';
+  color: $text-color;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  position: relative;
+  font-size: 16px;
+}
+
+.text-bold {
+  font-family: Spoqa Han Sans Bold;
+}
+
+section.content {
+  padding: 100px 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+
+  .content-inner {
+    width: 64.32%;
+    margin: 0 auto;
+  }
+}
+
+@import './components/_Header.scss';
+@import './components/_Banner.scss';
