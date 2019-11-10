@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <header>
-      <div className="header-inner">
+      <div className="container display-flex justify-content-space-between">
         <Link to="/" className="logo">
           <span className="point text-bold">개</span>발은{' '}
           <span className="point text-bold">같</span>이{' '}
