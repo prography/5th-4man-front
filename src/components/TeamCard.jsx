@@ -12,7 +12,10 @@ const TeamCard = props => {
       key={key}
       cover={<img height="200" alt="example" src={item.img} />}
     >
-      <div className="team-card-meta">1234</div>
+      <div className="team-card-meta">
+        <h3 className="text-bold">{item.title}</h3>
+        <p>{item.description}</p>
+      </div>
     </Card>
   );
 };
