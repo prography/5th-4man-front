@@ -1,6 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Avatar, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
+
+import SkeletonCard from 'components/SkeletonCard';
+import TeamCard from 'components/TeamCard';
 
 import * as teamActions from '../store/reducers/team';
 
@@ -16,31 +19,33 @@ const ListContainer = () => {
   }, []);
 
   return (
-    <div>
-      {isLoading && <h1>로딩중</h1>}
-
+    <>
       <div>
         <Row gutter={16}>
+          {isLoading && (
+            <>
+              <Col xs={24} md={12} lg={8} xl={6}>
+                <SkeletonCard />
+              </Col>
+              <Col xs={24} md={12} lg={8} xl={6}>
+                <SkeletonCard />
+              </Col>
+              <Col xs={24} md={12} lg={8} xl={6}>
+                <SkeletonCard />
+              </Col>
+              <Col xs={24} md={12} lg={8} xl={6}>
+                <SkeletonCard />
+              </Col>
+            </>
+          )}
           {list.map((item, key) => (
-            <Col span={6}>
-              <Card
-                style={{ width: 295, borderRadius: 8 }}
-                hoverable
-                key={key}
-                cover={<img height="200" alt="example" src={item.img} />}
-              >
-                <Card.Meta
-                  style={{ height: 255 }}
-                  avatar={<Avatar>{item.objective}</Avatar>}
-                  title={item.title}
-                  description={item.description}
-                />
-              </Card>
+            <Col xs={24} md={12} lg={8} xl={6}>
+              <TeamCard item={item} key={key} />
             </Col>
           ))}
         </Row>
       </div>
-    </div>
+    </>
   );
 };
 export default ListContainer;
