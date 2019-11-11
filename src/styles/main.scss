@@ -1,3 +1,4 @@
+// 폰트 설정
 @font-face {
   font-family: Spoqa Han Sans;
   src: url('./fonts/Spoqa Han Sans Regular.woff') format('woff');
@@ -18,11 +19,21 @@
   src: url('./fonts/Spoqa Han Sans Bold.woff') format('woff');
 }
 
+// 스타일 변수 설정
 $text-color: #272e40;
+$main-color-blue: #5f76f3;
+$main-color-violet: #845ef7;
+$main-color-gradient: linear-gradient(
+  133deg,
+  $main-color-blue,
+  $main-color-violet
+);
+
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 
 * {
   font-family: 'Spoqa Han Sans', 'Sans-serif';
-  color: $text-color;
+  box-sizing: border-box;
 }
 
 a {
@@ -38,21 +49,92 @@ body {
   font-size: 16px;
 }
 
+// display class
+.display-inline {
+  display: inline;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.display-flex {
+  display: flex;
+}
+
+// flex class
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+// container
+.container {
+  max-width: 1250px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+// text
 .text-bold {
   font-family: Spoqa Han Sans Bold;
 }
 
-section.content {
-  padding: 100px 0;
-  background-color: #f9f9f9;
-  display: flex;
-  justify-content: center;
+.text-thin {
+  font-family: Spoqa Han Sans Thin;
+}
 
-  .content-inner {
-    width: 64.32%;
-    margin: 0 auto;
+.text-light {
+  font-family: Spoqa Han Sans Light;
+}
+
+// section
+#content {
+  padding: 120px 0 100px;
+  background-color: #f9f9f9;
+
+  .content-title-aria {
+    h2 {
+      color: $text-color;
+      font-size: 1.5rem;
+      margin-bottom: 0px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #ADB5BD;
+    }
+
+    .bar {
+      width: 60px;
+      height: 0;
+      border: 2px solid $main-color-blue;
+      border-radius: 5px;
+      margin-bottom: 40px;
+    }
   }
 }
 
+@import './components/_SkeletonCard.scss';
+@import './components/TeamCard';
 @import './components/_Header.scss';
 @import './components/_Banner.scss';
