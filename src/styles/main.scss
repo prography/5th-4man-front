@@ -29,6 +29,8 @@ $main-color-gradient: linear-gradient(
   $main-color-violet
 );
 
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+
 * {
   font-family: 'Spoqa Han Sans', 'Sans-serif';
   box-sizing: border-box;
@@ -77,6 +79,14 @@ body {
   justify-content: space-between;
 }
 
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
 // container
 .container {
   max-width: 1250px;
@@ -99,8 +109,29 @@ body {
 
 // section
 #content {
-  padding: 100px 0;
+  padding: 120px 0 100px;
   background-color: #f9f9f9;
+
+  .content-title-aria {
+    h2 {
+      color: $text-color;
+      font-size: 1.5rem;
+      margin-bottom: 0px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #ADB5BD;
+    }
+
+    .bar {
+      width: 60px;
+      height: 0;
+      border: 2px solid $main-color-blue;
+      border-radius: 5px;
+      margin-bottom: 40px;
+    }
+  }
 }
 
 @import './components/_SkeletonCard.scss';
