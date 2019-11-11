@@ -13,7 +13,7 @@ function* getTeamList() {
     const items = yield call(PostAPI.getPosts);
 
     // 로딩 테스트 하기 위해서 딜레이 2초 줌
-    yield delay(1000);
+    yield delay(2000);
 
     // items로 데이터 전달
     yield put({ type: GET_TEAMLIST_SUCCESS, items });
