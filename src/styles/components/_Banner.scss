@@ -2,13 +2,29 @@
   .bannerBg {
     padding-top: 110px;
     background-image: $main-color-gradient;
-    height: 550px;
-    display: flex;
-    justify-content: center;
+    background-size: cover;
+    height: 440px;
 
-    h2 {
-      font-size: 2.38rem;
-      color: #fff;
+    .stack-choice-area {
+      width: 670px;
+      height: 400px;
+      background-color: #fff;
+      -webkit-box-shadow: $box-shadow;
+      box-shadow: $box-shadow;
+      border-radius: 3px;
+      padding: 30px;
     }
+
+    .banner-title {
+      padding-left: 50px;
+      color: rgba(#fff, .8);
+
+      h2 {
+        color: #fff;
+        font-size: 2rem;
+      }
+    }
+
+    
   }
 }
