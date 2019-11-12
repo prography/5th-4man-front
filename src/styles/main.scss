@@ -49,6 +49,11 @@ body {
   font-size: 16px;
 }
 
+button {
+  border: 0;
+  outline: none;
+}
+
 // display class
 .display-inline {
   display: inline;
@@ -107,6 +112,12 @@ body {
   font-family: Spoqa Han Sans Light;
 }
 
+.text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // section
 #content {
   padding: 120px 0 100px;
@@ -127,9 +138,32 @@ body {
     .bar {
       width: 60px;
       height: 0;
-      border: 2px solid $main-color-blue;
+      border: 1px solid $main-color-blue;
       border-radius: 5px;
       margin-bottom: 40px;
+    }
+  }
+
+  .category-navigation {
+    display: flex;
+    padding: 5px 0 20px;
+
+    li {
+      margin-right: 25px;
+      font-size: 1rem;
+      color: #adb5bd;
+      padding-bottom: 10px;
+      transition: color 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        color: rgba($text-color, 0.7);
+      }
+
+      &:first-child {
+        color: $text-color;
+        border-bottom: 3px solid $main-color-blue;
+      }
     }
   }
 }
