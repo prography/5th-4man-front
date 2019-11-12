@@ -1,13 +1,15 @@
+$banner-height: 440px;
+
 #banner {
   .bannerBg {
     padding-top: 110px;
     background-image: $main-color-gradient;
     background-size: cover;
-    height: 440px;
+    height: $banner-height;
 
     .stack-choice-area {
-      width: 670px;
-      height: 400px;
+      width: 50%;
+      height: $banner-height - 40;
       background-color: #fff;
       -webkit-box-shadow: $box-shadow;
       box-shadow: $box-shadow;
@@ -17,14 +19,45 @@
 
     .banner-title {
       padding-left: 50px;
-      color: rgba(#fff, .8);
+      color: rgba(#fff, 0.8);
 
       h2 {
         color: #fff;
         font-size: 2rem;
       }
-    }
 
-    
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// banner media
+@media (max-width: 1023px) {
+  $banner-height: 350px;
+
+  #banner {
+    .bannerBg {
+      padding-top: 80px;
+
+      .container {
+        flex-direction: column-reverse;
+      }
+
+      .banner-title {
+        padding-left: 0;
+      }
+
+      .stack-choice-area {
+        width: 100%;
+        height: $banner-height - 100;
+        background-color: #fff;
+        -webkit-box-shadow: $box-shadow;
+        box-shadow: $box-shadow;
+        border-radius: 3px;
+        padding: 30px;
+      }
+    }
   }
 }
