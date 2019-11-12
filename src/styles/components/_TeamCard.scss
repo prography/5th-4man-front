@@ -1,10 +1,88 @@
+// 카드 이미지 스타일
+.card-image-wrap {
+  position: relative;
+  padding-top: 67.125%;
+  overflow: hidden;
+
+  img {
+    transform: scale(1);
+    transition: transform 0.3s ease 0s, opacity 0.1s linear 0s;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 1;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
 .no-padding-card {
   .ant-card-body {
     padding: 0 !important;
   }
 }
 
+// 팀 정보
 .team-card-meta {
   height: 255px;
   padding: 15px;
+
+  // 팀 타이틀
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  // 팀 설명
+  .description {
+    font-weight: normal;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+    height: 40px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    color: #777777;
+    margin: 2px 0px 0px;
+    overflow: hidden;
+    margin-bottom: 35px;
+  }
+
+  // 현재인원
+  .current-member-wrap {
+    margin-bottom: 20px;
+    .current-member {
+      color: $main-color-blue;
+      font-size: 1rem;
+      margin: 0;
+
+      span.text-bold {
+        font-size: 1.25rem;
+      }
+    }
+
+    // antd customize
+    .ant-progress-bg {
+      background-color: $main-color-blue;
+      height: 10px !important;
+    }
+
+    .ant-progress-inner {
+      background-color: #5f76f34d;
+    }
+  }
+
+  // 좋아요, 댓글, 조회수
+  .card-counts {
+    border-top: 1px solid #e9ecef;
+    padding: 12px 0;
+    color: #adb5bd;
+    font-size: 13px;
+  }
 }
