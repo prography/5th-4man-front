@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
         return draft;
       }
       case GET_TEAMLIST_SUCCESS: {
-        draft.list = action.items;
+        draft.list.push(...action.items);
         draft.isLoading = false;
         return draft;
       }
