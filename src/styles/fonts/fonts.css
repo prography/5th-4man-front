@@ -1,0 +1,19 @@
+@font-face {
+  font-family: Spoqa Han Sans;
+  src: url('./Spoqa Han Sans Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: Spoqa Han Sans Thin;
+  src: url('./Spoqa Han Sans Thin.woff') format('woff');
+}
+
+@font-face {
+  font-family: Spoqa Han Sans Light;
+  src: url('./Spoqa Han Sans Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: Spoqa Han Sans Bold;
+  src: url('./Spoqa Han Sans Bold.woff') format('woff');
+}

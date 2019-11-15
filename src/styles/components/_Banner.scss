@@ -22,12 +22,15 @@ $banner-height: 440px;
       color: rgba(#fff, 0.8);
 
       h2 {
+        padding-top: 60px;
         color: #fff;
-        font-size: 2rem;
+        font-size: 2.3rem;
+        line-height: 1.3;
       }
 
       p {
-        font-size: 1rem;
+        font-size: 1.025rem;
+        padding-bottom: 10px;
       }
     }
   }
