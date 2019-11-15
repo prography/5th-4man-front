@@ -24,7 +24,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/">회원가입</Link>
+              <Link to="/register">회원가입</Link>
             </li>
           </ul>
         </div>
