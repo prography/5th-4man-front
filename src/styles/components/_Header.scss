@@ -7,6 +7,26 @@ header {
   display: flex !important;
   align-items: center;
   color: #fff;
+  z-index: 99999;
+
+  // 스크롤 했을때 헤더 스타일
+  &.scrolled {
+    background-color: #fff;
+    box-shadow: $box-shadow;
+    color: $text-color;
+
+    a.logo {
+      color: $main-color-blue;
+
+      .point {
+        color: $main-color-blue;
+      }
+    }
+
+    .navigation ul a {
+      color: $text-color;
+    }
+  }
 
   a.logo {
     font-family: Spoqa Han Sans Bold;
