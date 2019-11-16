@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import Root from './Root';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import LoginContainer from './containers/LoginContainer';
+import ModalContainer from './containers/ModalContainer';
 
 import 'styles/main.scss';
 
 ReactDOM.render(
   <Provider store={store}>
     <Root />
-    <LoginContainer />
+    <ModalContainer />
   </Provider>,
   document.getElementById('root'),
 );
