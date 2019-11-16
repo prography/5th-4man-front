@@ -19,7 +19,11 @@ const Header = () => {
               <Link to="/">서비스 소개</Link>
             </li>
             <li>
-              <Link to="/" onClick={() => dispatch({ type: OPEN_MODAL })}>
+              <Link
+                to="/"
+                onClick={() =>
+                  dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })}
+              >
                 로그인
               </Link>
             </li>

@@ -12,6 +12,7 @@ export const CloseModal = () => ({
 
 const initialState = {
   openYn: false,
+  type: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
       case OPEN_MODAL: {
         draft.openYn = true;
+        draft.type = action.payload.type;
         return draft;
       }
       case CLOSE_MODAL: {
