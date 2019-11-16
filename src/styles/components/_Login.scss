@@ -1,4 +1,6 @@
 .login-header {
+  padding: 1rem;
+  border-bottom: 2px solid #efefef;
   font-size: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -18,6 +20,7 @@
 }
 
 .login-contents {
+  padding: 1rem;
   padding-top: 5%;
   text-align: center;
   .login-title {
@@ -47,6 +50,12 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.button-border {
+  padding-top: 2%;
+  margin-top: 2%;
+  border-top: 2px solid #efefef;
+}
 .github-button {
   color: #272e40;
   height: 3.4rem;
@@ -63,6 +72,6 @@
     margin-top: 15%;
   }
 }
-#right-space {
+.right-space {
   opacity: 0;
 }
