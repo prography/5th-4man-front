@@ -6,6 +6,9 @@ import {
   GET_POPULAR_LIST_REQUEST,
   GET_POPULAR_LIST_SUCCESS,
   GET_POPULAR_LIST_FAILURE,
+  GET_RECENT_LIST_REQUEST,
+  GET_RECENT_LIST_SUCCESS,
+  GET_RECENT_LIST_FAILURE,
 } from 'store/reducers/team';
 
 import * as PostAPI from 'lib/api/post';
@@ -25,11 +28,21 @@ function* getTeamList() {
   }
 }
 
-function* watchTeamList() {
-  yield takeLatest(GET_TEAMLIST_REQUEST, getTeamList);
+function* getPopularList() {
+  try {
+    const items = yield call(PostAPI.getTeamList);
+
+    // 로딩 테스트 하기 위해서 딜레이 2초 줌
+    yield delay(2000);
+
+    // items로 데이터 전달
+    yield put({ type: GET_POPULAR_LIST_SUCCESS, items: items.data });
+  } catch (e) {
+    yield put({ type: GET_POPULAR_LIST_FAILURE, message: e.message });
+  }
 }
 
-function* getTeamList2() {
+function* getRecentList() {
   try {
     const items = yield call(PostAPI.getPosts);
 
@@ -37,16 +50,28 @@ function* getTeamList2() {
     yield delay(2000);
 
     // items로 데이터 전달
-    yield put({ type: GET_POPULAR_LIST_SUCCESS, items });
+    yield put({ type: GET_RECENT_LIST_SUCCESS, items });
   } catch (e) {
-    yield put({ type: GET_POPULAR_LIST_FAILURE, message: e.message });
+    yield put({ type: GET_RECENT_LIST_FAILURE, message: e.message });
   }
 }
 
-function* watchTeamList2() {
-  yield takeLatest(GET_POPULAR_LIST_REQUEST, getTeamList2);
+function* watchTeamList() {
+  yield takeLatest(GET_TEAMLIST_REQUEST, getTeamList);
+}
+
+function* watchPopularList() {
+  yield takeLatest(GET_POPULAR_LIST_REQUEST, getPopularList);
+}
+
+function* watchRecentList() {
+  yield takeLatest(GET_RECENT_LIST_REQUEST, getRecentList);
 }
 
 export default function* root() {
-  yield all([fork(watchTeamList), fork(watchTeamList2)]);
+  yield all([
+    fork(watchTeamList),
+    fork(watchPopularList),
+    fork(watchRecentList),
+  ]);
 }

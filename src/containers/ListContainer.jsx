@@ -7,65 +7,66 @@ import TeamCard from 'components/TeamCard';
 
 import * as teamActions from '../store/reducers/team';
 
-const ListContainer = ({ type }) => {
-  const { main, popular } = useSelector(state => state.team);
+// 로딩 컴포넌트
+const LoadingComponent = () => {
+  // skeleton 4개만 보여줌
+  const showCount = 4;
+
+  return (
+    <>
+      <Row gutter={16}>
+        {[...Array(showCount)].map((val, key) => (
+          <Col key={key} xs={24} md={12} lg={8} xl={6}>
+            <SkeletonCard />
+          </Col>
+        ))}
+      </Row>
+      <div className="display-flex justify-content-center more-loading-team">
+        <Icon type="loading" className="loading-icon" />
+      </div>
+    </>
+  );
+};
+
+const ListContainer = ({ type = 'recent' }) => {
+  const actions = {
+    popular: teamActions.getPopularListAction,
+    recent: teamActions.getRecentListAction,
+  };
+
+  const team = useSelector(state => state.team);
+  const currentData = team[type];
+
   const dispatch = useDispatch();
   const getList = useCallback(() => {
-    const currentAction =
-      type === 'popular'
-        ? teamActions.getPopularListAction
-        : teamActions.getTeamListAction;
-
-    dispatch(currentAction());
+    dispatch(actions[type]());
   }, [dispatch]);
 
   useEffect(() => {
     getList();
   }, []);
 
-  if (type === 'popular') {
-    console.log(popular.list);
-  }
-
-  const current = type === 'popular' ? popular : main;
-
   return (
     <div>
       <Row gutter={16}>
-        {current.list.map(item => (
+        {currentData.list.map(item => (
           <Col xs={24} md={12} lg={8} xl={6} key={item.id}>
             <TeamCard item={item} />
           </Col>
         ))}
-        {current.loading && (
-          <>
-            <Col xs={24} md={12} lg={8} xl={6}>
-              <SkeletonCard />
-            </Col>
-            <Col xs={24} md={12} lg={8} xl={6}>
-              <SkeletonCard />
-            </Col>
-            <Col xs={24} md={12} lg={8} xl={6}>
-              <SkeletonCard />
-            </Col>
-            <Col xs={24} md={12} lg={8} xl={6}>
-              <SkeletonCard />
-            </Col>
-          </>
-        )}
       </Row>
-
-      <div className="display-flex justify-content-center more-loading-team">
-        {!current.loading ? (
+      {currentData.loading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="display-flex justify-content-center more-loading-team">
           <button type="button" onClick={getList}>
             <span className="pr-10">팀 더보기</span>
-            <Icon type="caret-down" />
+            <Icon type="arrow-down" />
           </button>
-        ) : (
-          <Icon type="loading" className="loading-icon" />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default ListContainer;
