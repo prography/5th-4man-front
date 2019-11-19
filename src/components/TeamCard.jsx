@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card, Icon } from 'antd';
+import * as moment from 'moment';
 
 const TeamCard = props => {
   const { item } = props;
@@ -21,7 +23,7 @@ const TeamCard = props => {
   // 팀 카드 이미지
   const cardImage = (
     <span className="card-image-wrap">
-      <img src={item.img} alt="team-img" />
+      <img src={item.image} alt="team-img" />
       <div className="progress-wrap">
         <div className="progress-outer">
           <div className="progress-text display-flex justify-content-space-between">
@@ -42,12 +44,22 @@ const TeamCard = props => {
       cover={cardImage}
     >
       <div className="team-card-meta">
-        <h3 className="text-bold text-overflow-ellipsis">{item.title}</h3>
-        <p className="description">{item.description}</p>
+        <div className="content-header">
+          <Link to="/" className="leader-name display-block main-color-blue">
+            By. {item.leader.username}
+          </Link>
+          <h3 className="text-bold">{item.title}</h3>
+
+          <p className="description">{item.description}</p>
+        </div>
+        <p className="end-date">
+          마감일: {moment(item.end_date).format('YYYY-MM-DD')}{' '}
+          <span className="text-bold main-color-blue pl-10">D-{10}</span>
+        </p>
         <div className="card-counts">
           <div className="display-flex justify-content-space-between">
             <p className="no-margin">
-              <span>좋아요 10</span>∙<span>댓글 15</span>
+              <span>좋아요 {item.like_count}</span>∙<span>댓글 15</span>
             </p>
             <div>
               <Icon type="heart" className="card-icon card-icon-heart pr-10" />
