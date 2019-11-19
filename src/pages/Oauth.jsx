@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LOG_IN_GITHUB_TOKEN_REQUEST } from '../store/reducers/user';
 
 const Oauth = () => {
