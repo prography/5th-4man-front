@@ -1,4 +1,5 @@
 import React from 'react';
+import TagSearch from 'containers/TagSearchCotainer';
 
 const Banner = () => {
   return (
@@ -6,7 +7,9 @@ const Banner = () => {
       <div className="bannerBg">
         <div className="container display-flex">
           <div className="stack-choice-area">
-            여기에 개발 스택을 고를 수 있게 개발 예정
+            <div>
+              <TagSearch />
+            </div>
           </div>
           <div className="banner-title">
             <h2 className="text-light">
