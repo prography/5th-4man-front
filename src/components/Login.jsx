@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
+import { LOG_IN_GITHUB_CODE_REQUEST } from '../store/reducers/user';
 
 const Login = () => {
   const [email, setEmail] = useState();
 
+  const dispatch = useDispatch();
+
+  const onLoginGithub = () => {
+    dispatch({ type: LOG_IN_GITHUB_CODE_REQUEST });
+  };
   const onChangeEmail = e => {
     e.preventDefault();
     setEmail(e.target.value);
@@ -31,7 +38,12 @@ const Login = () => {
           <span id="right-space" />
         </Button>
         <div className="button-border">
-          <Button className="github-button" size="large" block>
+          <Button
+            className="github-button"
+            size="large"
+            block
+            onClick={onLoginGithub}
+          >
             <Icon type="github" className="github-icon" />
             깃허브로 시작하기
             <span className="right-space" />
