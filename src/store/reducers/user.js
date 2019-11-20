@@ -18,6 +18,10 @@ export const LOG_IN_GITHUB_TOKEN_REQUEST = 'user/LOG_IN_GITHUB_TOKEN_REQUEST';
 export const LOG_IN_GITHUB_TOKEN_SUCCESS = 'user/LOG_IN_GITHUB_TOKEN_SUCCESS';
 export const LOG_IN_GITHUB_TOKEN_FAILURE = 'user/LOG_IN_GITHUB_TOKEN_FAILURE';
 
+export const SIGN_UP_REQUEST = 'user/SIGN_UP_REQUEST';
+export const SIGN_UP_SUCCESS = 'user/SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'user/SIGN_UP_FAILURE';
+
 export const LOG_OUT = 'user/LOG_OUT';
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +54,11 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_FAILURE:
+        return draft;
+
+      case SIGN_UP_REQUEST:
+        return draft;
+      case SIGN_UP_SUCCESS:
         return draft;
     }
   });
