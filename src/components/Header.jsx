@@ -8,7 +8,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector(state => state.user);
   return (
-    <header>
+    <header className="scrolled">
       <div className="container display-flex justify-content-space-between">
         <Link to="/" className="logo">
           <span className="point text-bold">개</span>발은{' '}
