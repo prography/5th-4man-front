@@ -49,7 +49,7 @@ const TeamCard = props => {
             to="/"
             className="leader-name display-inline-block main-color-blue"
           >
-            By. {item.leader.username}
+            By. {item.leader.nickname}
           </Link>
           <h3 className="text-bold">{item.title}</h3>
 
