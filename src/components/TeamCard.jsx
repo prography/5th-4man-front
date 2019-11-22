@@ -45,7 +45,10 @@ const TeamCard = props => {
     >
       <div className="team-card-meta">
         <div className="content-header">
-          <Link to="/" className="leader-name display-block main-color-blue">
+          <Link
+            to="/"
+            className="leader-name display-inline-block main-color-blue"
+          >
             By. {item.leader.username}
           </Link>
           <h3 className="text-bold">{item.title}</h3>
