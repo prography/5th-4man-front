@@ -6,9 +6,10 @@ const Banner = () => {
     <section id="banner">
       <div className="bannerBg">
         <div className="container display-flex">
-          <div className="stack-choice-area">
+          <div className="stack-choice-area display-flex justify-content-center align-items-center">
             <div>
-              <TagSearch />
+              <h2 className="text-bold">서비스 준비 중입니다 🤔</h2>
+              {/* <TagSearch /> */}
             </div>
           </div>
           <div className="banner-title">
