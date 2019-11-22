@@ -1,6 +1,6 @@
 header {
   width: 100%;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   height: 60px;
@@ -14,6 +14,7 @@ header {
     background-color: #fff;
     box-shadow: $box-shadow;
     color: $text-color;
+    position: relative;
 
     a.logo {
       color: $main-color-blue;
