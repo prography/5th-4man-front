@@ -133,13 +133,13 @@ export const getPosts = async () => {
 };
 
 export const getTeamList = async () => {
-  const re = await axios.get('http://gaegata.fourman.store/team/');
+  const re = await axios.get('https://gaegata.fourman.store/team/');
 
   return re;
 };
 
 export const getRecentTeamList = async () => {
-  const re = await axios.get('http://gaegata.fourman.store/team/recent/');
+  const re = await axios.get('https://gaegata.fourman.store/team/recent/');
 
   return re;
 };
