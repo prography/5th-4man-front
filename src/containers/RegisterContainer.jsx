@@ -1,7 +1,7 @@
 import React from 'react';
 import Register from '../components/Register';
 
-const RegisterFormContainer = () => {
+const RegisterContainer = () => {
   return (
     <>
       <Register />
@@ -9,4 +9,4 @@ const RegisterFormContainer = () => {
   );
 };
 
-export default RegisterFormContainer;
+export default RegisterContainer;

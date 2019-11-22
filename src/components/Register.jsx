@@ -4,10 +4,13 @@ import { useDispatch } from 'react-redux';
 import {
   LOG_IN_GITHUB_CODE_REQUEST,
   SIGN_UP_REQUEST,
+  USER_CHECK_REQUEST,
 } from '../store/reducers/user';
 
 const Register = props => {
   const [confirmDirty, setConfirmDirty] = useState(false);
+  const [username, setUsername] = useState('');
+  const [introduce, setIntroduce] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -42,10 +45,20 @@ const Register = props => {
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      dispatch({ type: SIGN_UP_REQUEST, payload: { email, password, name } });
+      dispatch({
+        type: SIGN_UP_REQUEST,
+        payload: { username, password, email, introduce, name },
+      });
     },
     [email, password, name],
   );
+  const onChangeUserName = e => {
+    setUsername(e.target.value);
+    dispatch({ type: USER_CHECK_REQUEST, payload: { username } });
+  };
+  const onChangeIntroduce = e => {
+    setIntroduce(e.target.value);
+  };
   const onChangeEmail = e => {
     setEmail(e.target.value);
   };
@@ -66,25 +79,13 @@ const Register = props => {
       <div className="text-bold register-title .mb-20">회원가입</div>
       <div style={{ width: '50%' }}>
         <Form layout="horizontal" onSubmit={handleSubmit}>
-          <Form.Item label="이메일">
-            {getFieldDecorator('email', {
-              rules: [
-                {
-                  type: 'email',
-                  message: '이메일 형식이 아닙니다.',
-                },
-                {
-                  required: true,
-                  message: '이메일을 입력하세요.',
-                },
-              ],
-            })(
-              <Input
-                size="large"
-                placeholder="example@gmail.com"
-                onChange={onChangeEmail}
-              />,
-            )}
+          <Form.Item label="로그인 아이디" hasFeedback>
+            <Input
+              size="large"
+              placeholder="login id"
+              onChange={onChangeUserName}
+            />
+            ,
           </Form.Item>
           <Form.Item label="비밀번호">
             {getFieldDecorator('password', {
@@ -124,8 +125,35 @@ const Register = props => {
               />,
             )}
           </Form.Item>
+          <Form.Item label="이메일">
+            {getFieldDecorator('email', {
+              rules: [
+                {
+                  type: 'email',
+                  message: '이메일 형식이 아닙니다.',
+                },
+                {
+                  required: true,
+                  message: '이메일을 입력하세요.',
+                },
+              ],
+            })(
+              <Input
+                size="large"
+                placeholder="example@gmail.com"
+                onChange={onChangeEmail}
+              />,
+            )}
+          </Form.Item>
+          <Form.Item label="한줄 소개" hasFeedback>
+            <Input
+              size="large"
+              placeholder="안녕하세요."
+              onChange={onChangeIntroduce}
+            />
+          </Form.Item>
           <Form.Item label="이름" hasFeedback>
-            <Input size="large" placeholder="홍길동" onChange={onChangeName} />,
+            <Input size="large" placeholder="홍길동" onChange={onChangeName} />
           </Form.Item>
           <Form.Item {...buttonItemLayout}>
             {getFieldDecorator('agreement', {

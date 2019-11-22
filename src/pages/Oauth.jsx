@@ -4,16 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_GITHUB_TOKEN_REQUEST } from '../store/reducers/user';
 
 const Oauth = () => {
-  const { isNew, userId } = useSelector(state => state.user);
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
   const code = params.get('code');
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: LOG_IN_GITHUB_TOKEN_REQUEST, payload: { code } });
-  });
+  }, []);
 
-  alert(userId);
+  const { isNew, isLoggedIn } = useSelector(state => state.user);
+
+  if (!isLoggedIn) {
+    return null;
+  }
+
   return (
     <>
       <div>Loading...</div>
