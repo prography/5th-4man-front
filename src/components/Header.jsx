@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { OPEN_MODAL } from '../store/reducers/modal';
 import { LOG_OUT } from '../store/reducers/user';
 
-const Header = () => {
+const Header = ({ location }) => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector(state => state.user);
+
   return (
-    <header className="scrolled">
+    <header className={location.pathname !== '/' && 'scrolled'}>
       <div className="container display-flex justify-content-space-between">
         <Link to="/" className="logo">
           <span className="point text-bold">개</span>발은{' '}
@@ -50,4 +51,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
