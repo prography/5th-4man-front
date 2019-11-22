@@ -1,0 +1,48 @@
+.modal-container {
+  background: rgba(0, 0, 0, 0.25);
+  color: #272e40;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-container .modal-content {
+  background: white;
+  height: auto;
+  border-radius: 2%;
+}
+
+// modal size
+.modal-xs {
+  width: 500px;
+}
+
+.modal-sm {
+  width: 600px;
+}
+
+.modal-md {
+  width: 700px;
+}
+
+.modal-lg {
+  width: 800px;
+}
+
+.modal-xl {
+  width: 900px;
+}
+
+.modal-login {
+  width: 390px;
+}
+
+.modal-full {
+  width: 95%;
+}
