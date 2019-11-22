@@ -17,3 +17,28 @@
   font-family: Spoqa Han Sans Bold;
   src: url('./Spoqa Han Sans Bold.woff') format('woff');
 }
+
+@font-face {
+  font-family: Noto Sans;
+  src: url('./NotoSansKR-Regular-Hestia.woff') format('woff');
+}
+
+@font-face {
+  font-family: Noto Sans Thin;
+  src: url('./NotoSansKR-Thin-Hestia.woff') format('woff');
+}
+
+@font-face {
+  font-family: Noto Sans Light;
+  src: url('./NotoSansKR-Light-Hestia.woff') format('woff');
+}
+
+@font-face {
+  font-family: Noto Sans Medium;
+  src: url('./NotoSansKR-Medium-Hestia.woff') format('woff');
+}
+
+@font-face {
+  font-family: Noto Sans Bold;
+  src: url('./NotoSansKR-Bold-Hestia.woff') format('woff');
+}
