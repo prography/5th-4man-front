@@ -17,9 +17,6 @@ const Header = () => {
         </Link>
         <div className="navigation">
           <ul>
-            <li>
-              <Link to="/">서비스 소개</Link>
-            </li>
             {isLoggedIn ? (
               <>
                 <li>

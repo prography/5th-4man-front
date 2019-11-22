@@ -13,10 +13,13 @@ $main-color-gradient: linear-gradient(
 // 그림자 변수
 $box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 
+$font: Noto Sans;
+
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Spoqa Han Sans', 'Sans-serif';
+  //font-family: 'Spoqa Han Sans', 'Sans-serif';
+  font-family: $font, 'Sans-serif';
   box-sizing: border-box;
 }
 
@@ -47,6 +50,13 @@ button {
 }
 
 // 커스텀 클래스
+.main-color-blue {
+  color: $main-color-blue;
+}
+
+.main-color-violet {
+  color: $main-color-violet;
+}
 
 // display 클래스
 .display-inline {
@@ -88,15 +98,19 @@ button {
 
 // text
 .text-bold {
-  font-family: Spoqa Han Sans Bold;
+  font-family: $font Bold;
 }
 
 .text-thin {
-  font-family: Spoqa Han Sans Thin;
+  font-family: $font Thin;
 }
 
 .text-light {
-  font-family: Spoqa Han Sans Light;
+  font-family: $font Light;
+}
+
+.text-medium {
+  font-family: $font Medium;
 }
 
 .text-overflow-ellipsis {

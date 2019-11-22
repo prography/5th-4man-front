@@ -1,12 +1,16 @@
 import React from 'react';
+import TagSearch from 'containers/TagSearchCotainer';
 
 const Banner = () => {
   return (
     <section id="banner">
       <div className="bannerBg">
         <div className="container display-flex">
-          <div className="stack-choice-area">
-            여기에 개발 스택을 고를 수 있게 개발 예정
+          <div className="stack-choice-area display-flex justify-content-center align-items-center">
+            <div>
+              <h2 className="text-bold">서비스 준비 중입니다 🤔</h2>
+              {/* <TagSearch /> */}
+            </div>
           </div>
           <div className="banner-title">
             <h2 className="text-light">
