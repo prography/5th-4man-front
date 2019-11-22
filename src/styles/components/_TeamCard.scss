@@ -65,16 +65,49 @@
 
 // 팀 정보
 .team-card-meta {
-  padding: 15px;
+  padding: 8px 15px 15px;
+
+  .content-header {
+    height: 10.4rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #efefef;
+  }
+
+  .leader-name {
+    color: #adb5bd;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+
+    &:hover {
+      color: #adb5bd;
+      text-decoration: underline;
+    }
+  }
 
   // 팀 타이틀
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    //margin-bottom: 8px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    //height: 50px;
+    max-height: 50px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    overflow: hidden;
+  }
+
+  .end-date {
+    color: #adb5bd;
+    margin-bottom: 0;
   }
 
   // 팀 설명
   .description {
-    font-weight: normal;
+    font-size: 0.825rem;
     line-height: 20px;
     letter-spacing: -0.2px;
     height: 40px;
@@ -83,10 +116,9 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow-wrap: break-word;
-    color: #777777;
-    margin: 2px 0px 0px;
+    color: #4c657d;
+    margin: 0px 0px 0px;
     overflow: hidden;
-    margin-bottom: 35px;
   }
 
   // 좋아요, 댓글, 조회수
