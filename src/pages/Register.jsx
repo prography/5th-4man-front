@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterFormContainer from '../containers/RegisterFormContainer';
+import RegisterContainer from '../containers/RegisterContainer';
 
 const Register = () => {
   return (
@@ -7,7 +7,7 @@ const Register = () => {
       <section id="content">
         <div className="container">
           <div className="display-flex flex-direction-column align-items-center content-title-aria">
-            <RegisterFormContainer />
+            <RegisterContainer />
           </div>
         </div>
       </section>

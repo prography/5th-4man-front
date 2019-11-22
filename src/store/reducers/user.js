@@ -1,4 +1,4 @@
-import produce from 'immer';
+import produce, { finishDraft } from 'immer';
 
 export const initialState = {
   isLoggedIn: false,
@@ -21,6 +21,10 @@ export const LOG_IN_GITHUB_TOKEN_FAILURE = 'user/LOG_IN_GITHUB_TOKEN_FAILURE';
 export const SIGN_UP_REQUEST = 'user/SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'user/SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'user/SIGN_UP_FAILURE';
+
+export const USER_CHECK_REQUEST = 'user/USER_CHECK_REQUEST';
+export const USER_CHECK_SUCCESS = 'user/USER_CHECK_SUCCESS';
+export const USER_CHECK_FAILURE = 'user/USER_CHECK_FAILURE';
 
 export const LOG_OUT = 'user/LOG_OUT';
 
@@ -55,10 +59,17 @@ const reducer = (state = initialState, action) => {
 
       case LOG_IN_GITHUB_TOKEN_FAILURE:
         return draft;
-
       case SIGN_UP_REQUEST:
         return draft;
       case SIGN_UP_SUCCESS:
+        return draft;
+      case SIGN_UP_FAILURE:
+        return draft;
+      case USER_CHECK_REQUEST:
+        return draft;
+      case USER_CHECK_SUCCESS:
+        return draft;
+      case USER_CHECK_FAILURE:
         return draft;
     }
   });
