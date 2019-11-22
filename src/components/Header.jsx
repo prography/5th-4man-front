@@ -13,9 +13,6 @@ const Header = () => {
         <div className="navigation">
           <ul>
             <li>
-              <Link to="/">서비스 소개</Link>
-            </li>
-            <li>
               <Link to="/">로그인</Link>
             </li>
             <li>

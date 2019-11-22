@@ -1,75 +1,45 @@
 @import './reset.scss';
 
 // section
-#content {
-  padding: 150px 0 100px;
-  background-color: #f9f9f9;
+.home-wrap {
+  .home-list-wrap {
+    padding: 70px 0 0;
+    background-color: #f9f9f9;
 
-  .content-title-aria {
-    margin-bottom: 35px;
+    .list-section {
+      border-bottom: 1px solid #efefef;
+      padding: 70px 0 20px;
 
-    .section-title {
-      h2 {
-        color: $text-color;
-        font-size: 2rem;
-        margin-bottom: 0;
-      }
+      .content-title-aria {
+        .section-title {
+          padding-bottom: 5px;
 
-      p {
-        font-size: 1rem;
-        color: #adb5bd;
-      }
-    }
-  }
+          h2 {
+            color: $text-color;
+            font-size: 2rem;
+            margin-bottom: 0;
+          }
 
-  .category-navigation {
-    padding: 30px 0 0;
-    display: block;
-    margin: 0;
-
-    li {
-      float: left;
-      padding-right: 25px;
-      margin-right: 25px;
-      border-right: 1px solid #ddd;
-
-      a {
-        font-size: 1rem;
-        color: #adb5bd;
-        padding-bottom: 5px;
-        transition: color 0.2s;
-        cursor: pointer;
-
-        &:hover {
-          color: rgba($text-color, 0.7);
+          p {
+            font-size: 1rem;
+            color: #adb5bd;
+          }
         }
       }
 
-      &.active {
-        a {
-          color: $text-color;
-          border-bottom: 3px solid $main-color-blue;
+      .more-loading-team {
+        padding: 40px 0;
+        color: $main-color-blue;
+
+        button {
+          background: none;
+          font-size: 1rem;
+        }
+
+        .loading-icon {
+          font-size: 2rem;
         }
       }
-
-      &:last-child {
-        margin: 0;
-        border: 0;
-      }
-    }
-  }
-
-  .more-loading-team {
-    padding: 60px 0 0;
-    color: $main-color-blue;
-
-    button {
-      background: none;
-      font-size: 1rem;
-    }
-
-    .loading-icon {
-      font-size: 2rem;
     }
   }
 }
@@ -79,3 +49,4 @@
 @import './components/_SkeletonCard.scss';
 @import './components/TeamCard';
 @import './components/_Banner.scss';
+@import './components/Chip.scss';
