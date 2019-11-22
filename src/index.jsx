@@ -4,12 +4,14 @@ import { Provider } from 'react-redux';
 import Root from './Root';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
+import ModalContainer from './containers/ModalContainer';
 
 import 'styles/main.scss';
 
 ReactDOM.render(
   <Provider store={store}>
     <Root />
+    <ModalContainer />
   </Provider>,
   document.getElementById('root'),
 );
