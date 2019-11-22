@@ -55,7 +55,7 @@ const reducer = (state = initialState, action) => {
         return draft;
       }
       case GET_POPULAR_LIST_SUCCESS: {
-        draft.popular.list.push(...action.items);
+        draft.popular.list = action.items;
         draft.popular.loading = false;
         return draft;
       }
@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
         return draft;
       }
       case GET_RECENT_LIST_SUCCESS: {
-        draft.recent.list.push(...action.items);
+        draft.recent.list = action.items;
         draft.recent.loading = false;
         return draft;
       }

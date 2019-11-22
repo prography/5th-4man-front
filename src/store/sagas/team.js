@@ -28,6 +28,7 @@ function* getTeamList() {
   }
 }
 
+// 인기팀 데이터 불러오기
 function* getPopularList() {
   try {
     const items = yield call(PostAPI.getTeamList);
@@ -42,15 +43,16 @@ function* getPopularList() {
   }
 }
 
+// 최신팀 데이터 불러오기
 function* getRecentList() {
   try {
-    const items = yield call(PostAPI.getPosts);
+    const items = yield call(PostAPI.getRecentTeamList);
 
     // 로딩 테스트 하기 위해서 딜레이 2초 줌
     yield delay(2000);
 
     // items로 데이터 전달
-    yield put({ type: GET_RECENT_LIST_SUCCESS, items });
+    yield put({ type: GET_RECENT_LIST_SUCCESS, items: items.data });
   } catch (e) {
     yield put({ type: GET_RECENT_LIST_FAILURE, message: e.message });
   }

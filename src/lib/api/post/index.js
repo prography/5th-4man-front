@@ -74,6 +74,12 @@ export const getTeamList = async () => {
   return re;
 };
 
+export const getRecentTeamList = async () => {
+  const re = await axios.get('http://gaegata.fourman.store/team/recent/');
+
+  return re;
+};
+
 export const getTags = () => {
   // const re = await axios.get('http://gaegata.fourman.store/tag/');
   return [
