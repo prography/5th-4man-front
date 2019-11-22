@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as actions from '../reducers/user';
 
 function* register({ payload }) {
-  console.log(payload);
   try {
     const json = {
       username: payload.username,
@@ -42,7 +41,6 @@ function* idCheck({ payload }) {
       'http://gaegata.fourman.store/account/check/duplication/',
       json,
     );
-    console.log(data);
     yield put({
       type: actions.USER_CHECK_SUCCESS,
     });
