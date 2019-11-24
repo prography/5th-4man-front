@@ -28,7 +28,10 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "s3": "aws s3 sync build/ s3://ggh.io",
+    "cloudfront": "aws cloudfront create-invalidation --distribution-id 'E3ETSXEETH5DOT' --paths '/*'",
+    "deploy": "yarn build && npm run s3 && npm run cloudfront"
   },
   "eslintConfig": {
     "extends": [
