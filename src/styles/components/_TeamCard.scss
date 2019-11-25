@@ -1,5 +1,7 @@
 // 카드 스타일
 .team-card {
+  overflow: hidden;
+
   &:hover {
     .progress-wrap .progress-outer .progress-text {
       height: 21px;
@@ -14,51 +16,13 @@
 }
 
 // 카드 이미지 스타일
-.card-image-wrap {
-  position: relative;
-  padding-top: 67.125%;
-  overflow: hidden;
-
-  img {
-    transform: scale(1);
-    transition: transform 0.3s ease 0s, opacity 0.1s linear 0s;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    opacity: 1;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-
+.card-image-content {
   // 프로그레스바
   .progress-wrap {
-    position: absolute;
     bottom: 0;
-    width: 100%;
 
-    .progress-outer {
-      position: relative;
-      background: rgba(#656565, 0.85);
-      padding: 3px 7px;
-
-      .progress-text {
-        position: relative;
-        z-index: 10;
-        transition: height 0.2s;
-        height: 0;
-        overflow: hidden;
-
-        p {
-          margin: 0;
-          color: #fff;
-          text-shadow: 1px 2px 3px rgba(#000, 0.3);
-        }
-      }
+    .progress-text {
+      height: 0;
     }
   }
 }
@@ -66,6 +30,7 @@
 // 팀 정보
 .team-card-meta {
   padding: 8px 15px 15px;
+  cursor: auto;
 
   .content-header {
     height: 10.4rem;
