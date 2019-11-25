@@ -61,6 +61,19 @@ button {
   margin: 0 auto;
 }
 
+// position
+.posr {
+  position: relative;
+}
+
+.posa {
+  position: absolute;
+}
+
+.posf {
+  position: fixed;
+}
+
 // 커스텀 클래스
 .main-color-blue {
   color: $main-color-blue;
