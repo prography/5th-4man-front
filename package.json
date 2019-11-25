@@ -22,7 +22,8 @@
     "redux": "^4.0.4",
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.1.1",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
