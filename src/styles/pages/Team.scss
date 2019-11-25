@@ -1,0 +1,73 @@
+#team-detail {
+  padding: 32px 0 100px;
+
+  .apply-btn {
+    width: 100%;
+    background-image: $main-color-gradient;
+    transition: box-shadow 0.2s;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px 20px;
+
+    &:hover {
+      box-shadow: 1px 2px 5px 0 rgba(#000, 0.3);
+    }
+  }
+
+  .sub-btn {
+    background-color: #efefef;
+    border-radius: 3px;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 0.8rem;
+
+    i.heart-icon {
+      color: #ff8787;
+    }
+
+    &:hover {
+      background-color: darken(#efefef, 5%);
+    }
+  }
+
+  .container {
+    max-width: 960px;
+
+    .left-content {
+      .card-image-wrap {
+        border: 1px solid #efefef;
+      }
+    }
+
+    .right-content {
+      .fix-menu-wrap {
+        .fix-menu {
+          background-color: #fff;
+          border-radius: 3px;
+          padding: 20px;
+          border: 1px solid #efefef;
+
+          // 나중에 리더명은 컴포넌트화 처리 할 예정
+          .leader-name {
+            color: #adb5bd;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+
+            &:hover {
+              color: #adb5bd;
+              text-decoration: underline;
+            }
+          }
+
+          h2 {
+            font-size: 1.2rem;
+          }
+
+          .tag-wrap {
+            border-bottom: 1px solid #efefef;
+          }
+        }
+      }
+    }
+  }
+}

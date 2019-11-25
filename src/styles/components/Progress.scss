@@ -1,0 +1,24 @@
+.progress-wrap {
+  position: absolute;
+  width: 100%;
+
+  .progress-outer {
+    position: relative;
+    background: rgba(#656565, 0.85);
+    padding: 3px 7px;
+
+    .progress-text {
+      position: relative;
+      z-index: 10;
+      transition: height 0.2s;
+      overflow: hidden;
+
+      p {
+        margin: 0;
+        color: #fff;
+        text-shadow: 1px 2px 3px rgba(#000, 0.3);
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
