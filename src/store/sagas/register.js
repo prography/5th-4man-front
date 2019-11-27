@@ -11,15 +11,12 @@ function* register({ payload }) {
       nickname: payload.name,
       introduction: payload.introduce,
     };
-    const data = yield call(
-      [axios, 'post'],
-      'http://gaegata.fourman.store/account/',
-      json,
-    );
-
+    yield call([axios, 'post'], 'https://gaegata.fourman.store/account/', json);
     yield put({
       type: actions.SIGN_UP_SUCCESS,
     });
+    alert('회원가입 되었습니다.');
+    window.location.href = '/';
   } catch (error) {
     yield put({
       tpye: actions.SIGN_UP_FAILURE,
@@ -38,11 +35,14 @@ function* idCheck({ payload }) {
     };
     const data = yield call(
       [axios, 'post'],
-      'http://gaegata.fourman.store/account/check/duplication/',
+      'https://gaegata.fourman.store/account/check/duplication/',
       json,
     );
     yield put({
       type: actions.USER_CHECK_SUCCESS,
+      payload: {
+        usernameCheck: data.data.username,
+      },
     });
   } catch (error) {
     yield put({
@@ -55,6 +55,34 @@ function* watchIdCheck() {
   yield takeLatest(actions.USER_CHECK_REQUEST, idCheck);
 }
 
+function* addRigster({ payload }) {
+  try {
+    const json = {
+      email: payload.email,
+      introduction: payload.introduction,
+      nickname: payload.nickname,
+    };
+    yield call(
+      [axios, 'patch'],
+      `https://gaegata.fourman.store/account/${payload.userId}`,
+      json,
+    );
+    yield put({
+      type: actions.ADD_REGISTER_SUCCESS,
+    });
+    alert('추가정보 저장되었습니다.');
+    window.location.href = '/';
+  } catch (error) {
+    yield put({
+      type: actions.ADD_REGISTER_FAILURE,
+    });
+  }
+}
+
+function* watchAddRegister() {
+  yield takeLatest(actions.ADD_REGISTER_REQUEST, addRigster);
+}
+
 export default function* root() {
-  yield all([fork(watchRegister), fork(watchIdCheck)]);
+  yield all([fork(watchRegister), fork(watchIdCheck), fork(watchAddRegister)]);
 }

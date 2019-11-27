@@ -1,11 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
-import { useDispatch } from 'react-redux';
-import {
-  LOG_IN_GITHUB_CODE_REQUEST,
-  SIGN_UP_REQUEST,
-  USER_CHECK_REQUEST,
-} from '../store/reducers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGN_UP_REQUEST, USER_CHECK_REQUEST } from '../store/reducers/user';
 
 const Register = props => {
   const [confirmDirty, setConfirmDirty] = useState(false);
@@ -15,6 +11,7 @@ const Register = props => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const dispatch = useDispatch();
+  const { usernameCheck } = useSelector(state => state.user);
 
   const handleConfirmBlur = e => {
     const { value } = e.target;
@@ -45,6 +42,10 @@ const Register = props => {
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
+      if (usernameCheck === true) {
+        alert('아이디 중복입니다.');
+        return;
+      }
       dispatch({
         type: SIGN_UP_REQUEST,
         payload: { username, password, email, introduce, name },
@@ -54,7 +55,10 @@ const Register = props => {
   );
   const onChangeUserName = e => {
     setUsername(e.target.value);
-    dispatch({ type: USER_CHECK_REQUEST, payload: { username } });
+    dispatch({
+      type: USER_CHECK_REQUEST,
+      payload: { username: e.target.value },
+    });
   };
   const onChangeIntroduce = e => {
     setIntroduce(e.target.value);
@@ -70,7 +74,8 @@ const Register = props => {
   };
 
   const onLoginGithub = () => {
-    dispatch({ type: LOG_IN_GITHUB_CODE_REQUEST });
+    window.location.href =
+      'https://github.com/login/oauth/authorize?client_id=a7863c21770a0dd4c503';
   };
   const { getFieldDecorator } = props.form;
   return (
@@ -80,13 +85,26 @@ const Register = props => {
       <div style={{ width: '50%' }}>
         <Form layout="horizontal" onSubmit={handleSubmit}>
           <Form.Item label="로그인 아이디" hasFeedback>
-            <Input
-              size="large"
-              placeholder="login id"
-              onChange={onChangeUserName}
-            />
-            ,
+            {getFieldDecorator('username', {
+              rules: [
+                {
+                  required: true,
+                  message: '아이디를 입력하세요.',
+                },
+              ],
+            })(
+              <Input
+                size="large"
+                placeholder="login id"
+                onChange={onChangeUserName}
+              />,
+            )}
           </Form.Item>
+          {usernameCheck ? (
+            <div className="text-red">로그인이 중복입니다.</div>
+          ) : (
+            <></>
+          )}
           <Form.Item label="비밀번호">
             {getFieldDecorator('password', {
               rules: [
