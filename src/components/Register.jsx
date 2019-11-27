@@ -13,6 +13,7 @@ const Register = props => {
   const dispatch = useDispatch();
   const { usernameCheck } = useSelector(state => state.user);
 
+
   const handleConfirmBlur = e => {
     const { value } = e.target;
     setConfirmDirty({ confirmDirty: confirmDirty || !!value });
@@ -46,6 +47,7 @@ const Register = props => {
         alert('아이디 중복입니다.');
         return;
       }
+
       dispatch({
         type: SIGN_UP_REQUEST,
         payload: { username, password, email, introduce, name },

@@ -11,12 +11,14 @@ function* register({ payload }) {
       nickname: payload.name,
       introduction: payload.introduce,
     };
+
     yield call([axios, 'post'], 'https://gaegata.fourman.store/account/', json);
     yield put({
       type: actions.SIGN_UP_SUCCESS,
     });
     alert('회원가입 되었습니다.');
     window.location.href = '/';
+
   } catch (error) {
     yield put({
       tpye: actions.SIGN_UP_FAILURE,

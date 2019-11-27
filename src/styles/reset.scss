@@ -18,9 +18,13 @@ $font: Noto Sans;
 * {
   margin: 0;
   padding: 0;
-  //font-family: 'Spoqa Han Sans', 'Sans-serif';
   font-family: $font, 'Sans-serif';
   box-sizing: border-box;
+  font-size: 1rem;
+}
+
+:root {
+  font-size: 1rem;
 }
 
 a {
@@ -31,9 +35,17 @@ li {
   list-style: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.5rem;
+}
+
 body {
   position: relative;
-  font-size: 16px;
 }
 
 button {
@@ -45,7 +57,7 @@ button {
 // container
 .container {
   max-width: 1200px;
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
 }
 
