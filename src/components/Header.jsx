@@ -21,7 +21,7 @@ const Header = ({ location }) => {
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link onClick={() => dispatch({ type: LOG_OUT })}>
+                  <Link to="/" onClick={() => dispatch({ type: LOG_OUT })}>
                     로그아웃
                   </Link>
                 </li>
@@ -34,7 +34,8 @@ const Header = ({ location }) => {
                 <li>
                   <Link
                     onClick={() =>
-                      dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })}
+                      dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })
+                    }
                   >
                     로그인
                   </Link>
