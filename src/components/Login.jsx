@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
-import { LOG_IN_GITHUB_CODE_REQUEST } from '../store/reducers/user';
+import { LOG_IN_REQUEST } from '../store/reducers/user';
 
 const Login = () => {
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
   const onLoginGithub = () => {
-    dispatch({ type: LOG_IN_GITHUB_CODE_REQUEST });
+    window.location.href =
+      'https://github.com/login/oauth/authorize?client_id=a7863c21770a0dd4c503';
   };
-  const onChangeEmail = e => {
-    e.preventDefault();
-    setEmail(e.target.value);
+  const onLogin = () => {
+    dispatch({ type: LOG_IN_REQUEST, payload: { username, password } });
+  };
+  const onChangeUsername = e => {
+    setUsername(e.target.value);
+  };
+  const onChangePassword = e => {
+    setPassword(e.target.value);
   };
   return (
     <>
@@ -26,13 +33,21 @@ const Login = () => {
         <Input
           tpye="text"
           className="email-input"
-          value={email}
+          value={username}
           name="email"
-          onChange={onChangeEmail}
-          placeholder="이메일을 입력해주세요."
+          onChange={onChangeUsername}
+          placeholder="아이디를 입력해주세요."
           size="large"
         />
-        <Button size="large" className="email-button" block>
+        <Input.Password
+          className="password-input"
+          value={password}
+          name="password"
+          onChange={onChangePassword}
+          placeholder="패스워드를 입력해주세요."
+          size="large"
+        />
+        <Button size="large" className="email-button" block onClick={onLogin}>
           <Icon type="mail" className="email-icon" />
           이메일로 시작하기
           <span id="right-space" />
