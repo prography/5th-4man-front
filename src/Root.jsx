@@ -36,7 +36,11 @@ const Root = () => (
     <Suspense fallback={<div>Loading...</div>}>
       <TopBanner className="display-flex justify-content-center align-item-center">
         페이지에 대한 평가를 마음껏 남겨주세요!
-        <a href="#" target="_blank" className="pl-10">
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLScwdDfdkuHQ9AO2z5vvQ1AX_Vz-8_3OaAuDY4m7AKXlF03wwQ/viewform"
+          target="_blank"
+          className="pl-10"
+        >
           구글 폼
         </a>
       </TopBanner>
