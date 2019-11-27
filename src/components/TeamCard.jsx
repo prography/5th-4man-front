@@ -19,15 +19,14 @@ const TeamCard = props => {
 
   return (
     <Card
-      className="no-padding-card team-card"
-      style={{ borderRadius: 8, marginBottom: 15 }}
+      className="no-padding-card team-card mb-15"
       hoverable
       cover={CardImageWrap}
     >
       <div className="team-card-meta">
         <div className="content-header">
           <Link
-            to="/"
+            to="#"
             className="leader-name display-inline-block main-color-blue"
           >
             By. {item.leader.nickname}
