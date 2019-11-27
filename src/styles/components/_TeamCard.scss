@@ -68,6 +68,7 @@
   .end-date {
     color: #adb5bd;
     margin-bottom: 0;
+    font-size: 0.825rem;
   }
 
   // 팀 설명
@@ -89,7 +90,10 @@
   // 좋아요, 댓글, 조회수
   .card-counts {
     color: #adb5bd;
-    font-size: 13px;
+
+    span {
+      font-size: 0.825rem;
+    }
   }
 
   // 좋아요, 공유 아이콘
