@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CardImage = ({
-  imageUrl = 'https://cdn.class101.net/images/1336a493-1dbb-433f-beab-071bfd9b7e3c/1024xauto',
-  toUrl,
-  animation,
-}) => {
+const CardImage = ({ imageUrl, toUrl, animation }) => {
   return (
     <div>
       <span
