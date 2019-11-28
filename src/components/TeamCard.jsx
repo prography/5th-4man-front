@@ -37,7 +37,7 @@ const TeamCard = props => {
         </div>
         <p className="end-date">
           마감일: {moment(item.end_date).format('YYYY-MM-DD')}{' '}
-          <span className="text-bold main-color-blue pl-10">D-{10}</span>
+          {/* <span className="text-bold main-color-blue pl-10">D-{10}</span> */}
         </p>
         <div className="card-counts">
           <div className="display-flex justify-content-space-between">
