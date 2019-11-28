@@ -1,4 +1,5 @@
 import produce from 'immer';
+import swal from 'sweetalert';
 
 export const initialState = {
   isLoggedIn: false,
@@ -62,9 +63,17 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case SIGN_UP_SUCCESS:
+        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
+          () => {
+            window.location.href = '/';
+          },
+        );
+
         return draft;
 
       case SIGN_UP_FAILURE:
+        swal('회원가입 실패!', '회원가입에 실패하였습니다.', 'error');
+
         return draft;
 
       case USER_CHECK_REQUEST:
@@ -83,9 +92,14 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_SUCCESS:
         draft.isLoggedIn = true;
         draft.userId = action.payload.userId;
+
+        swal('로그인 완료!', '로그인 되었습니다!', 'success');
+
         return draft;
 
       case LOG_IN_FAILURE:
+        swal('로그인 실패!', '아이디 또는 비밀번호가 잘못되었습니다.', 'error');
+
         return draft;
 
       case ADD_REGISTER_REQUEST:

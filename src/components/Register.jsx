@@ -14,7 +14,6 @@ const Register = props => {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const { usernameCheck } = useSelector(state => state.user);
-  const { history } = props;
 
   const handleConfirmBlur = e => {
     const { value } = e.target;
@@ -46,7 +45,7 @@ const Register = props => {
     e => {
       e.preventDefault();
       if (usernameCheck === true) {
-        swal('아이디 중복!', 'error');
+        swal('아이디 중복!', '아이디가 중복되었습니다.', 'error');
         return;
       }
 
@@ -54,8 +53,6 @@ const Register = props => {
         type: SIGN_UP_REQUEST,
         payload: { username, password, email, introduce, name },
       });
-      swal('회원가입 완료!', 'success');
-      history.push('/');
     },
     [email, password, name],
   );

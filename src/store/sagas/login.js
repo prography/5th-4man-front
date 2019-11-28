@@ -26,7 +26,7 @@ function* loginAuth({ payload }) {
     });
   } catch (error) {
     yield put({
-      tpye: actions.LOG_IN_SUCCESS,
+      type: actions.LOG_IN_FAILURE,
     });
   }
 }

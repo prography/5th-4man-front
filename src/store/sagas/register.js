@@ -18,7 +18,7 @@ function* register({ payload }) {
     });
   } catch (error) {
     yield put({
-      tpye: actions.SIGN_UP_FAILURE,
+      type: actions.SIGN_UP_FAILURE,
     });
   }
 }
@@ -58,12 +58,15 @@ function* addRigster({ payload }) {
   try {
     const json = {
       email: payload.email,
-      introduction: payload.introduction,
-      nickname: payload.nickname,
+      introduction: payload.introduce,
+      nickname: payload.name,
       headers: {
         Authorization: `Bearer ${payload.access}`,
       },
     };
+
+    console.log(json);
+
     yield call(
       [axios, 'patch'],
       `https://gaegata.fourman.store/account/${payload.userId}/`,
