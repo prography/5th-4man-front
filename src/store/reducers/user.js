@@ -106,9 +106,17 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case ADD_REGISTER_SUCCESS:
+        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
+          () => {
+            window.location.href = '/';
+          },
+        );
+
         return draft;
 
       case ADD_REGISTER_FAILURE:
+        swal('회원가입 실패!', '회원가입에 실패하였습니다.', 'error');
+
         return draft;
     }
   });

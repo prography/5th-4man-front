@@ -1,15 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import swal from 'sweetalert';
 import { ADD_REGISTER_REQUEST } from '../store/reducers/user';
 
 const AddedForm = props => {
   const [introduce, setIntroduce] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const { history } = props;
 
   const dispatch = useDispatch();
   const { userId, access } = useSelector(state => state.user);
@@ -30,8 +28,6 @@ const AddedForm = props => {
       type: ADD_REGISTER_REQUEST,
       payload: { email, introduce, name, userId, access },
     });
-    swal('추가정보 저장완료!', 'success');
-    history.push('/');
   };
 
   const buttonItemLayout = {
@@ -80,7 +76,7 @@ const AddedForm = props => {
               valuePropName: 'checked',
             })(
               <Checkbox>
-                <a href="">이용약관</a> 및 개인정보 처리방침 동의 (필수)
+                <a href="#">이용약관</a> 및 개인정보 처리방침 동의 (필수)
               </Checkbox>,
             )}
           </Form.Item>

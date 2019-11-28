@@ -65,8 +65,6 @@ function* addRigster({ payload }) {
       },
     };
 
-    console.log(json);
-
     yield call(
       [axios, 'patch'],
       `https://gaegata.fourman.store/account/${payload.userId}/`,
