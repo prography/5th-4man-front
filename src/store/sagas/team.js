@@ -15,9 +15,6 @@ function* getPopularList() {
   try {
     const items = yield call(PostAPI.getTeamList);
 
-    // 로딩 테스트 하기 위해서 딜레이 2초 줌
-    yield delay(2000);
-
     // items로 데이터 전달
     yield put({ type: GET_POPULAR_LIST_SUCCESS, items: items.data });
   } catch (e) {
@@ -29,9 +26,6 @@ function* getPopularList() {
 function* getRecentList() {
   try {
     const items = yield call(PostAPI.getRecentTeamList);
-
-    // 로딩 테스트 하기 위해서 딜레이 2초 줌
-    yield delay(2000);
 
     // items로 데이터 전달
     yield put({ type: GET_RECENT_LIST_SUCCESS, items: items.data });
