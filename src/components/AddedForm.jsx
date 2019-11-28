@@ -1,15 +1,17 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { ADD_REGISTER_REQUEST } from '../store/reducers/user';
 
 const AddedForm = props => {
   const [introduce, setIntroduce] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const { history } = props;
 
   const dispatch = useDispatch();
-  const { userId } = useSelector(state => state.user);
+  const { userId, access } = useSelector(state => state.user);
 
   const onChangeName = e => {
     setName(e.target.value);
@@ -25,8 +27,9 @@ const AddedForm = props => {
 
     dispatch({
       type: ADD_REGISTER_REQUEST,
-      payload: { email, introduce, name, userId },
+      payload: { email, introduce, name, userId, access },
     });
+    history.push('/');
   }, []);
 
   const buttonItemLayout = {
@@ -98,4 +101,4 @@ const AddedForm = props => {
   );
 };
 
-export default Form.create()(AddedForm);
+export default withRouter(Form.create()(AddedForm));

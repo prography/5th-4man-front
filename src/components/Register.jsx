@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { SIGN_UP_REQUEST, USER_CHECK_REQUEST } from '../store/reducers/user';
 
 const Register = props => {
@@ -12,7 +13,7 @@ const Register = props => {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const { usernameCheck } = useSelector(state => state.user);
-
+  const { history } = props;
 
   const handleConfirmBlur = e => {
     const { value } = e.target;
@@ -52,6 +53,7 @@ const Register = props => {
         type: SIGN_UP_REQUEST,
         payload: { username, password, email, introduce, name },
       });
+      history.push('/');
     },
     [email, password, name],
   );
@@ -215,4 +217,4 @@ const Register = props => {
   );
 };
 
-export default Form.create()(Register);
+export default withRouter(Form.create()(Register));

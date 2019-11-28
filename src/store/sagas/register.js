@@ -17,8 +17,6 @@ function* register({ payload }) {
       type: actions.SIGN_UP_SUCCESS,
     });
     alert('회원가입 되었습니다.');
-    window.location.href = '/';
-
   } catch (error) {
     yield put({
       tpye: actions.SIGN_UP_FAILURE,
@@ -63,17 +61,19 @@ function* addRigster({ payload }) {
       email: payload.email,
       introduction: payload.introduction,
       nickname: payload.nickname,
+      headers: {
+        Authorization: `Bearer ${payload.access}`,
+      },
     };
     yield call(
       [axios, 'patch'],
-      `https://gaegata.fourman.store/account/${payload.userId}`,
+      `https://gaegata.fourman.store/account/${payload.userId}/`,
       json,
     );
     yield put({
       type: actions.ADD_REGISTER_SUCCESS,
     });
     alert('추가정보 저장되었습니다.');
-    window.location.href = '/';
   } catch (error) {
     yield put({
       type: actions.ADD_REGISTER_FAILURE,
