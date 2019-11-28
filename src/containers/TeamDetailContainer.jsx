@@ -97,7 +97,9 @@ const TeamDetailContainer = ({ teamId }) => {
       </div>
     </div>
   ) : (
-    'Loading...'
+    <div className="display-flex align-item-center justify-content-center p-20">
+      <Icon type="loading" style={{ color: '#5f76f3' }} />
+    </div>
   );
 };
 
