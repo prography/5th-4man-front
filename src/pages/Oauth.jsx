@@ -36,7 +36,7 @@ const Oauth = () => {
           render={() => (
             <Redirect
               to={{
-                pathname: '/',
+                pathname: '/addForm',
               }}
             />
           )}

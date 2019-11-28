@@ -1,13 +1,13 @@
 import React from 'react';
-import RegisterContainer from '../containers/RegisterContainer';
+import AddedForm from '../components/AddedForm';
 
-const Register = () => {
+const AddForm = () => {
   return (
     <>
-      <section id="register-content">
+      <section id="addform-content">
         <div className="container">
           <div className="display-flex flex-direction-column align-items-center content-title-aria">
-            <RegisterContainer />
+            <AddedForm />
           </div>
         </div>
       </section>
@@ -15,4 +15,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default AddForm;

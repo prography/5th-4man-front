@@ -10,12 +10,14 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  z-index: 99;
 }
 
 .modal-container .modal-content {
   background: white;
   height: auto;
   border-radius: 2%;
+  z-index: 9999;
 }
 
 // modal size

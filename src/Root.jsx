@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/Register'));
 const Oauth = lazy(() => import('./pages/Oauth'));
+const AddForm = lazy(() => import('./pages/AddForm'));
 const TeamDetail = lazy(() => import('./pages/TeamDetail'));
 
 // 임시로 설문을 받기 위한 컴포넌트 생성
@@ -51,6 +52,7 @@ const Root = () => (
           <Route exact path="/register" component={Register} />
           <Route exact path="/oauth" component={Oauth} />
           <Route exact path="/team/:teamId" component={TeamDetail} />
+          <Route exact path="/addForm" component={AddForm} />
         </Switch>
         <Footer />
       </div>
