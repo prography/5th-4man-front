@@ -26,12 +26,16 @@ footer {
     margin-top: 20px;
     font-size: 0.75rem;
 
-    span.dd {
-      &:before {
-        content: '|';
-        display: inline;
-        padding: 0 5px;
-        color: #999;
+    span {
+      font-size: 0.825rem;
+
+      &.dd {
+        &:before {
+          content: '|';
+          display: inline;
+          padding: 0 5px;
+          color: #999;
+        }
       }
     }
   }

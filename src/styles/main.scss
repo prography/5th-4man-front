@@ -44,6 +44,11 @@
   }
 }
 
+// all
+@import './media.scss';
+@import './antd-custom.scss';
+
+// components
 @import './components/_Header.scss';
 @import './components/Footer.scss';
 @import './components/_SkeletonCard.scss';
@@ -53,4 +58,8 @@
 @import './components/Login';
 @import './components/Register';
 @import './components/Chip.scss';
-@import './media.scss';
+@import './components/CardImage.scss';
+@import './components/Progress.scss';
+
+// pages
+@import './pages/Team.scss';

@@ -12,9 +12,9 @@ const Header = ({ location }) => {
     <header className={location.pathname !== '/' ? 'scrolled' : ''}>
       <div className="container display-flex justify-content-space-between">
         <Link to="/" className="logo">
-          <span className="point text-bold">개</span>발은{' '}
-          <span className="point text-bold">같</span>이{' '}
-          <span className="point text-bold">하</span>자
+          <span className="point">개</span>발은{' '}
+          <span className="point">같</span>이 <span className="point">하</span>
+          자
         </Link>
         <div className="navigation">
           <ul>

@@ -7,27 +7,6 @@ import TeamCard from 'components/TeamCard';
 
 import * as teamActions from '../store/reducers/team';
 
-// 로딩 컴포넌트
-const LoadingComponent = () => {
-  // skeleton 4개만 보여줌
-  const showCount = 4;
-
-  return (
-    <>
-      <Row gutter={16}>
-        {[...Array(showCount)].map((val, key) => (
-          <Col key={key} xs={24} md={12} lg={8} xl={6}>
-            <SkeletonCard />
-          </Col>
-        ))}
-      </Row>
-      <div className="display-flex justify-content-center more-loading-team">
-        <Icon type="loading" className="loading-icon" />
-      </div>
-    </>
-  );
-};
-
 const ListContainer = ({ type = 'recent' }) => {
   const actions = {
     popular: teamActions.getPopularListAction,
@@ -66,6 +45,27 @@ const ListContainer = ({ type = 'recent' }) => {
         </div>
       )}
     </div>
+  );
+};
+
+// 로딩 컴포넌트
+const LoadingComponent = () => {
+  // skeleton 4개만 보여줌
+  const showCount = 4;
+
+  return (
+    <>
+      <Row gutter={16}>
+        {[...Array(showCount)].map((val, key) => (
+          <Col key={key} xs={24} md={12} lg={8} xl={6}>
+            <SkeletonCard />
+          </Col>
+        ))}
+      </Row>
+      <div className="display-flex justify-content-center more-loading-team">
+        <Icon type="loading" className="loading-icon" />
+      </div>
+    </>
   );
 };
 

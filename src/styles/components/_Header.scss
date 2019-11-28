@@ -7,7 +7,7 @@ header {
   display: flex !important;
   align-items: center;
   color: #fff;
-  z-index: 99999;
+  z-index: 9999;
 
   // 스크롤 했을때 헤더 스타일
   &.scrolled {
@@ -53,6 +53,7 @@ header {
         display: inline-block;
         padding: 0 10px;
         color: #fff;
+        font-size: 0.95rem;
       }
     }
   }
