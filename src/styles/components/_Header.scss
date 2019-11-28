@@ -7,7 +7,7 @@ header {
   display: flex !important;
   align-items: center;
   color: #fff;
-  z-index: 9999;
+  z-index: 900;
 
   // 스크롤 했을때 헤더 스타일
   &.scrolled {
