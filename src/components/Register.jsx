@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
 import { SIGN_UP_REQUEST, USER_CHECK_REQUEST } from '../store/reducers/user';
 
 const Register = props => {
@@ -45,7 +46,7 @@ const Register = props => {
     e => {
       e.preventDefault();
       if (usernameCheck === true) {
-        alert('아이디 중복입니다.');
+        swal('아이디 중복!', 'error');
         return;
       }
 
@@ -53,6 +54,7 @@ const Register = props => {
         type: SIGN_UP_REQUEST,
         payload: { username, password, email, introduce, name },
       });
+      swal('회원가입 완료!', 'success');
       history.push('/');
     },
     [email, password, name],

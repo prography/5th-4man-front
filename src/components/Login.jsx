@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
+import swal from 'sweetalert';
 import { LOG_IN_REQUEST } from '../store/reducers/user';
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
   };
   const onLogin = () => {
     dispatch({ type: LOG_IN_REQUEST, payload: { username, password } });
+    swal('로그인 되었습니다!', 'success');
   };
   const onChangeUsername = e => {
     setUsername(e.target.value);

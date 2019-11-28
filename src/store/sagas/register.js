@@ -16,7 +16,6 @@ function* register({ payload }) {
     yield put({
       type: actions.SIGN_UP_SUCCESS,
     });
-    alert('회원가입 되었습니다.');
   } catch (error) {
     yield put({
       tpye: actions.SIGN_UP_FAILURE,
@@ -73,7 +72,6 @@ function* addRigster({ payload }) {
     yield put({
       type: actions.ADD_REGISTER_SUCCESS,
     });
-    alert('추가정보 저장되었습니다.');
   } catch (error) {
     yield put({
       type: actions.ADD_REGISTER_FAILURE,

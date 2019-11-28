@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
 import { ADD_REGISTER_REQUEST } from '../store/reducers/user';
 
 const AddedForm = props => {
@@ -29,6 +30,7 @@ const AddedForm = props => {
       type: ADD_REGISTER_REQUEST,
       payload: { email, introduce, name, userId, access },
     });
+    swal('추가정보 저장완료!', 'success');
     history.push('/');
   }, []);
 

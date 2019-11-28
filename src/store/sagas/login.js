@@ -24,7 +24,6 @@ function* loginAuth({ payload }) {
     yield put({
       type: CLOSE_MODAL,
     });
-    alert('로그인 되었습니다.');
   } catch (error) {
     yield put({
       tpye: actions.LOG_IN_SUCCESS,
