@@ -23,7 +23,7 @@ const AddedForm = props => {
   const onChangeEmail = e => {
     setEmail(e.target.value);
   };
-  const handleSubmit = useCallback(e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     dispatch({
@@ -32,7 +32,7 @@ const AddedForm = props => {
     });
     swal('추가정보 저장완료!', 'success');
     history.push('/');
-  }, []);
+  };
 
   const buttonItemLayout = {
     wrapperCol: { span: 28 },
