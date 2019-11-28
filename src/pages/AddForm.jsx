@@ -4,7 +4,7 @@ import AddedForm from '../components/AddedForm';
 const AddForm = () => {
   return (
     <>
-      <section id="content">
+      <section id="addform-content">
         <div className="container">
           <div className="display-flex flex-direction-column align-items-center content-title-aria">
             <AddedForm />
