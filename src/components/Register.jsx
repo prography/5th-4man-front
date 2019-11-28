@@ -41,21 +41,18 @@ const Register = props => {
     wrapperCol: { span: 28 },
   };
 
-  const handleSubmit = useCallback(
-    e => {
-      e.preventDefault();
-      if (usernameCheck === true) {
-        swal('아이디 중복!', '아이디가 중복되었습니다.', 'error');
-        return;
-      }
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (usernameCheck === true) {
+      swal('아이디 중복!', '아이디가 중복되었습니다.', 'error');
+      return;
+    }
 
-      dispatch({
-        type: SIGN_UP_REQUEST,
-        payload: { username, password, email, introduce, name },
-      });
-    },
-    [email, password, name],
-  );
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      payload: { username, password, email, introduce, name },
+    });
+  };
   const onChangeUserName = e => {
     setUsername(e.target.value);
     dispatch({
