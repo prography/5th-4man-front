@@ -22,7 +22,8 @@
     "redux": "^4.0.4",
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.1.1",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -50,7 +51,8 @@
       "react/no-array-index-key": 0,
       "import/no-named-as-default": 0,
       "import/no-named-as-default-member": 0,
-      "no-return-await": 0
+      "no-return-await": 0,
+      "camelcase": 0
     },
     "env": {
       "browser": true
