@@ -42,6 +42,7 @@ const reducer = (state = initialState, action) => {
         draft.user = null;
         draft.access = '';
         draft.refresh = '';
+        draft.userId = -1;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_REQUEST:
@@ -92,7 +93,6 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_SUCCESS:
         draft.isLoggedIn = true;
         draft.userId = action.payload.userId;
-
         swal('로그인 완료!', '로그인 되었습니다!', 'success');
 
         return draft;
