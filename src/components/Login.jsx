@@ -32,9 +32,9 @@ const Login = () => {
         </p>
         <Input
           tpye="text"
-          className="email-input"
+          className="username-input"
           value={username}
-          name="email"
+          name="username"
           onChange={onChangeUsername}
           placeholder="아이디를 입력해주세요."
           size="large"
@@ -47,9 +47,9 @@ const Login = () => {
           placeholder="패스워드를 입력해주세요."
           size="large"
         />
-        <Button size="large" className="email-button" block onClick={onLogin}>
-          <Icon type="mail" className="email-icon" />
-          이메일로 시작하기
+        <Button size="large" className="login-button" block onClick={onLogin}>
+          <Icon type="login" className="login-icon" />
+          아이디로 시작하기
           <span id="right-space" />
         </Button>
         <div className="button-border">
