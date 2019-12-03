@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -80,7 +80,7 @@ const AddedForm = props => {
               valuePropName: 'checked',
             })(
               <Checkbox>
-                <a href="">이용약관</a> 및 개인정보 처리방침 동의 (필수)
+                <a href="#">이용약관</a> 및 개인정보 처리방침 동의 (필수)
               </Checkbox>,
             )}
           </Form.Item>
