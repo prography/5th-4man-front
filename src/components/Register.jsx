@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -84,7 +84,13 @@ const Register = props => {
       <div className="text-bold register-title .mb-20">회원가입</div>
       <div style={{ width: '50%' }}>
         <Form layout="horizontal" onSubmit={handleSubmit}>
-          <Form.Item label="로그인 아이디" hasFeedback>
+          <Form.Item
+            label="로그인 아이디"
+            validateStatus={
+              usernameCheck ? 'error' : username === '' ? '' : 'success'
+            }
+            help={usernameCheck ? '아이디 중복' : ''}
+          >
             {getFieldDecorator('username', {
               rules: [
                 {
@@ -100,11 +106,6 @@ const Register = props => {
               />,
             )}
           </Form.Item>
-          {usernameCheck ? (
-            <div className="text-red">로그인이 중복입니다.</div>
-          ) : (
-            <></>
-          )}
           <Form.Item label="비밀번호">
             {getFieldDecorator('password', {
               rules: [
@@ -186,11 +187,11 @@ const Register = props => {
           <Form.Item {...buttonItemLayout}>
             <Button
               size="large"
-              className="email-button"
+              className="login-button"
               htmlType="submit"
               block
             >
-              <Icon type="mail" className="email-icon" />
+              <Icon type="login" className="login-icon" />
               가입하기
               <span className="right-space" />
             </Button>
