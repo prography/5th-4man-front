@@ -8,7 +8,6 @@ export const initialState = {
   refresh: '',
   code: '',
   isNew: false,
-  userId: -1,
   usernameCheck: false,
 };
 
@@ -32,6 +31,10 @@ export const ADD_REGISTER_REQUEST = 'user/ADD_REGISTER_REQUEST';
 export const ADD_REGISTER_SUCCESS = 'user/ADD_REGISTER_SUCCESS';
 export const ADD_REGISTER_FAILURE = 'user/ADD_REGISTER_FAILURE';
 
+export const AUTH_REQUEST = 'user/AUTH_REQUEST';
+export const AUTH_SUCCESS = 'user/AUTH_SUCCESS';
+export const AUTH_FAILURE = 'user/AUTH_FAILURE';
+
 export const LOG_OUT = 'user/LOG_OUT';
 
 const reducer = (state = initialState, action) => {
@@ -39,10 +42,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
       case LOG_OUT:
         draft.isLoggedIn = false;
-        draft.user = null;
         draft.access = '';
         draft.refresh = '';
-        draft.userId = -1;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_REQUEST:
@@ -54,7 +55,6 @@ const reducer = (state = initialState, action) => {
         draft.access = action.payload.access;
         draft.refresh = action.payload.refresh;
         draft.isNew = action.payload.isNew;
-        draft.userId = action.payload.userId;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_FAILURE:
@@ -92,7 +92,8 @@ const reducer = (state = initialState, action) => {
 
       case LOG_IN_SUCCESS:
         draft.isLoggedIn = true;
-        draft.userId = action.payload.userId;
+        draft.access = action.payload.access;
+        draft.refresh = action.payload.refresh;
         swal('로그인 완료!', '로그인 되었습니다!', 'success');
 
         return draft;
@@ -109,6 +110,17 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case ADD_REGISTER_FAILURE:
+        return draft;
+      case AUTH_REQUEST:
+        return draft;
+      case AUTH_SUCCESS:
+        if (action.payload) {
+          draft.isLoggedIn = true;
+          draft.access = action.payload.access;
+          draft.refresh = action.payload.refresh;
+        }
+        return draft;
+      case AUTH_FAILURE:
         return draft;
     }
   });
