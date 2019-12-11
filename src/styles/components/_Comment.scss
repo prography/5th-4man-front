@@ -1,0 +1,75 @@
+// antd custom
+.team-comment {
+  border-bottom: 1px solid #efefef;
+
+  .comment- {
+    &nickname {
+      font-size: 0.7rem;
+    }
+    &content {
+      font-size: 0.825rem;
+    }
+  }
+  &:last-child {
+    border: 0;
+  }
+
+  .ant-comment-actions {
+    button {
+      font-size: 0.825rem;
+    }
+  }
+}
+
+textarea.comment-input {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  height: 80px;
+
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  resize: none;
+  color: #212529;
+  display: block;
+  line-height: 1.5;
+
+  transition: height 0.2s;
+
+  outline: 0;
+}
+
+.ant-comment-inner {
+  padding-bottom: 0 !important;
+}
+
+.comment-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 10px;
+
+  .comment-btn-list {
+    button {
+      margin-left: 5px;
+      border: 0;
+
+      span {
+        font-size: 0.825rem;
+      }
+
+      &.add-btn {
+        color: #fff;
+        background-color: $main-color-blue;
+      }
+
+      &.cancel-btn {
+        color: #333;
+        background-color: #efefef;
+      }
+    }
+  }
+}
