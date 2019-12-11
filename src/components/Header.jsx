@@ -9,7 +9,7 @@ const Header = ({ location }) => {
   const { isLoggedIn } = useSelector(state => state.user);
 
   return (
-    <header className={location.pathname !== '/' && 'scrolled'}>
+    <header className={location.pathname !== '/' ? 'scrolled' : ''}>
       <div className="container display-flex justify-content-space-between">
         <Link to="/" className="logo">
           <span className="point">개</span>발은{' '}
