@@ -8,3 +8,8 @@ export const setToken = token => {
 export const getToken = () => {
   return JSON.parse(localStorage.getItem('token'));
 };
+
+export const removeToken = () => {
+  localStorage.removeItem('token');
+  axios.defaults.headers.common.Authorization = null;
+};
