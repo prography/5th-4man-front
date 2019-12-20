@@ -1,42 +1,52 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Input, Button, message } from 'antd';
 
-const CommentInput = () => {
-  const [content, setContent] = useState('');
+import * as PostAPI from 'lib/api/post';
+
+import * as teamDetailActions from '../store/reducers/teamDetail';
+
+const CommentInput = ({ team, id, handleSubmit, value = '' }) => {
+  const [body, setBody] = useState(value);
   const [loading, setLoading] = useState(false);
 
-  const inputRef = React.createRef();
+  const onSubmit = async () => {
+    const params = {};
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
-  const handleSubmit = useCallback(() => {
-    if (!content) {
-      return false;
+    // 댓글을 아무것도 적지 않았을 때
+    if (!body) {
+      message.error('댓글은 한글자 이상 입력해주세요.');
     }
+
+    // 대댓글일 경우 parent 추가
+    if (id) {
+      params.parent = id;
+    }
+
+    params.team = team;
+    params.body = body;
 
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      message.success('댓글 등록에 성공했습니다.');
+    console.log(params);
 
-      setContent('');
-    }, 1000);
-  }, [content]);
+    const re = await handleSubmit(params);
+
+    console.log(re);
+
+    setLoading(false);
+    setBody('');
+  };
 
   return (
     <div className="comment-input-wrap pb-20">
       <Input.TextArea
         className="comment-input"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-        ref={inputRef}
+        value={body}
+        onChange={e => setBody(e.target.value)}
       />
       <div className="comment-btn-wrap">
         <div className="comment-btn-list">
-          <Button className="add-btn" onClick={handleSubmit} loading={loading}>
+          <Button className="add-btn" onClick={onSubmit} loading={loading}>
             등록
           </Button>
         </div>

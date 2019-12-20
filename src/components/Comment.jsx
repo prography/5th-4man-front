@@ -1,40 +1,65 @@
 import React, { memo, useState, useMemo } from 'react';
-import { Comment as AntComment, Avatar } from 'antd';
+import { Comment as AntComment, Avatar, Popconfirm } from 'antd';
 
 import CommentInput from 'components/CommentInput';
-import CommentContainer from 'containers/CommentContainer';
+import CommentList from 'components/CommentList';
 
-const Comment = ({ author, body, child_comments, parent, created_at }) => {
+const Comment = ({
+  author,
+  id,
+  body,
+  child_comments,
+  team,
+  created_at,
+  child_comments_count,
+  isChild,
+  handleDelete,
+  handleSubmit,
+  handleUpdate,
+}) => {
   const [openInput, setOpenInput] = useState(false);
-
-  const handleInputToggle = () => {
-    setOpenInput(!openInput);
-  };
-
-  const isChild = useMemo(() => {
-    return !!parent;
-  });
+  const [isChange, setIsChange] = useState(false);
 
   const commentActionText = useMemo(() => {
     return openInput
       ? '숨기기'
-      : child_comments.length
-      ? `${child_comments.length}개의 답글`
+      : child_comments_count
+      ? `${child_comments_count}개의 답글`
       : '댓글 달기';
   });
 
   const actions = useMemo(() => {
-    const actionBtn = (
+    const ToggleBtn = (
       <button
         type="button"
         className="main-color-blue"
-        onClick={handleInputToggle}
+        onClick={() => setOpenInput(!openInput)}
       >
         {commentActionText}
       </button>
     );
 
-    return !isChild ? [actionBtn] : [];
+    const DeleteBtn = (
+      <Popconfirm
+        placement="bottomRight"
+        title="정말 댓글을 삭제하시겠습니까?"
+        onConfirm={() => handleDelete(id)}
+        okText="삭제"
+        cancelText="취소"
+      >
+        <button type="button">삭제</button>
+      </Popconfirm>
+    );
+
+    const UpdateBtn = (
+      <button type="button" onClick={() => setIsChange(!isChange)}>
+        {isChange ? '수정취소' : '수정'}
+      </button>
+    );
+
+    return !isChild
+      ? [ToggleBtn, DeleteBtn, UpdateBtn]
+      : [DeleteBtn, UpdateBtn];
   });
 
   return (
@@ -51,18 +76,35 @@ const Comment = ({ author, body, child_comments, parent, created_at }) => {
           />
         }
         content={
-          <div>
-            <p className="comment-content">{body}</p>
-          </div>
+          !isChange ? (
+            <div>
+              <p className="comment-content">{body}</p>
+            </div>
+          ) : (
+            <div className="pt-20">
+              <CommentInput
+                team={team}
+                id={id}
+                handleSubmit={handleUpdate}
+                value={body}
+              />
+            </div>
+          )
         }
       >
         {!isChild && openInput && (
           <>
-            {child_comments.length && (
-              <CommentContainer commentList={child_comments} />
+            {child_comments.length ? (
+              <CommentList
+                list={child_comments}
+                handleDelete={handleDelete}
+                handleUpdate={handleUpdate}
+              />
+            ) : (
+              ''
             )}
             <div className="pt-20">
-              <CommentInput />
+              <CommentInput team={team} id={id} handleSubmit={handleSubmit} />
             </div>
           </>
         )}

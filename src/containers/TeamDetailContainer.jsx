@@ -7,13 +7,13 @@ import swal from 'sweetalert';
 
 import CardImage from 'components/CardImage';
 import CommentContainer from 'containers/CommentContainer';
-import CommentInput from 'components/CommentInput';
 
 import * as teamDetailActions from '../store/reducers/teamDetail';
 
 const TeamDetailContainer = ({ teamId }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
   const {
+    id,
     title,
     description,
     image,
@@ -21,12 +21,13 @@ const TeamDetailContainer = ({ teamId }) => {
     tags,
     leader,
     parent_comments,
+    comments_count,
   } = team;
 
   const dispatch = useDispatch();
   const getData = useCallback(() => {
     dispatch(teamDetailActions.getTeamDetailAction(teamId));
-  }, [dispatch]);
+  }, []);
 
   const { TabPane } = Tabs;
 
@@ -48,17 +49,8 @@ const TeamDetailContainer = ({ teamId }) => {
                       <h2 className="text-bold">{title}</h2>
                       {description}
                     </div>
-                    <div id="#comment" className="team-comment-wrap">
-                      <h2 className="text-bold">
-                        {parent_comments.length}개의 댓글
-                      </h2>
-                      <div className="mb-20">
-                        <CommentInput />
-                      </div>
-
-                      <CommentContainer commentList={parent_comments} />
-                    </div>
                   </div>
+                  <CommentContainer teamId={teamId} />
                 </TabPane>
               </Tabs>
             </div>
@@ -107,7 +99,8 @@ const TeamDetailContainer = ({ teamId }) => {
                         '신청 완료!',
                         '축하드립니다! 팀 신청이 완료 되었습니다. (사실 안됨)',
                         'success',
-                      )}
+                      )
+                    }
                   >
                     신청하기
                   </button>
