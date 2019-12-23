@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Input, Button, message } from 'antd';
 
-const CommentInput = ({ isChange, team, id, handleSubmit, value = '' }) => {
+const CommentInput = ({ isChange, team, id, commentUpdate, value = '' }) => {
   const [body, setBody] = useState(value);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     const params = {};
 
     // 댓글을 아무것도 적지 않았을 때
@@ -20,19 +20,18 @@ const CommentInput = ({ isChange, team, id, handleSubmit, value = '' }) => {
     params.team = team;
     params.body = body;
 
-    
+    setLoading(true);
 
-    try {
-      setLoading(true);
+    await commentUpdate(params);
+  });
 
-      const re = await handleSubmit(params);
-
-      setLoading(false);
+  // 클린업 함수로 초기화
+  useEffect(() => {
+    return () => {
       setBody('');
-    } catch (err) {
-      throw Error();
-    }
-  };
+      setLoading(false);
+    };
+  }, []);
 
   return (
     <div className="comment-input-wrap pb-20">

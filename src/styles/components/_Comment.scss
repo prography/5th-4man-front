@@ -10,6 +10,7 @@
       font-size: 0.825rem;
     }
   }
+
   &:last-child {
     border: 0;
   }
@@ -23,6 +24,10 @@
       font-size: 0.825rem;
     }
   }
+}
+
+.ant-comment-nested > .team-comment:last-child {
+  border: 0;
 }
 
 textarea.comment-input {

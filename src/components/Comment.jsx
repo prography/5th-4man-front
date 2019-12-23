@@ -22,34 +22,30 @@ const Comment = ({
   const [openInput, setToggleInput] = useState(false);
   const [isChange, setIsChange] = useState(false);
 
-  const commentUpdate = params => {
-    try {
-      handleUpdate(params);
-    } catch (err) {
-      console.log(err);
-    }
-    
+  const commentUpdate = async params => {
+    const re = await handleUpdate(params);
+
+    setIsChange(!re);
+
+    return re;
   };
 
   const actions = useMemo(() => {
     const actionArr = [
-      <CommentActions.DeleteBtn
-        id={id}
-        handleDelete={handleDelete} 
-      />,
+      <CommentActions.DeleteBtn id={id} handleDelete={handleDelete} />,
       <CommentActions.UpdateBtn
         setIsChange={setIsChange}
-        isChange={isChange} 
-      />
+        isChange={isChange}
+      />,
     ];
-    
+
     if (!isChild) {
       actionArr.unshift(
         <CommentActions.ToggleBtn
-          setToggleInput={setToggleInput} 
-          openInput={openInput} 
-          child_comments_count={child_comments_count} 
-        />
+          setToggleInput={setToggleInput}
+          openInput={openInput}
+          child_comments_count={child_comments_count}
+        />,
       );
     }
 
@@ -80,7 +76,7 @@ const Comment = ({
                 isChange={isChange}
                 team={team}
                 id={id}
-                handleSubmit={handleUpdate}
+                commentUpdate={commentUpdate}
                 value={body}
               />
             </div>
@@ -93,14 +89,14 @@ const Comment = ({
               <CommentList
                 list={child_comments}
                 handleDelete={handleDelete}
-                handleUpdate={handleUpdate}
+                handleUpdate={commentUpdate}
                 handleSubmit={handleSubmit}
               />
             ) : (
               ''
             )}
             <div className="pt-20">
-              <CommentInput team={team} id={id} handleSubmit={handleSubmit} />
+              <CommentInput team={team} id={id} commentUpdate={handleSubmit} />
             </div>
           </>
         )}

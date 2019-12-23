@@ -44,16 +44,19 @@ const CommentContainer = ({ teamId }) => {
     }
   };
 
-  const handleUpdate = async (params) => {
+  const handleUpdate = async params => {
     try {
-      console.log(params);
       await PostAPI.updateComment(params);
 
       await getComment();
 
       message.success('댓글 수정에 성공했습니다.');
+
+      return true;
     } catch (err) {
       message.error('댓글 수정에 실패했습니다.');
+
+      return false;
     }
   };
 
@@ -66,7 +69,7 @@ const CommentContainer = ({ teamId }) => {
       <div id="#comment" className="team-comment-wrap">
         <h2 className="text-bold">{comment.comments_count}개의 댓글</h2>
         <div className="mb-20">
-          <CommentInput team={teamId} handleSubmit={handleSubmit} />
+          <CommentInput team={teamId} commentUpdate={handleSubmit} />
         </div>
         {comment.parent_comments ? (
           <CommentList
