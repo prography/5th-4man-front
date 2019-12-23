@@ -35,6 +35,7 @@ export const addComment = async params => {
 };
 
 export const updateComment = async params => {
+  console.log(params);
   const re = await axios.put(`${API_URL}/comment/${params.id}/`, params);
 
   return re;

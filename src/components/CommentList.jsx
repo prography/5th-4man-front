@@ -23,10 +23,10 @@ const CommentList = ({ list, handleDelete, handleSubmit, handleUpdate }) => {
         child_comments={child_comments}
         created_at={created_at}
         child_comments_count={child_comments_count}
+        isChild={!!parent}
         handleDelete={handleDelete}
         handleSubmit={handleSubmit}
         handleUpdate={handleUpdate}
-        isChild={!!parent}
       />
     ),
   );

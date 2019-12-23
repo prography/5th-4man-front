@@ -1,11 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input, Button, message } from 'antd';
 
-import * as PostAPI from 'lib/api/post';
-
-import * as teamDetailActions from '../store/reducers/teamDetail';
-
-const CommentInput = ({ team, id, handleSubmit, value = '' }) => {
+const CommentInput = ({ isChange, team, id, handleSubmit, value = '' }) => {
   const [body, setBody] = useState(value);
   const [loading, setLoading] = useState(false);
 
@@ -17,24 +13,25 @@ const CommentInput = ({ team, id, handleSubmit, value = '' }) => {
       message.error('댓글은 한글자 이상 입력해주세요.');
     }
 
-    // 대댓글일 경우 parent 추가
     if (id) {
-      params.parent = id;
+      params.id = id;
     }
 
     params.team = team;
     params.body = body;
 
-    setLoading(true);
+    
 
-    console.log(params);
+    try {
+      setLoading(true);
 
-    const re = await handleSubmit(params);
+      const re = await handleSubmit(params);
 
-    console.log(re);
-
-    setLoading(false);
-    setBody('');
+      setLoading(false);
+      setBody('');
+    } catch (err) {
+      throw Error();
+    }
   };
 
   return (
@@ -47,7 +44,7 @@ const CommentInput = ({ team, id, handleSubmit, value = '' }) => {
       <div className="comment-btn-wrap">
         <div className="comment-btn-list">
           <Button className="add-btn" onClick={onSubmit} loading={loading}>
-            등록
+            {isChange ? '수정' : '등록'}
           </Button>
         </div>
       </div>

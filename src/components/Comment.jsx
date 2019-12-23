@@ -1,8 +1,10 @@
 import React, { memo, useState, useMemo } from 'react';
-import { Comment as AntComment, Avatar, Popconfirm } from 'antd';
+import { Comment as AntComment, Avatar } from 'antd';
 
 import CommentInput from 'components/CommentInput';
 import CommentList from 'components/CommentList';
+
+import * as CommentActions from 'components/CommentActions';
 
 const Comment = ({
   author,
@@ -17,49 +19,41 @@ const Comment = ({
   handleSubmit,
   handleUpdate,
 }) => {
-  const [openInput, setOpenInput] = useState(false);
+  const [openInput, setToggleInput] = useState(false);
   const [isChange, setIsChange] = useState(false);
 
-  const commentActionText = useMemo(() => {
-    return openInput
-      ? '숨기기'
-      : child_comments_count
-      ? `${child_comments_count}개의 답글`
-      : '댓글 달기';
-  });
+  const commentUpdate = params => {
+    try {
+      handleUpdate(params);
+    } catch (err) {
+      console.log(err);
+    }
+    
+  };
 
   const actions = useMemo(() => {
-    const ToggleBtn = (
-      <button
-        type="button"
-        className="main-color-blue"
-        onClick={() => setOpenInput(!openInput)}
-      >
-        {commentActionText}
-      </button>
-    );
+    const actionArr = [
+      <CommentActions.DeleteBtn
+        id={id}
+        handleDelete={handleDelete} 
+      />,
+      <CommentActions.UpdateBtn
+        setIsChange={setIsChange}
+        isChange={isChange} 
+      />
+    ];
+    
+    if (!isChild) {
+      actionArr.unshift(
+        <CommentActions.ToggleBtn
+          setToggleInput={setToggleInput} 
+          openInput={openInput} 
+          child_comments_count={child_comments_count} 
+        />
+      );
+    }
 
-    const DeleteBtn = (
-      <Popconfirm
-        placement="bottomRight"
-        title="정말 댓글을 삭제하시겠습니까?"
-        onConfirm={() => handleDelete(id)}
-        okText="삭제"
-        cancelText="취소"
-      >
-        <button type="button">삭제</button>
-      </Popconfirm>
-    );
-
-    const UpdateBtn = (
-      <button type="button" onClick={() => setIsChange(!isChange)}>
-        {isChange ? '수정취소' : '수정'}
-      </button>
-    );
-
-    return !isChild
-      ? [ToggleBtn, DeleteBtn, UpdateBtn]
-      : [DeleteBtn, UpdateBtn];
+    return actionArr;
   });
 
   return (
@@ -83,6 +77,7 @@ const Comment = ({
           ) : (
             <div className="pt-20">
               <CommentInput
+                isChange={isChange}
                 team={team}
                 id={id}
                 handleSubmit={handleUpdate}
@@ -99,6 +94,7 @@ const Comment = ({
                 list={child_comments}
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
+                handleSubmit={handleSubmit}
               />
             ) : (
               ''

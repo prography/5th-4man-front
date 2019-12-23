@@ -44,8 +44,9 @@ const CommentContainer = ({ teamId }) => {
     }
   };
 
-  const handleUpdate = async (id, params) => {
+  const handleUpdate = async (params) => {
     try {
+      console.log(params);
       await PostAPI.updateComment(params);
 
       await getComment();
