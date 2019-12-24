@@ -7,11 +7,11 @@ import CommentList from 'components/CommentList';
 import * as CommentActions from 'components/CommentActions';
 
 const Comment = ({
-  author,
   id,
+  parent_id,
+  author,
   body,
   child_comments,
-  team,
   created_at,
   child_comments_count,
   isChild,
@@ -26,6 +26,17 @@ const Comment = ({
     const re = await handleUpdate(params);
 
     setIsChange(!re);
+
+    return re;
+  };
+
+  const commentSubmit = async data => {
+    const params = {
+      parent: id,
+      body: data.body,
+    };
+
+    const re = await handleSubmit(params);
 
     return re;
   };
@@ -73,9 +84,9 @@ const Comment = ({
           ) : (
             <div className="pt-20">
               <CommentInput
-                isChange={isChange}
-                team={team}
                 id={id}
+                parent_id={parent_id}
+                isChange={isChange}
                 commentUpdate={commentUpdate}
                 value={body}
               />
@@ -89,14 +100,14 @@ const Comment = ({
               <CommentList
                 list={child_comments}
                 handleDelete={handleDelete}
-                handleUpdate={commentUpdate}
+                handleUpdate={handleUpdate}
                 handleSubmit={handleSubmit}
               />
             ) : (
               ''
             )}
             <div className="pt-20">
-              <CommentInput team={team} id={id} commentUpdate={handleSubmit} />
+              <CommentInput isChange={isChange} commentUpdate={commentSubmit} />
             </div>
           </>
         )}

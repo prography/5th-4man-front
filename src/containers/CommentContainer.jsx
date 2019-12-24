@@ -8,14 +8,14 @@ import CommentInput from 'components/CommentInput';
 import * as PostAPI from 'lib/api/post';
 import * as commentActions from '../store/reducers/comment';
 
-const CommentContainer = ({ teamId }) => {
+const CommentContainer = ({ team_id }) => {
   const { comment } = useSelector(state => state.comment);
 
   const dispatch = useDispatch();
 
   // 댓글 불러오기
   const getComment = useCallback(() => {
-    dispatch(commentActions.getTeamCommentAction(teamId));
+    dispatch(commentActions.getTeamCommentAction(team_id));
   }, [dispatch]);
 
   // 댓글 삭제
@@ -32,8 +32,14 @@ const CommentContainer = ({ teamId }) => {
   };
 
   // 댓글 등록
-  const handleSubmit = async params => {
+  const handleSubmit = async data => {
+
     try {
+      const params = {
+        ...data,
+        team: team_id,
+      };
+
       await PostAPI.addComment(params);
 
       await getComment();
@@ -44,7 +50,14 @@ const CommentContainer = ({ teamId }) => {
     }
   };
 
-  const handleUpdate = async params => {
+  const handleUpdate = async data => {
+
+    console.log('=====================');
+    const params = {
+      ...data,
+      team: team_id,
+    };
+
     try {
       await PostAPI.updateComment(params);
 
@@ -69,7 +82,7 @@ const CommentContainer = ({ teamId }) => {
       <div id="#comment" className="team-comment-wrap">
         <h2 className="text-bold">{comment.comments_count}개의 댓글</h2>
         <div className="mb-20">
-          <CommentInput team={teamId} commentUpdate={handleSubmit} />
+          <CommentInput commentUpdate={handleSubmit} />
         </div>
         {comment.parent_comments ? (
           <CommentList

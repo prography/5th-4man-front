@@ -10,23 +10,20 @@ import CommentContainer from 'containers/CommentContainer';
 
 import * as teamDetailActions from '../store/reducers/teamDetail';
 
-const TeamDetailContainer = ({ teamId }) => {
+const TeamDetailContainer = ({ team_id }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
   const {
-    id,
     title,
     description,
     image,
     like_count,
     tags,
     leader,
-    parent_comments,
-    comments_count,
   } = team;
 
   const dispatch = useDispatch();
   const getData = useCallback(() => {
-    dispatch(teamDetailActions.getTeamDetailAction(teamId));
+    dispatch(teamDetailActions.getTeamDetailAction(team_id));
   }, []);
 
   const { TabPane } = Tabs;
@@ -50,7 +47,7 @@ const TeamDetailContainer = ({ teamId }) => {
                       {description}
                     </div>
                   </div>
-                  <CommentContainer teamId={teamId} />
+                  <CommentContainer team_id={team_id} />
                 </TabPane>
               </Tabs>
             </div>
