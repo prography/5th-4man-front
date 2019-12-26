@@ -15,14 +15,14 @@ export const getRecentTeamList = async () => {
 };
 
 export const getTeamDetail = async id => {
-  const re = await axios.get(`https://gaegata.fourman.store/team/${id}/`);
+  const re = await axios.get(`${API_URL}/team/${id}/`);
 
   return re;
 };
 
 export const getTeamComment = async id => {
   const re = await axios.get(
-    `https://gaegata.fourman.store/team/${id}/comment/`,
+    `${API_URL}/team/${id}/comment/`,
   );
 
   return re;
