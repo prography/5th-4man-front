@@ -96,8 +96,7 @@ const TeamDetailContainer = ({ team_id }) => {
                         '신청 완료!',
                         '축하드립니다! 팀 신청이 완료 되었습니다. (사실 안됨)',
                         'success',
-                      )
-                    }
+                      )}
                   >
                     신청하기
                   </button>

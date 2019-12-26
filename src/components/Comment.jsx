@@ -95,7 +95,7 @@ const Comment = ({
         }
       >
         {!isChild && openInput && (
-          <>
+          <div>
             {child_comments.length ? (
               <CommentList
                 list={child_comments}
@@ -109,7 +109,7 @@ const Comment = ({
             <div className="pt-20">
               <CommentInput isChange={isChange} commentUpdate={commentSubmit} />
             </div>
-          </>
+          </div>
         )}
       </AntComment>
     </>
