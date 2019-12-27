@@ -1,4 +1,4 @@
-import { call, put, all, fork, takeLatest, delay } from 'redux-saga/effects';
+import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
 import {
   GET_TEAM_DETAIL_REQUEST,
   GET_TEAM_DETAIL_SUCCESS,
