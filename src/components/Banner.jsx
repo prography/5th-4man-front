@@ -1,5 +1,5 @@
 import React from 'react';
-import TagSearch from 'containers/TagSearchCotainer';
+// import TagSearch from 'containers/TagSearchCotainer';
 
 const Banner = () => {
   return (

@@ -2,11 +2,11 @@ import React from 'react';
 import TeamDetailContainer from 'containers/TeamDetailContainer';
 
 const TeamDetail = ({ match }) => {
-  const { teamId } = match.params;
+  const { team_id } = match.params;
 
   return (
     <>
-      <TeamDetailContainer teamId={teamId} />
+      <TeamDetailContainer team_id={team_id} />
     </>
   );
 };
