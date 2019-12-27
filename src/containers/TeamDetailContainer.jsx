@@ -24,7 +24,7 @@ const TeamDetailContainer = ({ team_id }) => {
   const dispatch = useDispatch();
   const getData = useCallback(() => {
     dispatch(teamDetailActions.getTeamDetailAction(team_id));
-  }, []);
+  }, [dispatch, team_id]);
 
   const { TabPane } = Tabs;
 

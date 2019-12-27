@@ -9,7 +9,7 @@ export const ToggleBtn = ({ setToggleInput, openInput, child_comments_count }) =
       : child_comments_count
       ? `${child_comments_count}개의 답글`
       : '댓글 달기';
-  });
+  }, [openInput, child_comments_count]);
 
   return (
     <button

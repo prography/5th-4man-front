@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo } from 'react';
+import React, { memo, useState } from 'react';
 import { Comment as AntComment, Avatar } from 'antd';
 
 import CommentInput from 'components/CommentInput';
@@ -41,7 +41,7 @@ const Comment = ({
     return re;
   };
 
-  const actions = useMemo(() => {
+  const actions = () => {
     const actionArr = [
       <CommentActions.DeleteBtn id={id} handleDelete={handleDelete} />,
       <CommentActions.UpdateBtn
@@ -61,13 +61,13 @@ const Comment = ({
     }
 
     return actionArr;
-  });
+  };
 
   return (
     <>
       <AntComment
         className="team-comment"
-        actions={actions}
+        actions={actions()}
         author={<span className="comment-nickname">{author.nickname}</span>}
         datetime={created_at}
         avatar={

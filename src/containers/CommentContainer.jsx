@@ -16,7 +16,7 @@ const CommentContainer = ({ team_id }) => {
   // 댓글 불러오기
   const getComment = useCallback(() => {
     dispatch(commentActions.getTeamCommentAction(team_id));
-  }, [dispatch]);
+  }, [dispatch, team_id]);
 
   // 댓글 삭제
   const handleDelete = async id => {
@@ -51,8 +51,6 @@ const CommentContainer = ({ team_id }) => {
   };
 
   const handleUpdate = async data => {
-
-    console.log('=====================');
     const params = {
       ...data,
       team: team_id,

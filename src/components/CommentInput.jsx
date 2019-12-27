@@ -10,7 +10,7 @@ const CommentInput = ({ id, parent_id, isChange, commentUpdate, value = '' }) =>
     setLoading(false);
   }, []);
 
-  const onSubmit = useCallback(async () => {
+  const onSubmit = async () => {
     setLoading(true);
 
     // 댓글을 아무것도 적지 않았을 때
@@ -31,9 +31,7 @@ const CommentInput = ({ id, parent_id, isChange, commentUpdate, value = '' }) =>
     if (!isChange) {
       cleanUp();
     }
-
-    
-  });
+  };
 
   // 클린업 함수로 초기화
   useEffect(() => {
