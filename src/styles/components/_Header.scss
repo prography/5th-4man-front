@@ -30,14 +30,15 @@ header {
   }
 
   a.logo {
-    font-family: Spoqa Han Sans Bold;
+    font-family: 'Nanum Myeongjo';
+    font-weight: bold;
     color: #fff;
-    font-size: 0.88rem;
+    font-size: 1.5rem;
 
-    .point {
-      color: #fff;
-      font-size: 1.5rem;
-    }
+    // .point {
+    //   color: #fff;
+    //   font-size: 1.5rem;
+    // }
   }
 
   .navigation {

@@ -42,7 +42,7 @@ const TeamCard = props => {
         <div className="card-counts">
           <div className="display-flex justify-content-space-between">
             <p className="no-margin">
-              <span>좋아요 {item.like_count}</span>∙<span>댓글 15</span>
+  <span>좋아요 {item.like_count}</span>∙<span>댓글 {item.comments_count}</span>
             </p>
             <div>
               <Icon type="heart" className="card-icon card-icon-heart pr-10" />

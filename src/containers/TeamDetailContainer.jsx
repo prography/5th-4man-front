@@ -6,17 +6,25 @@ import { Col, Row, Icon, Tabs, Tag } from 'antd';
 import swal from 'sweetalert';
 
 import CardImage from 'components/CardImage';
+import CommentContainer from 'containers/CommentContainer';
 
 import * as teamDetailActions from '../store/reducers/teamDetail';
 
-const TeamDetailContainer = ({ teamId }) => {
+const TeamDetailContainer = ({ team_id }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
-  const { title, description, image, like_count, tags, leader } = team;
+  const {
+    title,
+    description,
+    image,
+    like_count,
+    tags,
+    leader,
+  } = team;
 
   const dispatch = useDispatch();
   const getData = useCallback(() => {
-    dispatch(teamDetailActions.getTeamDetailAction(teamId));
-  }, [dispatch]);
+    dispatch(teamDetailActions.getTeamDetailAction(team_id));
+  }, [dispatch, team_id]);
 
   const { TabPane } = Tabs;
 
@@ -34,9 +42,12 @@ const TeamDetailContainer = ({ teamId }) => {
               <Tabs defaultActiveKey="1">
                 <TabPane tab={<span>소개</span>} key="1">
                   <div className="tab-1-content">
-                    <h2 className="text-bold">{title}</h2>
-                    {description}
+                    <div className="team-info-wrap">
+                      <h2 className="text-bold">{title}</h2>
+                      {description}
+                    </div>
                   </div>
+                  <CommentContainer team_id={team_id} />
                 </TabPane>
               </Tabs>
             </div>

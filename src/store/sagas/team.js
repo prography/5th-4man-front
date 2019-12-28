@@ -1,4 +1,4 @@
-import { call, put, all, fork, takeLatest, delay } from 'redux-saga/effects';
+import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
 import {
   GET_POPULAR_LIST_REQUEST,
   GET_POPULAR_LIST_SUCCESS,

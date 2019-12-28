@@ -35,15 +35,25 @@
 
     .left-content {
       .card-image-wrap {
+        border-radius: 10px;
         border: 1px solid #efefef;
+      }
+
+      .team-info-wrap {
+        padding: 30px 0 100px;
+        border-bottom: 1px solid #efefef;
+      }
+
+      .team-comment-wrap {
+        padding: 50px 0 100px;
       }
     }
 
     .right-content {
       .fix-menu-wrap {
         .fix-menu {
+          border-radius: 10px;
           background-color: #fff;
-          border-radius: 3px;
           padding: 20px;
           border: 1px solid #efefef;
 

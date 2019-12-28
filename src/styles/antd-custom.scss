@@ -21,3 +21,19 @@
     font-size: 0.9rem;
   }
 }
+
+.ant-message {
+  span {
+    font-size: 0.825rem;
+  }
+}
+
+.ant-popover-inner-content {
+  .ant-popover-message .ant-popover-message-title {
+    font-size: 0.9rem;
+  }
+
+  .ant-popover-buttons span {
+    font-size: 0.825rem;
+  }
+}

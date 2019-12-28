@@ -4,6 +4,7 @@ import modal from './modal';
 import user from './user';
 import teamDetail from './teamDetail';
 import teamCreate from './teamCreate';
+import comment from './comment';
 
 // 리듀서들을 하나로 합침
 export default combineReducers({
@@ -12,4 +13,5 @@ export default combineReducers({
   user,
   teamDetail,
   teamCreate,
+  comment,
 });

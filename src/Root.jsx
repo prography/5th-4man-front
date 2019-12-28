@@ -52,7 +52,7 @@ const Root = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/oauth" component={Oauth} />
-          <Route exact path="/team/:teamId" component={TeamDetail} />
+          <Route exact path="/team/:team_id" component={TeamDetail} />
           <Route exact path="/addForm" component={AddForm} />
           <Route exact path="/teamCreate" component={TeamCreate} />
         </Switch>
