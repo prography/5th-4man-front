@@ -125,7 +125,6 @@ const reducer = (state = initialState, action) => {
         if (action.payload) {
           draft.isLoggedIn = true;
           draft.access = action.payload.access;
-          draft.refresh = action.payload.refresh;
         }
         return draft;
       case AUTH_FAILURE:

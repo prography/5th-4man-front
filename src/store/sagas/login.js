@@ -17,7 +17,6 @@ function* loginAuth({ payload }) {
     );
     authUtils.setToken({
       access: data.data.access,
-      refresh: data.data.refresh,
     });
     yield put({
       type: actions.LOG_IN_SUCCESS,
@@ -51,13 +50,11 @@ function* loginGithubAuth({ payload }) {
     );
     authUtils.setToken({
       access: data.data.access,
-      refresh: data.data.refresh,
     });
     yield put({
       type: actions.LOG_IN_GITHUB_TOKEN_SUCCESS,
       payload: {
         access: data.data.access,
-        refresh: data.data.refresh,
         isNew: data.data.is_new,
       },
     });
