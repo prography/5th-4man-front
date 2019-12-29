@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Input, Button, message } from 'antd';
 
-const CommentInput = ({ id, parent_id, isChange, commentUpdate, value = '' }) => {
+const CommentInput = ({
+  id,
+  parent_id,
+  isChange,
+  commentUpdate,
+  value = '',
+}) => {
   const [body, setBody] = useState(value);
   const [loading, setLoading] = useState(false);
 
@@ -11,8 +17,6 @@ const CommentInput = ({ id, parent_id, isChange, commentUpdate, value = '' }) =>
   }, []);
 
   const onSubmit = async () => {
-    setLoading(true);
-
     // 댓글을 아무것도 적지 않았을 때
     if (!body) {
       message.error('댓글은 한글자 이상 입력해주세요.');
@@ -26,8 +30,10 @@ const CommentInput = ({ id, parent_id, isChange, commentUpdate, value = '' }) =>
       body,
     };
 
+    setLoading(true);
+
     await commentUpdate(params);
-    
+
     if (!isChange) {
       cleanUp();
     }
