@@ -13,7 +13,7 @@ const TeamCard = props => {
   const CardImageWrap = (
     <div className="card-image-content posr">
       <CardImage animation toUrl={`/team/${item.id}`} imageUrl={item.image} />
-      <Progress max={10} current={7} />
+      <Progress max={item.max_personnel} current={item.current_personnel} />
     </div>
   );
 
@@ -32,17 +32,16 @@ const TeamCard = props => {
             By. {item.leader.nickname}
           </Link>
           <h3 className="text-bold">{item.title}</h3>
-
           <p className="description">{item.description}</p>
         </div>
         <p className="end-date">
           마감일: {moment(item.end_date).format('YYYY-MM-DD')}{' '}
-          {/* <span className="text-bold main-color-blue pl-10">D-{10}</span> */}
         </p>
         <div className="card-counts">
           <div className="display-flex justify-content-space-between">
             <p className="no-margin">
-  <span>좋아요 {item.like_count}</span>∙<span>댓글 {item.comments_count}</span>
+              <span>좋아요 {item.like_count}</span>∙
+              <span>댓글 {item.comments_count}</span>
             </p>
             <div>
               <Icon type="heart" className="card-icon card-icon-heart pr-10" />

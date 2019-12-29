@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = 'https://gaegata.fourman.store';
 
 export const getTeamList = async () => {
-  const re = await axios.get(`${API_URL}/team/`);
+  const re = await axios.get(`${API_URL}/team?ordering=-like_count`);
 
   return re;
 };
@@ -21,9 +21,7 @@ export const getTeamDetail = async id => {
 };
 
 export const getTeamComment = async id => {
-  const re = await axios.get(
-    `${API_URL}/team/${id}/comment/`,
-  );
+  const re = await axios.get(`${API_URL}/team/${id}/comment/`);
 
   return re;
 };

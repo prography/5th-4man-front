@@ -33,7 +33,8 @@ const Header = ({ location }) => {
                   <Link
                     to="#"
                     onClick={() =>
-                      dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })}
+                      dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })
+                    }
                   >
                     로그인
                   </Link>
