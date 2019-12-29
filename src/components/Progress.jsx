@@ -9,6 +9,7 @@ const Progress = ({ max, current }) => {
     background-image: linear-gradient(133deg, #5f76f3, #845ef7);
     height: 100%;
     width: ${(current / max) * 100}%;
+    max-width: 100%;
     z-index: 9;
   `;
   return (
