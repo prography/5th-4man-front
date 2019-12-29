@@ -1,12 +1,11 @@
 import produce from 'immer';
+import { createAction } from 'redux-actions';
 import swal from 'sweetalert';
 
 export const initialState = {
   isLoggedIn: false,
-  user: null,
+  userId: -1,
   access: '',
-  refresh: '',
-  code: '',
   isNew: false,
   usernameCheck: false,
 };
@@ -35,7 +34,21 @@ export const AUTH_REQUEST = 'user/AUTH_REQUEST';
 export const AUTH_SUCCESS = 'user/AUTH_SUCCESS';
 export const AUTH_FAILURE = 'user/AUTH_FAILURE';
 
+export const MY_USER_DETAIL_REQUEST = 'user/MY_USER_DETAIL_REQUEST';
+export const MY_USER_DETAIL_SUCCESS = 'user/MY_USER_DETAIL_SUCCESS';
+export const MY_USER_DETAIL_FAILURE = 'user/MY_USER_DETAIL_FAILURE';
+
 export const LOG_OUT = 'user/LOG_OUT';
+
+export const getLogInGithubTokenAction = createAction(
+  LOG_IN_GITHUB_TOKEN_REQUEST,
+);
+export const getLogInAction = createAction(LOG_IN_REQUEST);
+export const getSignUpAction = createAction(SIGN_UP_REQUEST);
+export const getUserCheckAction = createAction(USER_CHECK_REQUEST);
+export const getAddRegisterAction = createAction(ADD_REGISTER_REQUEST);
+export const getAuthAction = createAction(AUTH_REQUEST);
+export const getMyUserDetailAction = createAction(MY_USER_DETAIL_REQUEST);
 
 const reducer = (state = initialState, action) => {
   return produce(state, draft => {
@@ -43,7 +56,7 @@ const reducer = (state = initialState, action) => {
       case LOG_OUT:
         draft.isLoggedIn = false;
         draft.access = '';
-        draft.refresh = '';
+        draft.userId = -1;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_REQUEST:
@@ -53,8 +66,8 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_GITHUB_TOKEN_SUCCESS:
         draft.isLoggedIn = true;
         draft.access = action.payload.access;
-        draft.refresh = action.payload.refresh;
         draft.isNew = action.payload.isNew;
+        draft.userId = action.payload.userId;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_FAILURE:
@@ -93,7 +106,7 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_SUCCESS:
         draft.isLoggedIn = true;
         draft.access = action.payload.access;
-        draft.refresh = action.payload.refresh;
+        draft.userId = action.payload.userId;
         swal('로그인 완료!', '로그인 되었습니다!', 'success');
 
         return draft;
@@ -119,15 +132,31 @@ const reducer = (state = initialState, action) => {
         swal('회원가입 실패!', '회원가입에 실패하였습니다.', 'error');
 
         return draft;
+
       case AUTH_REQUEST:
         return draft;
+
       case AUTH_SUCCESS:
         if (action.payload) {
           draft.isLoggedIn = true;
           draft.access = action.payload.access;
+          draft.userId = action.payload.userId;
         }
         return draft;
+
       case AUTH_FAILURE:
+        return draft;
+
+      case MY_USER_DETAIL_REQUEST:
+        return draft;
+
+      case MY_USER_DETAIL_SUCCESS:
+        draft.isLoggedIn = true;
+        draft.access = action.payload.access;
+        draft.userId = action.payload.userId;
+        return draft;
+
+      case MY_USER_DETAIL_FAILURE:
         return draft;
     }
   });

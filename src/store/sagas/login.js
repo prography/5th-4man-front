@@ -22,6 +22,8 @@ function* loginAuth({ payload }) {
       type: actions.LOG_IN_SUCCESS,
       payload: {
         userId: data.data.user_id,
+        access: data.data.access,
+        isLoggedIn: true,
       },
     });
     yield put({
@@ -69,6 +71,14 @@ function* watchLoginGithubAuth() {
   yield takeLatest(actions.LOG_IN_GITHUB_TOKEN_REQUEST, loginGithubAuth);
 }
 
+// function* getMyDetail({payload}) {
+//   try{
+
+//   } catch(error) {
+
+//   }
+// }
+
 export default function* root() {
   yield all([fork(watchLoginAuth), fork(watchLoginGithubAuth)]);
 
@@ -79,5 +89,6 @@ export default function* root() {
       type: actions.AUTH_SUCCESS,
       payload: token,
     });
+    // watchMyDetail();
   }
 }
