@@ -1,5 +1,4 @@
 import produce from 'immer';
-import swal from 'sweetalert';
 
 export const TEAM_CREATE_REQUEST = 'team/TEAM_CREATE_REQUEST';
 export const TEAM_CREATE_SUCCESS = 'team/TEAM_CREATE_SUCCESS';
@@ -13,9 +12,6 @@ const reducer = (state = initialState, action) => {
         return draft;
       }
       case TEAM_CREATE_SUCCESS: {
-        swal('팀생성 완료!', 'success').then(() => {
-          window.location.href = `/team/${action.payload.id}`;
-        });
         return draft;
       }
       case TEAM_CREATE_FAILURE: {

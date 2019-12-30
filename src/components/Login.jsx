@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
 import { LOG_IN_REQUEST } from '../store/reducers/user';
+import swal from 'sweetalert';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,8 +14,9 @@ const Login = () => {
     window.location.href =
       'https://github.com/login/oauth/authorize?client_id=a7863c21770a0dd4c503';
   };
-  const onLogin = () => {
-    dispatch({ type: LOG_IN_REQUEST, payload: { username, password } });
+  const onLogin = async () => {
+    await dispatch({ type: LOG_IN_REQUEST, payload: { username, password } });
+    swal('로그인 완료!', '로그인 되었습니다!', 'success');
   };
   const onChangeUsername = e => {
     setUsername(e.target.value);

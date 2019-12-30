@@ -12,6 +12,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { TEAM_CREATE_REQUEST } from '../store/reducers/teamCreate';
+import swal from 'sweetalert';
 
 const getBase64 = file => {
   return new Promise((resolve, reject) => {
@@ -47,7 +48,7 @@ const TeamCreateContainer = props => {
   const onChangeTeamEndDate = value => {
     setTeamendate(value.format('YYYY-MM-DD HH:mm:ss'));
   };
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const formdata = new FormData();
     formdata.append('title', teamtitle);
@@ -57,11 +58,15 @@ const TeamCreateContainer = props => {
     formdata.append('access', access);
     formdata.append('image', image);
 
-    dispatch({
+    await dispatch({
       type: TEAM_CREATE_REQUEST,
       payload: {
         formdata,
       },
+    });
+
+    swal('팀생성 완료!', 'success').then(() => {
+      window.location.href = '/';
     });
   };
 

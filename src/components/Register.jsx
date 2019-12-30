@@ -41,17 +41,23 @@ const Register = props => {
     wrapperCol: { span: 28 },
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (usernameCheck === true) {
       swal('아이디 중복!', '아이디가 중복되었습니다.', 'error');
       return;
     }
 
-    dispatch({
+    await dispatch({
       type: SIGN_UP_REQUEST,
       payload: { username, password, email, introduce, name },
     });
+
+    swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
+      () => {
+        window.location.href = '/';
+      },
+    );
   };
   const onChangeUserName = e => {
     setUsername(e.target.value);
