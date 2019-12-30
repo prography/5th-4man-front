@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { OPEN_MODAL } from '../store/reducers/modal';
 import { LOG_OUT } from '../store/reducers/user';
+import { removeToken } from '../utils/auth';
 
 const Header = ({ location }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,13 @@ const Header = ({ location }) => {
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link to="#" onClick={() => dispatch({ type: LOG_OUT })}>
+                  <Link
+                    to="#"
+                    onClick={() => {
+                      dispatch({ type: LOG_OUT });
+                      removeToken();
+                    }}
+                  >
                     로그아웃
                   </Link>
                 </li>
@@ -33,7 +40,8 @@ const Header = ({ location }) => {
                   <Link
                     to="#"
                     onClick={() =>
-                      dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })}
+                      dispatch({ type: OPEN_MODAL, payload: { type: 'login' } })
+                    }
                   >
                     로그인
                   </Link>

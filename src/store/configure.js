@@ -20,9 +20,7 @@ const configure = initialState => {
     initialState,
     composeEnhancers(applyMiddleware(...middleWares)),
   );
-
   sagaMiddleware.run(rootSaga);
-
   return store;
 };
 

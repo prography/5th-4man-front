@@ -3,6 +3,7 @@ import teamSaga from './team';
 import loginSaga from './login';
 import registerSaga from './register';
 import teamDetailSaga from './teamDetail';
+import teamCreateSaga from './teamCreate';
 import commentSaga from './comment';
 
 function* rootSaga() {
@@ -11,6 +12,7 @@ function* rootSaga() {
     fork(loginSaga),
     fork(registerSaga),
     fork(teamDetailSaga),
+    fork(teamCreateSaga),
     fork(commentSaga),
   ]);
 }

@@ -3,6 +3,7 @@ import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { ADD_REGISTER_REQUEST } from '../store/reducers/user';
+import swal from 'sweetalert';
 
 const AddedForm = props => {
   const [introduce, setIntroduce] = useState('');
@@ -21,13 +22,19 @@ const AddedForm = props => {
   const onChangeEmail = e => {
     setEmail(e.target.value);
   };
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    dispatch({
+    await dispatch({
       type: ADD_REGISTER_REQUEST,
       payload: { email, introduce, name, userId, access },
     });
+
+    swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
+      () => {
+        window.location.href = '/';
+      },
+    );
   };
 
   const buttonItemLayout = {

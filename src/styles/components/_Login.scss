@@ -38,7 +38,7 @@
   border: 1px solid #eeeeee;
   margin-top: 4% 0;
 }
-.email-input {
+.username-input {
   margin-bottom: 5%;
   height: 3.4rem;
 }
@@ -46,7 +46,7 @@
   margin-bottom: 5%;
   height: 3.4rem;
 }
-.email-button {
+.login-button {
   color: #ffffff;
   height: 3.4rem;
   background-color: $main-color-blue;
@@ -69,7 +69,7 @@
   align-items: center;
   text-align: center;
 }
-.email-icon,
+.login-icon,
 .github-icon {
   font-size: 1.2rem;
   justify-content: flex-start;

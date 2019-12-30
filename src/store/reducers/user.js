@@ -1,14 +1,11 @@
 import produce from 'immer';
-import swal from 'sweetalert';
+import { createAction } from 'redux-actions';
 
 export const initialState = {
   isLoggedIn: false,
-  user: null,
-  access: '',
-  refresh: '',
-  code: '',
-  isNew: false,
   userId: -1,
+  access: '',
+  isNew: false,
   usernameCheck: false,
 };
 
@@ -32,16 +29,33 @@ export const ADD_REGISTER_REQUEST = 'user/ADD_REGISTER_REQUEST';
 export const ADD_REGISTER_SUCCESS = 'user/ADD_REGISTER_SUCCESS';
 export const ADD_REGISTER_FAILURE = 'user/ADD_REGISTER_FAILURE';
 
+export const AUTH_REQUEST = 'user/AUTH_REQUEST';
+export const AUTH_SUCCESS = 'user/AUTH_SUCCESS';
+export const AUTH_FAILURE = 'user/AUTH_FAILURE';
+
+export const MY_USER_DETAIL_REQUEST = 'user/MY_USER_DETAIL_REQUEST';
+export const MY_USER_DETAIL_SUCCESS = 'user/MY_USER_DETAIL_SUCCESS';
+export const MY_USER_DETAIL_FAILURE = 'user/MY_USER_DETAIL_FAILURE';
+
 export const LOG_OUT = 'user/LOG_OUT';
+
+export const getLogInGithubTokenAction = createAction(
+  LOG_IN_GITHUB_TOKEN_REQUEST,
+);
+export const getLogInAction = createAction(LOG_IN_REQUEST);
+export const getSignUpAction = createAction(SIGN_UP_REQUEST);
+export const getUserCheckAction = createAction(USER_CHECK_REQUEST);
+export const getAddRegisterAction = createAction(ADD_REGISTER_REQUEST);
+export const getAuthAction = createAction(AUTH_REQUEST);
+export const getMyUserDetailAction = createAction(MY_USER_DETAIL_REQUEST);
 
 const reducer = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case LOG_OUT:
         draft.isLoggedIn = false;
-        draft.user = null;
         draft.access = '';
-        draft.refresh = '';
+        draft.userId = -1;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_REQUEST:
@@ -51,7 +65,6 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_GITHUB_TOKEN_SUCCESS:
         draft.isLoggedIn = true;
         draft.access = action.payload.access;
-        draft.refresh = action.payload.refresh;
         draft.isNew = action.payload.isNew;
         draft.userId = action.payload.userId;
         return draft;
@@ -63,17 +76,9 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case SIGN_UP_SUCCESS:
-        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
-          () => {
-            window.location.href = '/';
-          },
-        );
-
         return draft;
 
       case SIGN_UP_FAILURE:
-        swal('회원가입 실패!', '회원가입에 실패하였습니다.', 'error');
-
         return draft;
 
       case USER_CHECK_REQUEST:
@@ -91,32 +96,47 @@ const reducer = (state = initialState, action) => {
 
       case LOG_IN_SUCCESS:
         draft.isLoggedIn = true;
+        draft.access = action.payload.access;
         draft.userId = action.payload.userId;
-
-        swal('로그인 완료!', '로그인 되었습니다!', 'success');
 
         return draft;
 
       case LOG_IN_FAILURE:
-        swal('로그인 실패!', '아이디 또는 비밀번호가 잘못되었습니다.', 'error');
-
         return draft;
 
       case ADD_REGISTER_REQUEST:
         return draft;
 
       case ADD_REGISTER_SUCCESS:
-        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
-          () => {
-            window.location.href = '/';
-          },
-        );
-
         return draft;
 
       case ADD_REGISTER_FAILURE:
-        swal('회원가입 실패!', '회원가입에 실패하였습니다.', 'error');
+        return draft;
 
+      case AUTH_REQUEST:
+        return draft;
+
+      case AUTH_SUCCESS:
+        if (action.payload) {
+          draft.isLoggedIn = true;
+          draft.access = action.payload.access;
+          draft.userId = action.payload.userId;
+        }
+        return draft;
+
+      case AUTH_FAILURE:
+        return draft;
+
+      case MY_USER_DETAIL_REQUEST:
+        return draft;
+
+      case MY_USER_DETAIL_SUCCESS:
+        draft.isLoggedIn = true;
+        draft.access = action.payload.access;
+        draft.userId = action.payload.userId;
+        return draft;
+
+      case MY_USER_DETAIL_FAILURE:
         return draft;
     }
   });

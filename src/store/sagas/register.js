@@ -64,7 +64,6 @@ function* addRigster({ payload }) {
         Authorization: `Bearer ${payload.access}`,
       },
     };
-
     yield call(
       [axios, 'patch'],
       `https://gaegata.fourman.store/account/${payload.userId}/`,

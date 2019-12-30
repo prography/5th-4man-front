@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
 import { LOG_IN_REQUEST } from '../store/reducers/user';
+import swal from 'sweetalert';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,8 +14,9 @@ const Login = () => {
     window.location.href =
       'https://github.com/login/oauth/authorize?client_id=a7863c21770a0dd4c503';
   };
-  const onLogin = () => {
-    dispatch({ type: LOG_IN_REQUEST, payload: { username, password } });
+  const onLogin = async () => {
+    await dispatch({ type: LOG_IN_REQUEST, payload: { username, password } });
+    swal('로그인 완료!', '로그인 되었습니다!', 'success');
   };
   const onChangeUsername = e => {
     setUsername(e.target.value);
@@ -32,9 +34,9 @@ const Login = () => {
         </p>
         <Input
           tpye="text"
-          className="email-input"
+          className="username-input"
           value={username}
-          name="email"
+          name="username"
           onChange={onChangeUsername}
           placeholder="아이디를 입력해주세요."
           size="large"
@@ -47,9 +49,9 @@ const Login = () => {
           placeholder="패스워드를 입력해주세요."
           size="large"
         />
-        <Button size="large" className="email-button" block onClick={onLogin}>
-          <Icon type="mail" className="email-icon" />
-          이메일로 시작하기
+        <Button size="large" className="login-button" block onClick={onLogin}>
+          <Icon type="login" className="login-icon" />
+          아이디로 시작하기
           <span id="right-space" />
         </Button>
         <div className="button-border">

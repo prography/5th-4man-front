@@ -2,6 +2,7 @@ import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actions from '../reducers/user';
 import { CLOSE_MODAL } from '../reducers/modal';
+import * as authUtils from '../../utils/auth';
 
 function* loginAuth({ payload }) {
   try {
@@ -14,11 +15,15 @@ function* loginAuth({ payload }) {
       'https://gaegata.fourman.store/account/token/',
       json,
     );
-
+    authUtils.setToken({
+      access: data.data.access,
+    });
     yield put({
       type: actions.LOG_IN_SUCCESS,
       payload: {
         userId: data.data.user_id,
+        access: data.data.access,
+        isLoggedIn: true,
       },
     });
     yield put({
@@ -45,13 +50,13 @@ function* loginGithubAuth({ payload }) {
       'https://gaegata.fourman.store/account/token/',
       json,
     );
-
+    authUtils.setToken({
+      access: data.data.access,
+    });
     yield put({
       type: actions.LOG_IN_GITHUB_TOKEN_SUCCESS,
       payload: {
         access: data.data.access,
-        refresh: data.data.refresh,
-        userId: data.data.user_id,
         isNew: data.data.is_new,
       },
     });
@@ -68,4 +73,13 @@ function* watchLoginGithubAuth() {
 
 export default function* root() {
   yield all([fork(watchLoginAuth), fork(watchLoginGithubAuth)]);
+
+  const token = authUtils.getToken();
+  if (token) {
+    authUtils.setToken(token);
+    yield put({
+      type: actions.AUTH_SUCCESS,
+      payload: token,
+    });
+  }
 }
