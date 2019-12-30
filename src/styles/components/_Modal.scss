@@ -20,6 +20,10 @@
   z-index: 9999;
 }
 
+.modal-body {
+  padding: 20px;
+}
+
 // modal size
 .modal-xs {
   width: 500px;
@@ -43,6 +47,10 @@
 
 .modal-login {
   width: 390px;
+}
+
+.modal-application {
+  width: 800px;
 }
 
 .modal-full {
