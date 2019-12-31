@@ -18,6 +18,8 @@ const Comment = ({
   handleDelete,
   handleSubmit,
   handleUpdate,
+  isLoggedIn,
+  username,
 }) => {
   const [openInput, setToggleInput] = useState(false);
   const [isChange, setIsChange] = useState(false);
@@ -40,17 +42,19 @@ const Comment = ({
 
     return re;
   };
-
   const actions = () => {
-    const actionArr = [
-      <CommentActions.DeleteBtn id={id} handleDelete={handleDelete} />,
-      <CommentActions.UpdateBtn
-        setIsChange={setIsChange}
-        isChange={isChange}
-      />,
-    ];
+    const actionArr =
+      author.username === username
+        ? [
+            <CommentActions.DeleteBtn id={id} handleDelete={handleDelete} />,
+            <CommentActions.UpdateBtn
+              setIsChange={setIsChange}
+              isChange={isChange}
+            />,
+          ]
+        : [];
 
-    if (!isChild) {
+    if (!isChild && (child_comments_count !== 0 || isLoggedIn)) {
       actionArr.unshift(
         <CommentActions.ToggleBtn
           setToggleInput={setToggleInput}
@@ -72,9 +76,11 @@ const Comment = ({
         datetime={created_at}
         avatar={
           <Avatar
-            src="https://avatars1.githubusercontent.com/u/23019698?s=460&v=4"
-            alt={author.username}
-          />
+            //src="https://avatars1.githubusercontent.com/u/23019698?s=460&v=4"
+            src="#"
+          >
+            {author.username}
+          </Avatar>
         }
         content={
           !isChange ? (
@@ -102,13 +108,22 @@ const Comment = ({
                 handleDelete={handleDelete}
                 handleUpdate={handleUpdate}
                 handleSubmit={handleSubmit}
+                isLoggedIn={isLoggedIn}
+                username={username}
               />
             ) : (
               ''
             )}
-            <div className="pt-20">
-              <CommentInput isChange={isChange} commentUpdate={commentSubmit} />
-            </div>
+            {isLoggedIn ? (
+              <div className="pt-20">
+                <CommentInput
+                  isChange={isChange}
+                  commentUpdate={commentSubmit}
+                />
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         )}
       </AntComment>
