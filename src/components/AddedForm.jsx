@@ -1,40 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { ADD_REGISTER_REQUEST } from '../store/reducers/user';
+import * as userActions from '../store/reducers/user';
 import swal from 'sweetalert';
 
 const AddedForm = props => {
-  const [introduce, setIntroduce] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-
   const dispatch = useDispatch();
   const { userId, access } = useSelector(state => state.user);
 
-  const onChangeName = e => {
-    setName(e.target.value);
-  };
-  const onChangeIntroduce = e => {
-    setIntroduce(e.target.value);
-  };
-  const onChangeEmail = e => {
-    setEmail(e.target.value);
-  };
   const handleSubmit = async e => {
     e.preventDefault();
 
-    await dispatch({
-      type: ADD_REGISTER_REQUEST,
-      payload: { email, introduce, name, userId, access },
-    });
+    props.form.validateFields(async (err, values) => {
+      if (!err) {
+        const params = {
+          email: values.email,
+          introduction: values.introduction,
+          nickname: values.nickname,
+          userId,
+          access,
+        };
 
-    swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
-      () => {
-        window.location.href = '/';
-      },
-    );
+        await dispatch(userActions.getAddRegisterAction(params));
+
+        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
+          () => {
+            window.location.href = '/';
+          },
+        );
+      }
+    });
   };
 
   const buttonItemLayout = {
@@ -60,23 +56,27 @@ const AddedForm = props => {
                   message: '이메일을 입력하세요.',
                 },
               ],
-            })(
-              <Input
-                size="large"
-                placeholder="example@gmail.com"
-                onChange={onChangeEmail}
-              />,
-            )}
+            })(<Input size="large" placeholder="example@gmail.com" />)}
           </Form.Item>
           <Form.Item label="한줄 소개" hasFeedback>
-            <Input
-              size="large"
-              placeholder="안녕하세요."
-              onChange={onChangeIntroduce}
-            />
+            {getFieldDecorator('introduction', {
+              rules: [
+                {
+                  max: 200,
+                  message: '한줄 소개는 200자 내로 작성해주세요.',
+                },
+              ],
+            })(<Input size="large" placeholder="안녕하세요." />)}
           </Form.Item>
           <Form.Item label="이름" hasFeedback>
-            <Input size="large" placeholder="홍길동" onChange={onChangeName} />
+            {getFieldDecorator('nickname', {
+              rules: [
+                {
+                  pattern: /^[a-zA-Z가-힣]{1}[a-zA-Z0-9가-힣]{1,9}$/i,
+                  message: '이름은 특수문자 제외 한글자 이상이어야 합니다.',
+                },
+              ],
+            })(<Input size="large" placeholder="홍길동" />)}
           </Form.Item>
           <Form.Item {...buttonItemLayout}>
             {getFieldDecorator('agreement', {
