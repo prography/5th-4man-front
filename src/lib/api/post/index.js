@@ -21,9 +21,7 @@ export const getTeamDetail = async id => {
 };
 
 export const getTeamComment = async id => {
-  const re = await axios.get(
-    `${API_URL}/team/${id}/comment/`,
-  );
+  const re = await axios.get(`${API_URL}/team/${id}/comment/`);
 
   return re;
 };
@@ -42,6 +40,20 @@ export const updateComment = async params => {
 
 export const deleteComment = async params => {
   const re = await axios.delete(`${API_URL}/comment/${params.id}/`);
+
+  return re;
+};
+
+export const teamApplication = async (params, token) => {
+  const re = await axios({
+    url: `${API_URL}/application/`,
+    method: 'post',
+    data: params,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   return re;
 };

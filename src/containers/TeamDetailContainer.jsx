@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, memo } from 'react';
+import React, { useEffect, useCallback, useMemo, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -13,12 +13,22 @@ import * as teamDetailActions from '../store/reducers/teamDetail';
 
 const TeamDetailContainer = ({ team_id }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
+  const { isLoggedIn } = useSelector(state => state.user);
+
   const { title, description, image, like_count, tags, leader } = team;
 
   const dispatch = useDispatch();
   const getData = useCallback(() => {
     dispatch(teamDetailActions.getTeamDetailAction(team_id));
   }, [dispatch, team_id]);
+
+  const applyBtnMsg = useMemo(() => {
+    return isLoggedIn ? '신청하기' : '로그인 후 신청해주세요';
+  }, [isLoggedIn]);
+
+  const applyBtnType = useMemo(() => {
+    return isLoggedIn ? 'application' : 'login';
+  }, [isLoggedIn]);
 
   const { TabPane } = Tabs;
 
@@ -88,11 +98,11 @@ const TeamDetailContainer = ({ team_id }) => {
                     onClick={() =>
                       dispatch({
                         type: OPEN_MODAL,
-                        payload: { type: 'application' },
+                        payload: { type: applyBtnType },
                       })
                     }
                   >
-                    신청하기
+                    {applyBtnMsg}
                   </button>
                 </div>
               </div>
