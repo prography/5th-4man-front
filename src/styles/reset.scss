@@ -1,10 +1,20 @@
 @import './fonts/fonts.css';
 
+::-moz-selection {
+  background: #c0eb75;
+  color: #fff;
+}
+::selection {
+  background: #c0eb75;
+  color: #fff;
+}
+
 // 컬러 변수
 $text-color: #272e40;
 $main-color-blue: #5f76f3;
 $main-color-violet: #845ef7;
 $main-color-red: #e74c3c;
+$main-color-green: #c0eb75;
 $main-color-gradient: linear-gradient(
   133deg,
   $main-color-blue,
