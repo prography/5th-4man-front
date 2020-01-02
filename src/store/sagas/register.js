@@ -1,6 +1,20 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import * as actions from '../reducers/user';
+import * as PostAPI from 'lib/api/post';
+import {
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
+  USER_CHECK_SUCCESS,
+  USER_CHECK_FAILURE,
+  USER_CHECK_REQUEST,
+  ADD_REGISTER_SUCCESS,
+  ADD_REGISTER_FAILURE,
+  ADD_REGISTER_REQUEST,
+  USER_DETAIL_REQUEST,
+  USER_DETAIL_SUCCESS,
+  USER_DETAIL_FAILURE,
+} from '../reducers/user';
 
 function* register({ payload }) {
   try {
@@ -14,17 +28,17 @@ function* register({ payload }) {
 
     yield call([axios, 'post'], 'https://gaegata.fourman.store/account/', json);
     yield put({
-      type: actions.SIGN_UP_SUCCESS,
+      type: SIGN_UP_SUCCESS,
     });
   } catch (error) {
     yield put({
-      type: actions.SIGN_UP_FAILURE,
+      type: SIGN_UP_FAILURE,
     });
   }
 }
 
 function* watchRegister() {
-  yield takeLatest(actions.SIGN_UP_REQUEST, register);
+  yield takeLatest(SIGN_UP_REQUEST, register);
 }
 
 function* idCheck({ payload }) {
@@ -38,20 +52,20 @@ function* idCheck({ payload }) {
       json,
     );
     yield put({
-      type: actions.USER_CHECK_SUCCESS,
+      type: USER_CHECK_SUCCESS,
       payload: {
         usernameCheck: data.data.username,
       },
     });
   } catch (error) {
     yield put({
-      type: actions.USER_CHECK_FAILURE,
+      type: USER_CHECK_FAILURE,
     });
   }
 }
 
 function* watchIdCheck() {
-  yield takeLatest(actions.USER_CHECK_REQUEST, idCheck);
+  yield takeLatest(USER_CHECK_REQUEST, idCheck);
 }
 
 function* addRigster({ payload }) {
@@ -70,19 +84,32 @@ function* addRigster({ payload }) {
       json,
     );
     yield put({
-      type: actions.ADD_REGISTER_SUCCESS,
+      type: ADD_REGISTER_SUCCESS,
     });
   } catch (error) {
     yield put({
-      type: actions.ADD_REGISTER_FAILURE,
+      type: ADD_REGISTER_FAILURE,
     });
   }
 }
 
 function* watchAddRegister() {
-  yield takeLatest(actions.ADD_REGISTER_REQUEST, addRigster);
+  yield takeLatest(ADD_REGISTER_REQUEST, addRigster);
+}
+
+function* getUserDetail() {
+  const userInfo = yield call(PostAPI.getUserDetail);
+}
+
+function* watchGetUserDetail() {
+  yield takeLatest(USER_DETAIL_REQUEST, getUserDetail);
 }
 
 export default function* root() {
-  yield all([fork(watchRegister), fork(watchIdCheck), fork(watchAddRegister)]);
+  yield all([
+    fork(watchRegister),
+    fork(watchIdCheck),
+    fork(watchAddRegister),
+    fork(watchGetUserDetail),
+  ]);
 }
