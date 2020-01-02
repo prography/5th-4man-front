@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 
 const Register = props => {
   const [confirmDirty, setConfirmDirty] = useState(false);
+  const [check, setCheck] = useState(false);
   const dispatch = useDispatch();
 
   const buttonItemLayout = {
@@ -55,6 +56,10 @@ const Register = props => {
   const handleSubmit = e => {
     e.preventDefault();
 
+    if (check === false) {
+      swal('이용약관에 동의해주세요.', '', 'info');
+    }
+
     props.form.validateFields(async (err, values) => {
       if (!err) {
         const params = {
@@ -70,6 +75,10 @@ const Register = props => {
         );
       }
     });
+  };
+
+  const onCheckBox = () => {
+    setCheck(true);
   };
 
   const onLoginGithub = () => {
@@ -176,8 +185,8 @@ const Register = props => {
             {getFieldDecorator('agreement', {
               valuePropName: 'checked',
             })(
-              <Checkbox>
-                <a href="">이용약관</a> 및 개인정보 처리방침 동의 (필수)
+              <Checkbox onChange={onCheckBox}>
+                <a href="#">이용약관</a> 및 개인정보 처리방침 동의 (필수)
               </Checkbox>,
             )}
           </Form.Item>
