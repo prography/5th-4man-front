@@ -26,7 +26,7 @@ const getBase64 = file => {
 const TeamCreateContainer = props => {
   const [previewVisible, setPreviewvisible] = useState(false);
   const [previewImage, setPreviewimage] = useState('');
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState('');
   const { access } = useSelector(state => state.user);
   const { getFieldDecorator } = props.form;
   const { TextArea } = Input;
@@ -155,7 +155,7 @@ const TeamCreateContainer = props => {
                     onPreview={handlePreview}
                     onChange={handleChange}
                   >
-                    {image === '' ? null : uploadButton}
+                    {image === '' ? uploadButton : ''}
                   </Upload>
                   <Modal
                     visible={previewVisible}
