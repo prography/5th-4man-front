@@ -7,9 +7,10 @@ const Oauth = () => {
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
   const code = params.get('code');
+  const userId = params.get('user_id');
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: LOG_IN_GITHUB_TOKEN_REQUEST, payload: { code } });
+    dispatch({ type: LOG_IN_GITHUB_TOKEN_REQUEST, payload: { code, userId } });
   }, []);
 
   const { isNew, isLoggedIn } = useSelector(state => state.user);
