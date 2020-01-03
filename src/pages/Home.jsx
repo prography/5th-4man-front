@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from 'components/Banner';
 import ListContainer from 'containers/ListContainer';
+import CreateBannerContainer from 'containers/CreateBannerContainer';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <div className="home-list-wrap">
         <section className="list-section">
           <div className="container">
+            <CreateBannerContainer />
             <div className="display-flex flex-direction-row justify-content-space-between content-title-aria">
               <div className="section-title">
                 <h2>최근 일주일 인기 팀</h2>
