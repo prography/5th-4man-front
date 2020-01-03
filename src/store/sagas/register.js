@@ -19,14 +19,15 @@ import {
 function* register({ payload }) {
   try {
     const json = {
-      username: payload.username,
-      password: payload.password,
-      email: payload.email,
-      nickname: payload.name,
-      introduction: payload.introduce,
+      username: payload.values.username,
+      password: payload.values.password,
+      email: payload.values.email,
+      nickname: payload.values.nickname,
+      introduction: payload.values.introduction,
     };
 
-    yield call([axios, 'post'], 'https://gaegata.fourman.store/account/', json);
+    yield call(PostAPI.register, json);
+
     yield put({
       type: SIGN_UP_SUCCESS,
     });
@@ -41,48 +42,20 @@ function* watchRegister() {
   yield takeLatest(SIGN_UP_REQUEST, register);
 }
 
-function* idCheck({ payload }) {
+function* addRigster(props) {
   try {
     const json = {
-      username: payload.username,
-    };
-    const data = yield call(
-      [axios, 'post'],
-      'https://gaegata.fourman.store/account/check/duplication/',
-      json,
-    );
-    yield put({
-      type: USER_CHECK_SUCCESS,
-      payload: {
-        usernameCheck: data.data.username,
-      },
-    });
-  } catch (error) {
-    yield put({
-      type: USER_CHECK_FAILURE,
-    });
-  }
-}
-
-function* watchIdCheck() {
-  yield takeLatest(USER_CHECK_REQUEST, idCheck);
-}
-
-function* addRigster({ payload }) {
-  try {
-    const json = {
-      email: payload.email,
-      introduction: payload.introduce,
-      nickname: payload.name,
+      email: props.email,
+      introduction: props.introduce,
+      nickname: props.name,
+      userId: props.userId,
       headers: {
-        Authorization: `Bearer ${payload.access}`,
+        Authorization: `Bearer ${props.access}`,
       },
     };
-    yield call(
-      [axios, 'patch'],
-      `https://gaegata.fourman.store/account/${payload.userId}/`,
-      json,
-    );
+
+    yield call(PostAPI.addRigster, json);
+
     yield put({
       type: ADD_REGISTER_SUCCESS,
     });
@@ -98,7 +71,7 @@ function* watchAddRegister() {
 }
 
 function* getUserDetail() {
-  const userInfo = yield call(PostAPI.getUserDetail);
+  // const userInfo = yield call(PostAPI.getUserDetail);
 }
 
 function* watchGetUserDetail() {
@@ -106,10 +79,5 @@ function* watchGetUserDetail() {
 }
 
 export default function* root() {
-  yield all([
-    fork(watchRegister),
-    fork(watchIdCheck),
-    fork(watchAddRegister),
-    fork(watchGetUserDetail),
-  ]);
+  yield all([fork(watchRegister), fork(watchAddRegister)]);
 }

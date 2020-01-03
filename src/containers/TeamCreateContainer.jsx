@@ -10,8 +10,8 @@ import {
   Modal,
 } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { TEAM_CREATE_REQUEST } from '../store/reducers/teamCreate';
+import { useSelector } from 'react-redux';
+import * as PostAPI from 'lib/api/post';
 import swal from 'sweetalert';
 
 const getBase64 = file => {
@@ -24,49 +24,35 @@ const getBase64 = file => {
 };
 
 const TeamCreateContainer = props => {
-  const [teamtitle, setTeamtitle] = useState('');
-  const [teamDescription, setTeamdescription] = useState('');
-  const [teamMaxpersonnel, setTeammaxpersonnel] = useState(0);
-  const [teamEnddate, setTeamendate] = useState('');
   const [previewVisible, setPreviewvisible] = useState(false);
   const [previewImage, setPreviewimage] = useState('');
-  const dispatch = useDispatch();
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState('');
   const { access } = useSelector(state => state.user);
-
+  const { getFieldDecorator } = props.form;
   const { TextArea } = Input;
 
-  const onChangeTeamTitle = e => {
-    setTeamtitle(e.target.value);
-  };
-  const onChangeTeamDescription = e => {
-    setTeamdescription(e.target.value);
-  };
-  const onChangeTeamMaxPersonnel = value => {
-    setTeammaxpersonnel(value);
-  };
-  const onChangeTeamEndDate = value => {
-    setTeamendate(value.format('YYYY-MM-DD HH:mm:ss'));
-  };
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append('title', teamtitle);
-    formdata.append('description', teamDescription);
-    formdata.append('max_personnel', teamMaxpersonnel);
-    formdata.append('end_date', teamEnddate);
-    formdata.append('access', access);
-    formdata.append('image', image);
 
-    await dispatch({
-      type: TEAM_CREATE_REQUEST,
-      payload: {
-        formdata,
-      },
-    });
+    props.form.validateFields(async (err, values) => {
+      if (!err) {
+        const formdata = new FormData();
+        formdata.append('title', values.title);
+        formdata.append('description', values.description);
+        formdata.append('max_personnel', values.max_personnel);
+        formdata.append(
+          'end_date',
+          values.end_date.format('YYYY-MM-DD HH:mm:ss'),
+        );
+        formdata.append('access', access);
+        formdata.append('image', image);
 
-    swal('팀생성 완료!', 'success').then(() => {
-      window.location.href = '/';
+        const data = await PostAPI.createTeam(formdata);
+
+        swal('팀생성 완료!', 'success').then(() => {
+          window.location.href = `/team/${data.data.id}`;
+        });
+      }
     });
   };
 
@@ -92,13 +78,7 @@ const TeamCreateContainer = props => {
   const buttonItemLayout = {
     wrapperCol: { span: 28 },
   };
-  const config = {
-    rules: [
-      { type: 'object', required: true, message: '마감 기한을 정해주세요.' },
-    ],
-  };
 
-  const { getFieldDecorator } = props.form;
   return (
     <>
       <section id="register-content">
@@ -116,16 +96,15 @@ const TeamCreateContainer = props => {
                     rules: [
                       {
                         required: true,
-                        message: '팀 이름을 입력하세요.',
+                        message: '팀 이름은 필수로 입력해주세요.',
+                      },
+                      {
+                        max: 50,
+                        min: 5,
+                        message: '5 - 50자 내로 작성해주세요.',
                       },
                     ],
-                  })(
-                    <Input
-                      size="large"
-                      placeholder="team title"
-                      onChange={onChangeTeamTitle}
-                    />,
-                  )}
+                  })(<Input size="large" placeholder="team title" />)}
                 </Form.Item>
 
                 <Form.Item label="팀 세부설명">
@@ -133,39 +112,41 @@ const TeamCreateContainer = props => {
                     rules: [
                       {
                         required: true,
-                        message: '팀 세부설명을 입력하세요.',
+                        message: '팀 세부설명은 필수로 입력해주세요.',
+                      },
+                      {
+                        max: 2000,
+                        min: 50,
+                        message: '50 - 2000글자 이하로 입력하세요.',
                       },
                     ],
                   })(
                     <TextArea
                       placeholder="team description"
                       autoSize={{ minRows: 5, maxRows: 20 }}
-                      onChange={onChangeTeamDescription}
                     />,
                   )}
                 </Form.Item>
                 <Form.Item label="팀 최대인원">
-                  {getFieldDecorator('max personnel', {
+                  {getFieldDecorator('max_personnel', {
                     rules: [
                       {
                         required: true,
                         message: '팀 최대인원을 입력하세요.',
                       },
                     ],
-                  })(
-                    <InputNumber
-                      min={1}
-                      max={10}
-                      defaultValue={2}
-                      onChange={onChangeTeamMaxPersonnel}
-                    />,
-                  )}
+                  })(<InputNumber min={1} max={10} />)}
                 </Form.Item>
                 <Form.Item label="마감 기한">
-                  {getFieldDecorator(
-                    'date-picker',
-                    config,
-                  )(<DatePicker onChange={onChangeTeamEndDate} mode="date" />)}
+                  {getFieldDecorator('end_date', {
+                    rules: [
+                      {
+                        type: 'object',
+                        required: true,
+                        message: '마감 기한을 정해주세요.',
+                      },
+                    ],
+                  })(<DatePicker mode="date" format="YYYY-MM-DD" />)}
                 </Form.Item>
                 <div className="clearfix">
                   <Upload
@@ -174,7 +155,7 @@ const TeamCreateContainer = props => {
                     onPreview={handlePreview}
                     onChange={handleChange}
                   >
-                    {image === '' ? null : uploadButton}
+                    {image === '' ? uploadButton : ''}
                   </Upload>
                   <Modal
                     visible={previewVisible}

@@ -10,6 +10,7 @@ import * as commentActions from '../store/reducers/comment';
 
 const CommentContainer = ({ team_id }) => {
   const { comment } = useSelector(state => state.comment);
+  const { isLoggedIn, username } = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
@@ -33,7 +34,6 @@ const CommentContainer = ({ team_id }) => {
 
   // 댓글 등록
   const handleSubmit = async data => {
-
     try {
       const params = {
         ...data,
@@ -49,6 +49,7 @@ const CommentContainer = ({ team_id }) => {
       message.error('댓글 등록에 실패했습니다.');
     }
   };
+  console.log(comment.parent_comments);
 
   const handleUpdate = async data => {
     const params = {
@@ -79,15 +80,21 @@ const CommentContainer = ({ team_id }) => {
     <>
       <div id="#comment" className="team-comment-wrap">
         <h2 className="text-bold">{comment.comments_count}개의 댓글</h2>
-        <div className="mb-20">
-          <CommentInput commentUpdate={handleSubmit} />
-        </div>
+        {isLoggedIn ? (
+          <div className="mb-20">
+            <CommentInput commentUpdate={handleSubmit} />
+          </div>
+        ) : (
+          ''
+        )}
         {comment.parent_comments ? (
           <CommentList
             list={comment.parent_comments}
             handleDelete={handleDelete}
             handleSubmit={handleSubmit}
             handleUpdate={handleUpdate}
+            isLoggedIn={isLoggedIn}
+            username={username}
           />
         ) : (
           ''

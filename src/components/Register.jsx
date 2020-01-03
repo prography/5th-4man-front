@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import * as userActions from '../store/reducers/user';
+import * as PostAPI from 'lib/api/post';
 import swal from 'sweetalert';
-import { SIGN_UP_REQUEST, USER_CHECK_REQUEST } from '../store/reducers/user';
 
 const Register = props => {
   const [confirmDirty, setConfirmDirty] = useState(false);
-  const [username, setUsername] = useState('');
-  const [introduce, setIntroduce] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [check, setCheck] = useState(false);
   const dispatch = useDispatch();
-  const { usernameCheck } = useSelector(state => state.user);
+
+  const buttonItemLayout = {
+    wrapperCol: { span: 28 },
+  };
+
+  const validateToUserName = async (rule, value, callback) => {
+    const { form } = props;
+
+    const params = {
+      username: form.getFieldValue('username'),
+    };
+
+    const data = await PostAPI.idCheck(params);
+    if (data.data.username) {
+      callback('로그인 중복입니다.');
+    } else {
+      callback();
+    }
+  };
 
   const handleConfirmBlur = e => {
     const { value } = e.target;
@@ -31,58 +46,46 @@ const Register = props => {
 
   const validateToNextPassword = (rule, value, callback) => {
     const { form } = props;
+
     if (value && confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
   };
 
-  const buttonItemLayout = {
-    wrapperCol: { span: 28 },
-  };
-
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    if (usernameCheck === true) {
-      swal('아이디 중복!', '아이디가 중복되었습니다.', 'error');
-      return;
+
+    if (check === false) {
+      swal('이용약관에 동의해주세요.', '', 'info');
     }
 
-    await dispatch({
-      type: SIGN_UP_REQUEST,
-      payload: { username, password, email, introduce, name },
-    });
+    props.form.validateFields(async (err, values) => {
+      if (!err) {
+        const params = {
+          values,
+        };
 
-    swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
-      () => {
-        window.location.href = '/';
-      },
-    );
-  };
-  const onChangeUserName = e => {
-    setUsername(e.target.value);
-    dispatch({
-      type: USER_CHECK_REQUEST,
-      payload: { username: e.target.value },
+        await dispatch(userActions.getSignUpAction(params));
+
+        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
+          () => {
+            window.location.href = '/';
+          },
+        );
+      }
     });
   };
-  const onChangeIntroduce = e => {
-    setIntroduce(e.target.value);
-  };
-  const onChangeEmail = e => {
-    setEmail(e.target.value);
-  };
-  const onChangePassword = e => {
-    setPassword(e.target.value);
-  };
-  const onChangeName = e => {
-    setName(e.target.value);
+
+  const onCheckBox = () => {
+    setCheck(true);
   };
 
   const onLoginGithub = () => {
     window.location.href =
       'https://github.com/login/oauth/authorize?client_id=a7863c21770a0dd4c503';
   };
+
   const { getFieldDecorator } = props.form;
   return (
     <>
@@ -90,27 +93,22 @@ const Register = props => {
       <div className="text-bold register-title .mb-20">회원가입</div>
       <div style={{ width: '50%' }}>
         <Form layout="horizontal" onSubmit={handleSubmit}>
-          <Form.Item
-            label="로그인 아이디"
-            validateStatus={
-              usernameCheck ? 'error' : username === '' ? '' : 'success'
-            }
-            help={usernameCheck ? '아이디 중복' : ''}
-          >
+          <Form.Item hasFeedback label="로그인 아이디">
             {getFieldDecorator('username', {
               rules: [
                 {
                   required: true,
                   message: '아이디를 입력하세요.',
                 },
+                {
+                  validator: validateToUserName,
+                },
+                {
+                  pattern: /^[a-z]{1}[a-z0-9]{4,15}$/i,
+                  message: '로그인 형식을 입력하세요.',
+                },
               ],
-            })(
-              <Input
-                size="large"
-                placeholder="login id"
-                onChange={onChangeUserName}
-              />,
-            )}
+            })(<Input size="large" placeholder="login id" />)}
           </Form.Item>
           <Form.Item label="비밀번호">
             {getFieldDecorator('password', {
@@ -122,14 +120,13 @@ const Register = props => {
                 {
                   validator: validateToNextPassword,
                 },
+                {
+                  pattern: /(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i,
+                  message:
+                    '비밀번호는 6자 이상의 영문, 숫자, 특수문자가 필요합니다.',
+                },
               ],
-            })(
-              <Input.Password
-                size="large"
-                placeholder="*******"
-                onChange={onChangePassword}
-              />,
-            )}
+            })(<Input.Password size="large" placeholder="*******" />)}
           </Form.Item>
           <Form.Item label="비밀번호 확인" hasFeedback>
             {getFieldDecorator('confirm', {
@@ -155,37 +152,41 @@ const Register = props => {
               rules: [
                 {
                   type: 'email',
-                  message: '이메일 형식이 아닙니다.',
+                  message: '이메일이 올바르지 않습니다.',
                 },
                 {
                   required: true,
-                  message: '이메일을 입력하세요.',
+                  message: '이메일은 필수로 입력해주세요.',
                 },
               ],
-            })(
-              <Input
-                size="large"
-                placeholder="example@gmail.com"
-                onChange={onChangeEmail}
-              />,
-            )}
+            })(<Input size="large" placeholder="example@gmail.com" />)}
           </Form.Item>
           <Form.Item label="한줄 소개" hasFeedback>
-            <Input
-              size="large"
-              placeholder="안녕하세요."
-              onChange={onChangeIntroduce}
-            />
+            {getFieldDecorator('introduction', {
+              rules: [
+                {
+                  max: 200,
+                  message: '한줄 소개는 200자 내로 작성해주세요.',
+                },
+              ],
+            })(<Input size="large" placeholder="안녕하세요." />)}
           </Form.Item>
           <Form.Item label="이름" hasFeedback>
-            <Input size="large" placeholder="홍길동" onChange={onChangeName} />
+            {getFieldDecorator('nickname', {
+              rules: [
+                {
+                  pattern: /^[a-zA-Z가-힣]{1}[a-zA-Z0-9가-힣]{1,9}$/i,
+                  message: '이름은 특수문자 제외 한글자 이상이어야 합니다.',
+                },
+              ],
+            })(<Input size="large" placeholder="홍길동" />)}
           </Form.Item>
           <Form.Item {...buttonItemLayout}>
             {getFieldDecorator('agreement', {
               valuePropName: 'checked',
             })(
-              <Checkbox>
-                <a href="">이용약관</a> 및 개인정보 처리방침 동의 (필수)
+              <Checkbox onChange={onCheckBox}>
+                <a href="#">이용약관</a> 및 개인정보 처리방침 동의 (필수)
               </Checkbox>,
             )}
           </Form.Item>

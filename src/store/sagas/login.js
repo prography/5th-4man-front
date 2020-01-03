@@ -1,31 +1,27 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
+import * as PostAPI from 'lib/api/post';
 import * as actions from '../reducers/user';
 import { CLOSE_MODAL } from '../reducers/modal';
 import * as authUtils from '../../utils/auth';
 
-function* loginAuth({ payload }) {
+function* loginAuth(props) {
   try {
-    const json = {
-      username: payload.username,
-      password: payload.password,
-    };
-    const data = yield call(
-      [axios, 'post'],
-      'https://gaegata.fourman.store/account/token/',
-      json,
-    );
+    const data = yield call(PostAPI.loginAuth, props.payload);
+
     authUtils.setToken({
       access: data.data.access,
     });
+
     yield put({
       type: actions.LOG_IN_SUCCESS,
       payload: {
         userId: data.data.user_id,
         access: data.data.access,
+        username: data.data.username,
         isLoggedIn: true,
       },
     });
+
     yield put({
       type: CLOSE_MODAL,
     });
@@ -40,16 +36,9 @@ function* watchLoginAuth() {
   yield takeLatest(actions.LOG_IN_REQUEST, loginAuth);
 }
 
-function* loginGithubAuth({ payload }) {
+function* loginGithubAuth(props) {
   try {
-    const json = {
-      code: payload.code,
-    };
-    const data = yield call(
-      [axios, 'post'],
-      'https://gaegata.fourman.store/account/token/',
-      json,
-    );
+    const data = yield call(PostAPI.loginGithubAuth, props.payload);
     authUtils.setToken({
       access: data.data.access,
     });
@@ -71,6 +60,25 @@ function* watchLoginGithubAuth() {
   yield takeLatest(actions.LOG_IN_GITHUB_TOKEN_REQUEST, loginGithubAuth);
 }
 
+function* getMyUserDetail(token) {
+  try {
+    const data = yield call(PostAPI.myUserDetail, token);
+
+    yield put({
+      type: actions.USER_DETAIL_SUCCESS,
+      payload: {
+        userId: data.data.id,
+        isLoggedIn: true,
+        username: data.data.username,
+      },
+    });
+  } catch (error) {
+    yield put({
+      type: actions.USER_DETAIL_FAILURE,
+    });
+  }
+}
+
 export default function* root() {
   yield all([fork(watchLoginAuth), fork(watchLoginGithubAuth)]);
 
@@ -81,5 +89,6 @@ export default function* root() {
       type: actions.AUTH_SUCCESS,
       payload: token,
     });
+    yield getMyUserDetail(token);
   }
 }

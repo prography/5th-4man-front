@@ -4,6 +4,7 @@ import { createAction } from 'redux-actions';
 export const initialState = {
   isLoggedIn: false,
   userId: -1,
+  username: '',
   access: '',
   isNew: false,
   usernameCheck: false,
@@ -60,6 +61,7 @@ const reducer = (state = initialState, action) => {
         draft.isLoggedIn = false;
         draft.access = '';
         draft.userId = -1;
+        draft.username = '';
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_REQUEST:
@@ -71,6 +73,7 @@ const reducer = (state = initialState, action) => {
         draft.access = action.payload.access;
         draft.isNew = action.payload.isNew;
         draft.userId = action.payload.userId;
+        draft.username = action.payload.username;
         return draft;
 
       case LOG_IN_GITHUB_TOKEN_FAILURE:
@@ -102,7 +105,7 @@ const reducer = (state = initialState, action) => {
         draft.isLoggedIn = true;
         draft.access = action.payload.access;
         draft.userId = action.payload.userId;
-
+        draft.username = action.payload.username;
         return draft;
 
       case LOG_IN_FAILURE:
@@ -125,6 +128,7 @@ const reducer = (state = initialState, action) => {
           draft.isLoggedIn = true;
           draft.access = action.payload.access;
           draft.userId = action.payload.userId;
+          draft.username = action.payload.username;
         }
         return draft;
 
@@ -135,6 +139,9 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case USER_DETAIL_SUCCESS:
+        draft.isLoggedIn = true;
+        draft.userId = action.payload.userId;
+        draft.username = action.payload.username;
         return draft;
 
       case USER_DETAIL_FAILURE:
