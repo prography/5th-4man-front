@@ -72,7 +72,7 @@ export const createTeam = async params => {
 };
 
 export const getTeamList = async () => {
-  const re = await axios.get(`${API_URL}/team/`);
+  const re = await axios.get(`${API_URL}/team?ordering=-like_count`);
 
   return re;
 };
