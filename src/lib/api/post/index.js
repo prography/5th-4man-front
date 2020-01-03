@@ -44,8 +44,16 @@ export const deleteComment = async params => {
   return re;
 };
 
-export const getUserDetail = async params => {
-  const re = await axios.get(`${API_URL}/account/${params.id}`);
+export const teamApplication = async (params, token) => {
+  const re = await axios({
+    url: `${API_URL}/application/`,
+    method: 'post',
+    data: params,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   return re;
 };
