@@ -20,7 +20,7 @@ const CreateBanner = styled.div`
   h2 {
     font-size: 1.25rem;
     margin: 0;
-    font-family: Noto Sans Regular;
+    font-family: Noto Sans Medium;
     color: #5f76f3;
   }
 
