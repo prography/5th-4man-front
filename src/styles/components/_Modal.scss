@@ -16,8 +16,12 @@
 .modal-container .modal-content {
   background: white;
   height: auto;
-  border-radius: 2%;
+  border-radius: 10px;
   z-index: 9999;
+}
+
+.modal-body {
+  padding: 20px;
 }
 
 // modal size
@@ -43,6 +47,10 @@
 
 .modal-login {
   width: 390px;
+}
+
+.modal-application {
+  width: 800px;
 }
 
 .modal-full {

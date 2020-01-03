@@ -1,22 +1,20 @@
 .login-header {
   padding: 1rem;
-  border-bottom: 2px solid #efefef;
+  border-bottom: 1px solid #efefef;
   font-size: 0.5rem;
   display: flex;
   flex-direction: row;
-
-  .point {
-    font-size: 1rem;
-  }
 }
 .main-logo {
+  font-family: 'Nanum Myeongjo';
   text-align: center;
   width: 100%;
+  font-size: 1.05rem;
+  font-weight: bold;
 }
 .close-box {
   margin-left: auto;
-  font-size: 0.9rem;
-  color: #bbbbbb;
+  color: #ddd;
 }
 
 .login-contents {

@@ -1,30 +1,34 @@
-import React, { useEffect, useCallback, memo } from 'react';
+import React, { useEffect, useCallback, useMemo, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Col, Row, Icon, Tabs, Tag } from 'antd';
-import swal from 'sweetalert';
 
 import CardImage from 'components/CardImage';
 import CommentContainer from 'containers/CommentContainer';
+
+import { OPEN_MODAL } from '../store/reducers/modal';
 
 import * as teamDetailActions from '../store/reducers/teamDetail';
 
 const TeamDetailContainer = ({ team_id }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
-  const {
-    title,
-    description,
-    image,
-    like_count,
-    tags,
-    leader,
-  } = team;
+  const { isLoggedIn } = useSelector(state => state.user);
+
+  const { title, description, image, like_count, tags, leader } = team;
 
   const dispatch = useDispatch();
   const getData = useCallback(() => {
     dispatch(teamDetailActions.getTeamDetailAction(team_id));
   }, [dispatch, team_id]);
+
+  const applyBtnMsg = useMemo(() => {
+    return isLoggedIn ? '신청하기' : '로그인 후 신청해주세요';
+  }, [isLoggedIn]);
+
+  const applyBtnType = useMemo(() => {
+    return isLoggedIn ? 'application' : 'login';
+  }, [isLoggedIn]);
 
   const { TabPane } = Tabs;
 
@@ -92,13 +96,13 @@ const TeamDetailContainer = ({ team_id }) => {
                     type="button"
                     className="apply-btn display-block"
                     onClick={() =>
-                      swal(
-                        '신청 완료!',
-                        '축하드립니다! 팀 신청이 완료 되었습니다. (사실 안됨)',
-                        'success',
-                      )}
+                      dispatch({
+                        type: OPEN_MODAL,
+                        payload: { type: applyBtnType },
+                      })
+                    }
                   >
-                    신청하기
+                    {applyBtnMsg}
                   </button>
                 </div>
               </div>
