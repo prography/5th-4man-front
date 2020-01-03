@@ -28,15 +28,15 @@ function* watchRegister() {
   yield takeLatest(actions.SIGN_UP_REQUEST, register);
 }
 
-function* addRigster(props) {
+function* addRigster({payload}) {
   try {
     const json = {
-      email: props.email,
-      introduction: props.introduce,
-      nickname: props.name,
-      userId: props.userId,
+      email: payload.email,
+      introduction: payload.introduce,
+      nickname: payload.name,
+      userId: payload.userId,
       headers: {
-        Authorization: `Bearer ${props.access}`,
+        Authorization: `Bearer ${payload.access}`,
       },
     };
 
