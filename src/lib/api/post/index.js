@@ -2,6 +2,75 @@ import axios from 'axios';
 
 const API_URL = 'https://gaegata.fourman.store';
 
+export const SendUrl = async (url, method, params, headers) => {
+  let re;
+  try {
+    re = await axios({
+      method,
+      url,
+      data: params,
+      headers,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return re;
+};
+
+export const loginGithubAuth = async params => {
+  const re = await SendUrl(`${API_URL}/account/token/`, 'post', params);
+
+  return re;
+};
+
+export const loginAuth = async params => {
+  const re = await SendUrl(`${API_URL}/account/token/`, 'post', params);
+
+  return re;
+};
+
+export const addRigster = async params => {
+  const re = await SendUrl(
+    `${API_URL}/account/${params.userId}/`,
+    'patch',
+    params,
+  );
+
+  return re;
+};
+
+export const idCheck = async params => {
+  const re = await SendUrl(
+    `${API_URL}/account/check/duplication/`,
+    'post',
+    params,
+  );
+
+  return re;
+};
+
+export const register = async params => {
+  const re = await SendUrl(`${API_URL}/account/`, 'post', params);
+
+  return re;
+};
+
+export const myUserDetail = async params => {
+  const re = await SendUrl(`${API_URL}/account/self/`, 'get', params);
+  return re;
+};
+
+export const createTeam = async params => {
+  const headers = {
+    'content-type':
+      'multipart/form-data; boundary=ebf9f03029db4c2799ae16b5428b06bd',
+  };
+
+  const re = await SendUrl(`${API_URL}/team/`, 'post', params, headers);
+
+  return re;
+};
+
 export const getTeamList = async () => {
   const re = await axios.get(`${API_URL}/team/`);
 

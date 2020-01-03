@@ -1,7 +1,14 @@
 import React from 'react';
 import Comment from 'components/Comment';
 
-const CommentList = ({ list, handleDelete, handleSubmit, handleUpdate }) => {
+const CommentList = ({
+  list,
+  handleDelete,
+  handleSubmit,
+  handleUpdate,
+  isLoggedIn,
+  username,
+}) => {
   return list.map(
     ({
       id,
@@ -27,6 +34,8 @@ const CommentList = ({ list, handleDelete, handleSubmit, handleUpdate }) => {
         handleDelete={handleDelete}
         handleSubmit={handleSubmit}
         handleUpdate={handleUpdate}
+        isLoggedIn={isLoggedIn}
+        username={username}
       />
     ),
   );

@@ -1,18 +1,19 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
 import * as actions from '../reducers/user';
+import * as PostAPI from 'lib/api/post';
 
 function* register({ payload }) {
   try {
     const json = {
-      username: payload.username,
-      password: payload.password,
-      email: payload.email,
-      nickname: payload.name,
-      introduction: payload.introduce,
+      username: payload.values.username,
+      password: payload.values.password,
+      email: payload.values.email,
+      nickname: payload.values.nickname,
+      introduction: payload.values.introduction,
     };
 
-    yield call([axios, 'post'], 'https://gaegata.fourman.store/account/', json);
+    yield call(PostAPI.register, json);
+
     yield put({
       type: actions.SIGN_UP_SUCCESS,
     });
@@ -27,48 +28,20 @@ function* watchRegister() {
   yield takeLatest(actions.SIGN_UP_REQUEST, register);
 }
 
-function* idCheck({ payload }) {
+function* addRigster(props) {
   try {
     const json = {
-      username: payload.username,
-    };
-    const data = yield call(
-      [axios, 'post'],
-      'https://gaegata.fourman.store/account/check/duplication/',
-      json,
-    );
-    yield put({
-      type: actions.USER_CHECK_SUCCESS,
-      payload: {
-        usernameCheck: data.data.username,
-      },
-    });
-  } catch (error) {
-    yield put({
-      type: actions.USER_CHECK_FAILURE,
-    });
-  }
-}
-
-function* watchIdCheck() {
-  yield takeLatest(actions.USER_CHECK_REQUEST, idCheck);
-}
-
-function* addRigster({ payload }) {
-  try {
-    const json = {
-      email: payload.email,
-      introduction: payload.introduce,
-      nickname: payload.name,
+      email: props.email,
+      introduction: props.introduce,
+      nickname: props.name,
+      userId: props.userId,
       headers: {
-        Authorization: `Bearer ${payload.access}`,
+        Authorization: `Bearer ${props.access}`,
       },
     };
-    yield call(
-      [axios, 'patch'],
-      `https://gaegata.fourman.store/account/${payload.userId}/`,
-      json,
-    );
+
+    yield call(PostAPI.addRigster, json);
+
     yield put({
       type: actions.ADD_REGISTER_SUCCESS,
     });
@@ -84,5 +57,5 @@ function* watchAddRegister() {
 }
 
 export default function* root() {
-  yield all([fork(watchRegister), fork(watchIdCheck), fork(watchAddRegister)]);
+  yield all([fork(watchRegister), fork(watchAddRegister)]);
 }
