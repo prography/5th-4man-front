@@ -32,14 +32,13 @@ function* addRigster({payload}) {
   try {
     const json = {
       email: payload.email,
-      introduction: payload.introduce,
-      nickname: payload.name,
+      introduction: payload.introduction,
+      nickname: payload.nickname,
       userId: payload.userId,
       headers: {
         Authorization: `Bearer ${payload.access}`,
       },
     };
-
     yield call(PostAPI.addRigster, json);
 
     yield put({
