@@ -47,6 +47,7 @@ function* loginGithubAuth(props) {
       payload: {
         access: data.data.access,
         isNew: data.data.is_new,
+        userId: data.data.user_id,
       },
     });
   } catch (error) {

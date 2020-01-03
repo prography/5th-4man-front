@@ -129,6 +129,7 @@ const TeamCreateContainer = props => {
                 </Form.Item>
                 <Form.Item label="팀 최대인원">
                   {getFieldDecorator('max_personnel', {
+                    initialValue: 1,
                     rules: [
                       {
                         required: true,
