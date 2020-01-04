@@ -1,18 +1,18 @@
+.apply-btn {
+  width: 100%;
+  background-image: $main-color-gradient;
+  transition: box-shadow 0.2s;
+  color: #fff;
+  border-radius: 3px;
+  padding: 10px 20px;
+
+  &:hover {
+    box-shadow: 1px 2px 5px 0 rgba(#000, 0.3);
+  }
+}
+
 #team-detail {
   padding: 32px 0 100px;
-
-  .apply-btn {
-    width: 100%;
-    background-image: $main-color-gradient;
-    transition: box-shadow 0.2s;
-    color: #fff;
-    border-radius: 3px;
-    padding: 10px 20px;
-
-    &:hover {
-      box-shadow: 1px 2px 5px 0 rgba(#000, 0.3);
-    }
-  }
 
   .sub-btn {
     background-color: #efefef;
