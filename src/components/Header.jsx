@@ -7,7 +7,7 @@ import { removeToken } from '../utils/auth';
 
 const Header = ({ location }) => {
   const dispatch = useDispatch();
-  const { isLoggedIn, userId } = useSelector(state => state.user);
+  const { isLoggedIn } = useSelector(state => state.user);
 
   return (
     <header className={location.pathname !== '/' ? 'scrolled' : ''}>
@@ -31,7 +31,7 @@ const Header = ({ location }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={`/mypage/${userId}`}>마이페이지</Link>
+                  <Link to="/mypage">마이페이지</Link>
                 </li>
               </>
             ) : (

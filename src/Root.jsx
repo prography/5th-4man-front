@@ -56,7 +56,7 @@ const Root = () => (
           <Route exact path="/team/:team_id" component={TeamDetail} />
           <Route exact path="/addForm" component={AddForm} />
           <Route exact path="/teamCreate" component={TeamCreate} />
-          <Route exact path="/mypage/:user_id" component={MyPage} />
+          <Route exact path="/mypage" component={MyPage} />
         </Switch>
         <Footer />
       </div>
