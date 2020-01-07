@@ -8,10 +8,6 @@ export const initialState = {
   access: '',
   isNew: false,
   usernameCheck: false,
-  detail: {
-    loading: false,
-    userInfo: null,
-  },
 };
 
 export const LOG_IN_GITHUB_TOKEN_REQUEST = 'user/LOG_IN_GITHUB_TOKEN_REQUEST';
@@ -52,7 +48,6 @@ export const getSignUpAction = createAction(SIGN_UP_REQUEST);
 export const getUserCheckAction = createAction(USER_CHECK_REQUEST);
 export const getAddRegisterAction = createAction(ADD_REGISTER_REQUEST);
 export const getAuthAction = createAction(AUTH_REQUEST);
-export const getUserDetailAction = createAction(USER_DETAIL_REQUEST);
 
 const reducer = (state = initialState, action) => {
   return produce(state, draft => {
@@ -142,6 +137,11 @@ const reducer = (state = initialState, action) => {
         draft.isLoggedIn = true;
         draft.userId = action.payload.userId;
         draft.username = action.payload.username;
+        draft.nickname = action.payload.nickname;
+        draft.introduction = action.payload.introduction;
+        draft.image = action.payload.image;
+        draft.is_github_authenticated = action.payload.is_github_authenticated;
+
         return draft;
 
       case USER_DETAIL_FAILURE:

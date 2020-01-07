@@ -70,6 +70,10 @@ function* getMyUserDetail(token) {
         userId: data.data.id,
         isLoggedIn: true,
         username: data.data.username,
+        introduction: data.data.introduction,
+        image: data.data.image,
+        is_github_authenticated: data.data.is_github_authenticated,
+        nickname: data.data.nickname,
       },
     });
   } catch (error) {
@@ -83,6 +87,7 @@ export default function* root() {
   yield all([fork(watchLoginAuth), fork(watchLoginGithubAuth)]);
 
   const token = authUtils.getToken();
+
   if (token) {
     authUtils.setToken(token);
     yield put({
