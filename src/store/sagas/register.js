@@ -1,19 +1,12 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
 import * as PostAPI from 'lib/api/post';
 import {
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
-  USER_CHECK_SUCCESS,
-  USER_CHECK_FAILURE,
-  USER_CHECK_REQUEST,
   ADD_REGISTER_SUCCESS,
   ADD_REGISTER_FAILURE,
   ADD_REGISTER_REQUEST,
-  USER_DETAIL_REQUEST,
-  USER_DETAIL_SUCCESS,
-  USER_DETAIL_FAILURE,
 } from '../reducers/user';
 
 function* register({ payload }) {
@@ -68,14 +61,6 @@ function* addRigster(props) {
 
 function* watchAddRegister() {
   yield takeLatest(ADD_REGISTER_REQUEST, addRigster);
-}
-
-function* getUserDetail() {
-  // const userInfo = yield call(PostAPI.getUserDetail);
-}
-
-function* watchGetUserDetail() {
-  yield takeLatest(USER_DETAIL_REQUEST, getUserDetail);
 }
 
 export default function* root() {
