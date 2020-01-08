@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://gaegata.fourman.store';
+const API_URL = 'https://api.gaegata.com';
 
 export const SendUrl = async (url, method, params, headers) => {
   let re;
