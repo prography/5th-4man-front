@@ -8,6 +8,7 @@ export const initialState = {
   access: '',
   isNew: false,
   usernameCheck: false,
+  loginStatus: 'INIT',
 };
 
 export const LOG_IN_GITHUB_TOKEN_REQUEST = 'user/LOG_IN_GITHUB_TOKEN_REQUEST';
@@ -54,6 +55,7 @@ const reducer = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case LOG_OUT:
+        draft.loginStatus = 'INIT';
         draft.isLoggedIn = false;
         draft.access = '';
         draft.userId = -1;
@@ -95,9 +97,11 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case LOG_IN_REQUEST:
+        draft.loginStatus = 'REQUEST';
         return draft;
 
       case LOG_IN_SUCCESS:
+        draft.loginStatus = 'SUCCESS';
         draft.isLoggedIn = true;
         draft.access = action.payload.access;
         draft.userId = action.payload.userId;
@@ -105,6 +109,8 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case LOG_IN_FAILURE:
+        draft.loginStatus = 'FAILURE';
+        draft.error = action.error;
         return draft;
 
       case ADD_REGISTER_REQUEST:
