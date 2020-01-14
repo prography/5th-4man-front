@@ -29,7 +29,7 @@ const getBase64 = file => {
 const TeamCreateContainer = props => {
   const [previewVisible, setPreviewvisible] = useState(false);
   const [previewImage, setPreviewimage] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const [selectTags, setSelectTags] = useState([]);
   const [searchTags, setSearchTags] = useState([]);
   const [input, setInput] = useState('');
@@ -105,8 +105,12 @@ const TeamCreateContainer = props => {
         );
         formdata.append('access', access);
         formdata.append('image', image);
-        formdata.append('tags', searchTags);
+        for (let i = 0; i < searchTags.length; i++) {
+          formdata.append('tags', searchTags[i]);
+        }
+
         const data = await api.createTeam(formdata);
+
         swal('팀생성 완료!', 'success').then(() => {
           window.location.href = `/team/${data.data.id}`;
         });
@@ -134,7 +138,7 @@ const TeamCreateContainer = props => {
     setImage(file.originFileObj);
 
     if (file.status === 'removed') {
-      setImage(null);
+      setImage('');
     }
   };
 
@@ -285,7 +289,7 @@ const TeamCreateContainer = props => {
                     onChange={handleChange}
                     accept="image/*"
                   >
-                    {image === null ? uploadButton : null}
+                    {image === '' ? uploadButton : null}
                   </Upload>
                   <Modal
                     visible={previewVisible}
