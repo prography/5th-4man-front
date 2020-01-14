@@ -1,16 +1,17 @@
 import React from 'react';
-// import TagSearch from 'containers/TagSearchCotainer';
+import TagSearch from 'containers/TagSearchCotainer';
 
 const Banner = () => {
   return (
     <section id="banner">
       <div className="bannerBg">
         <div className="container display-flex">
-          <div className="stack-choice-area display-flex justify-content-center align-items-center">
-            <div>
-              <h2 className="text-bold">서비스 준비 중입니다 🤔</h2>
-              {/* <TagSearch /> */}
+          <div className="stack-choice-area display-flex flex-direction-column justify-content-center align-items-center">
+            {/* <h2 className="text-bold">서비스 준비 중입니다 🤔</h2> */}
+            <div style={{ textAlign: 'left' }}>
+              관련 태그를 추가하고 검색해보세요.
             </div>
+            <TagSearch />
           </div>
           <div className="banner-title">
             <h2 className="text-light">
