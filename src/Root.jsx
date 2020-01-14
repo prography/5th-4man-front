@@ -12,6 +12,7 @@ const Oauth = lazy(() => import('./pages/Oauth'));
 const AddForm = lazy(() => import('./pages/AddForm'));
 const TeamDetail = lazy(() => import('./pages/TeamDetail'));
 const TeamCreate = lazy(() => import('./pages/TeamCreate'));
+const TeamList = lazy(() => import('./pages/TeamList'));
 
 // 임시로 설문을 받기 위한 컴포넌트 생성
 const TopBanner = styled.div`
@@ -55,6 +56,7 @@ const Root = () => (
           <Route exact path="/team/:team_id" component={TeamDetail} />
           <Route exact path="/addForm" component={AddForm} />
           <Route exact path="/teamCreate" component={TeamCreate} />
+          <Route exact path="/teamList" component={TeamList} />
         </Switch>
         <Footer />
       </div>

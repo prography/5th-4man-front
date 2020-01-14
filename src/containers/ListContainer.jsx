@@ -7,23 +7,25 @@ import TeamCard from 'components/TeamCard';
 
 import * as teamActions from '../store/reducers/team';
 
-const ListContainer = ({ type = 'recent' }) => {
+const ListContainer = ({ type = 'recent', tags }) => {
   const actions = {
     popular: teamActions.getPopularListAction,
     recent: teamActions.getRecentListAction,
+    search: teamActions.getSearchTeamListAction,
   };
-
   const team = useSelector(state => state.team);
   const currentData = team[type];
-
   const dispatch = useDispatch();
-  const getList = useCallback(() => {
-    dispatch(actions[type]());
-  }, [dispatch]);
+
+  const getList = () => {
+    dispatch(actions[type](tags));
+  };
 
   useEffect(() => {
     getList();
-  }, []);
+
+    return getList();
+  }, [tags]);
 
   return (
     <div>
