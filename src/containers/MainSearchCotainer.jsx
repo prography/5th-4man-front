@@ -5,7 +5,7 @@ import * as api from 'lib/api/post';
 
 import { withRouter, Link } from 'react-router-dom';
 
-const TagSearchContainer = () => {
+const MainSearchContainer = () => {
   // test api
   const [tags, setTags] = useState([]);
   const [selectTags, setSelectTags] = useState([]);
@@ -27,7 +27,7 @@ const TagSearchContainer = () => {
 
   const handleClose = removedTag => {
     setSearchTags(searchTags.filter(tag => tag !== removedTag));
-    handleQuery(searchTags);
+    handleQuery(searchTags.filter(tag => tag !== removedTag));
   };
 
   const handleTagInput = tag => {
@@ -36,7 +36,9 @@ const TagSearchContainer = () => {
         (item, index) => [...searchTags, tag].indexOf(item) === index,
       ),
     );
-    handleQuery(searchTags);
+    handleQuery( [...searchTags, tag].filter(
+      (item, index) => [...searchTags, tag].indexOf(item) === index,
+    ),);
   };
   const handleQuery = tags => {
     let params = '';
@@ -55,7 +57,9 @@ const TagSearchContainer = () => {
         (item, index) => [...searchTags, selectedItems].indexOf(item) === index,
       ),
     );
-    handleQuery(searchTags);
+    handleQuery([...searchTags, selectedItems].filter(
+      (item, index) => [...searchTags, selectedItems].indexOf(item) === index,
+    ));
   };
   const handleTagSearch = async value => {
     setInput(value);
@@ -132,21 +136,19 @@ const TagSearchContainer = () => {
         selectTags={selectTags}
         tags={tags}
       />
-      <div>
-        <Button
-          block
-          style={{
-            width: '17%',
-            marginLeft: '3%',
-            backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
-            color: 'white',
-          }}
-        >
-          <Link to={'/teamList?' + query}>검색</Link>
-        </Button>
-      </div>
+      <Button
+        block
+        size="large"
+        style={{
+          width: '100%',
+          backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
+          color: 'white',
+        }}
+      >
+        <Link to={'/teamList?' + query}>검색</Link>
+      </Button>
     </div>
   );
 };
 
-export default withRouter(TagSearchContainer);
+export default withRouter(MainSearchContainer);

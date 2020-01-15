@@ -1,8 +1,8 @@
 import React from 'react';
 import ListContainer from 'containers/ListContainer';
-import TagSearchContainer from '../containers/TagSearchCotainer';
 import queryString from 'query-string';
 import { Divider } from 'antd';
+import SubSearchContainer from '../containers/SubSearchContainer';
 
 const TeamList = ({ location }) => {
   const query = queryString.parse(location.search);
@@ -14,7 +14,8 @@ const TeamList = ({ location }) => {
           <Divider />
           <div className="display-flex flex-direction-row justify-content-space-between content-title-aria">
             <div className="section-title">
-              <TagSearchContainer />
+              <SubSearchContainer/>
+              {/* <TagSearchContainer /> */}
             </div>
           </div>
           <Divider />
