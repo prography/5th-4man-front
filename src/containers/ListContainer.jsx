@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row, Icon } from 'antd';
+import { Col, Row, Icon, Dropdown, Menu } from 'antd';
 
 import SkeletonCard from 'components/SkeletonCard';
 import TeamCard from 'components/TeamCard';
@@ -27,8 +27,32 @@ const ListContainer = ({ type = 'recent', tags }) => {
     return getList();
   }, [tags]);
 
+  const menu = (
+    <Menu>
+      <Menu.Item>인기 순</Menu.Item>
+      <Menu.Item>최신 순</Menu.Item>
+    </Menu>
+  );
+
   return (
     <div>
+      {type === 'search' ? (
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ margin: '2% 0', justifyContent: 'space-between' }}>
+            <span style={{ color: '#5f76f3' }}>{currentData.list.length}</span>
+            개 프로젝트가 있습니다.
+          </div>
+          <div style={{ margin: '2% 0', justifyContent: 'space-between' }}>
+            <Dropdown overlay={menu}>
+              <div>
+                인기 순 <Icon type="down" />
+              </div>
+            </Dropdown>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
       <Row gutter={16}>
         {currentData.list.map(item => (
           <Col xs={24} md={12} lg={8} xl={6} key={item.id}>

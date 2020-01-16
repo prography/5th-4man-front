@@ -1,24 +1,22 @@
 import React from 'react';
 import ListContainer from 'containers/ListContainer';
-import queryString from 'query-string';
 import { Divider } from 'antd';
 import SubSearchContainer from '../containers/SubSearchContainer';
+import queryString from 'query-string';
 
 const TeamList = ({ location }) => {
   const query = queryString.parse(location.search);
-
   return (
     <>
       <section className="list-section">
         <div className="container">
-          <Divider />
-          <div className="display-flex flex-direction-row justify-content-space-between content-title-aria">
+          <div style={{ margin: '1% 0' }}>
             <div className="section-title">
-              <SubSearchContainer/>
-              {/* <TagSearchContainer /> */}
+              <SubSearchContainer tags={query.tag} />
             </div>
           </div>
-          <Divider />
+          <Divider style={{ margin: '1% 0' }} />
+
           <ListContainer type="search" tags={query} />
         </div>
       </section>
