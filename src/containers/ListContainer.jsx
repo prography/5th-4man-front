@@ -45,7 +45,7 @@ const ListContainer = ({ type = 'recent', tags }) => {
           <div style={{ margin: '2% 0', justifyContent: 'space-between' }}>
             <Dropdown overlay={menu}>
               <div>
-                인기 순 <Icon type="down" />
+                최신 순 <Icon type="down" />
               </div>
             </Dropdown>
           </div>
