@@ -68,7 +68,16 @@ const TeamDetailContainer = ({ team_id }) => {
                 <h2 className="text-bold">{title}</h2>
                 <div className="tag-wrap mb-10 pb-20">
                   {tags.map((o, idx) => (
-                    <Tag key={idx} color="geekblue">
+                    <Tag
+                      key={idx}
+                      style={{
+                        fontFamily: 'Noto Sans Light',
+                        borderRadius: '25px',
+                        color: 'white',
+                        backgroundImage:
+                          'linear-gradient(133deg, #5f76f3, #845ef7)',
+                      }}
+                    >
                       {o}
                     </Tag>
                   ))}
