@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://gaegata.fourman.store';
+const API_URL = 'https://api.gaegata.com';
 
 export const SendUrl = async (url, method, params, headers) => {
   let re;
@@ -14,6 +14,19 @@ export const SendUrl = async (url, method, params, headers) => {
   } catch (err) {
     console.log(err);
   }
+  return re;
+};
+// 127.0.0.1:8000/team/?tag=python&tag=django&tag=java
+export const getSearchTeamList = async params => {
+  let query = '';
+  for (let i = 0; i < params.length; i++) {
+    if (params.length - 1 === i) {
+      query += 'tag=' + params[i];
+    } else {
+      query += 'tag=' + params[i] + '&';
+    }
+  }
+  const re = await SendUrl(`${API_URL}/team/?${query}`, 'get');
   return re;
 };
 
@@ -127,14 +140,19 @@ export const teamApplication = async (params, token) => {
   return re;
 };
 
-export const getTags = () => {
-  // const re = await axios.get('http://gaegata.fourman.store/tag/');
-  return [
-    {
-      name: 'React',
-    },
-    {
-      name: 'Vue',
-    },
-  ];
+export const getTags = async () => {
+  const re = await SendUrl(`${API_URL}/tag/`, 'get');
+  return re;
+};
+
+export const getTagData = async params => {
+  const re = await SendUrl(`${API_URL}/tag?search=${params}`, 'get');
+
+  return re;
+};
+
+export const insertTag = async params => {
+  const re = await SendUrl(`${API_URL}/tag/`, 'post', params);
+
+  return re;
 };

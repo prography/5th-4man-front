@@ -11,7 +11,6 @@ function* loginAuth(props) {
     authUtils.setToken({
       access: data.data.access,
     });
-
     yield put({
       type: actions.LOG_IN_SUCCESS,
       payload: {

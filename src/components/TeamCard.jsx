@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Icon } from 'antd';
+import { Card, Icon, Tag } from 'antd';
 import * as moment from 'moment';
 
 import CardImage from 'components/CardImage';
@@ -8,7 +8,6 @@ import Progress from 'components/Progress';
 
 const TeamCard = props => {
   const { item } = props;
-
   // 팀 카드 이미지
   const CardImageWrap = (
     <div className="card-image-content posr">
@@ -25,12 +24,23 @@ const TeamCard = props => {
     >
       <div className="team-card-meta">
         <div className="content-header">
-          <Link to="#" className="leader-name display-inline-block main-color-blue">
+          <Link
+            to="#"
+            className="leader-name display-inline-block main-color-blue"
+          >
             By. {item.leader.nickname}
           </Link>
           <h3 className="text-bold">{item.title}</h3>
 
           <p className="description">{item.description}</p>
+
+          <div>
+            {item.tags.map(o => (
+              <Tag key={o} style={{ borderRadius: '30px' }}>
+                {o}
+              </Tag>
+            ))}
+          </div>
         </div>
         <p className="end-date">
           마감일: {moment(item.end_date).format('YYYY-MM-DD')}{' '}
@@ -39,7 +49,8 @@ const TeamCard = props => {
         <div className="card-counts">
           <div className="display-flex justify-content-space-between">
             <p className="no-margin">
-              <span>좋아요 {item.like_count}</span>∙<span>댓글 {item.comments_count}</span>
+              <span>좋아요 {item.like_count}</span>∙
+              <span>댓글 {item.comments_count}</span>
             </p>
             <div>
               <Icon type="heart" className="card-icon card-icon-heart pr-10" />

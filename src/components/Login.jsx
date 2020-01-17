@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
 import * as userActions from '../store/reducers/user';
 import swal from 'sweetalert';
@@ -7,26 +7,28 @@ import swal from 'sweetalert';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const { loginStatus } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const onLoginGithub = () => {
     window.location.href =
       'https://github.com/login/oauth/authorize?client_id=a7863c21770a0dd4c503';
   };
-  const onLogin = async () => {
-    try {
-      const params = {
-        username,
-        password,
-      };
-
-      await dispatch(userActions.getLogInAction(params));
-
-      swal('로그인 완료!', '로그인 되었습니다!', 'success');
-    } catch (err) {
+  useEffect(() => {
+    if (loginStatus === 'FAILURE') {
       swal('로그인 실패!', '로그인 실패했습니다!', 'error');
+    } else if (loginStatus === 'SUCCESS') {
+      swal('로그인 완료!', '로그인 되었습니다!', 'success');
     }
+  }, [loginStatus]);
+
+  const onLogin = () => {
+    const params = {
+      username,
+      password,
+    };
+
+    dispatch(userActions.getLogInAction(params));
   };
 
   const onChangeUsername = e => {
