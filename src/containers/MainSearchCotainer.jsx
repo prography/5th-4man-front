@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
-import TagSearch from '../components/TagSearch';
+import TagSearch from 'components/TagSearch';
 import * as api from 'lib/api/post';
-
-import { withRouter, Link } from 'react-router-dom';
+import SearchButton from 'components/SearchButton';
 
 const MainSearchContainer = () => {
   // test api
@@ -25,21 +23,6 @@ const MainSearchContainer = () => {
     fetchData();
   }, []);
 
-  const handleClose = removedTag => {
-    setSearchTags(searchTags.filter(tag => tag !== removedTag));
-    handleQuery(searchTags.filter(tag => tag !== removedTag));
-  };
-
-  const handleTagInput = tag => {
-    setSearchTags(
-      [...searchTags, tag].filter(
-        (item, index) => [...searchTags, tag].indexOf(item) === index,
-      ),
-    );
-    handleQuery( [...searchTags, tag].filter(
-      (item, index) => [...searchTags, tag].indexOf(item) === index,
-    ),);
-  };
   const handleQuery = tags => {
     let params = '';
     for (let i = 0; i < tags.length; i++) {
@@ -51,15 +34,37 @@ const MainSearchContainer = () => {
     }
     setQuery(params);
   };
+
+  const handleClose = removedTag => {
+    setSearchTags(searchTags.filter(tag => tag !== removedTag));
+
+    handleQuery(searchTags.filter(tag => tag !== removedTag));
+  };
+
+  const handleTagInput = tag => {
+    setSearchTags(
+      [...searchTags, tag].filter(
+        (item, index) => [...searchTags, tag].indexOf(item) === index,
+      ),
+    );
+    handleQuery(
+      [...searchTags, tag].filter(
+        (item, index) => [...searchTags, tag].indexOf(item) === index,
+      ),
+    );
+  };
+
   const onSelect = selectedItems => {
     setSearchTags(
       [...searchTags, selectedItems].filter(
         (item, index) => [...searchTags, selectedItems].indexOf(item) === index,
       ),
     );
-    handleQuery([...searchTags, selectedItems].filter(
-      (item, index) => [...searchTags, selectedItems].indexOf(item) === index,
-    ));
+    handleQuery(
+      [...searchTags, selectedItems].filter(
+        (item, index) => [...searchTags, selectedItems].indexOf(item) === index,
+      ),
+    );
   };
   const handleTagSearch = async value => {
     setInput(value);
@@ -101,20 +106,6 @@ const MainSearchContainer = () => {
     }
   };
 
-  const onSearch = async () => {
-    let params = '';
-    for (let i = 0; i < searchTags.length; i++) {
-      if (searchTags.length - 1 === i) {
-        params += 'tag=' + searchTags[i];
-      } else {
-        params += 'tag=' + searchTags[i] + '&';
-      }
-    }
-    // const test = { params, searchTags };
-    // await dispatch(searchTeamActions.getSearchTeamListAction(test));
-    // window.location.href = '/teamList';
-  };
-
   return (
     <div
       style={{
@@ -136,19 +127,9 @@ const MainSearchContainer = () => {
         selectTags={selectTags}
         tags={tags}
       />
-      <Button
-        block
-        size="large"
-        style={{
-          width: '100%',
-          backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
-          color: 'white',
-        }}
-      >
-        <Link to={'/teamList?' + query}>검색</Link>
-      </Button>
+      <SearchButton query={query} />
     </div>
   );
 };
 
-export default withRouter(MainSearchContainer);
+export default MainSearchContainer;

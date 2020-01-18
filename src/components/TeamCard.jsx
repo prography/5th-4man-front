@@ -36,7 +36,15 @@ const TeamCard = props => {
 
           <div>
             {item.tags.map(o => (
-              <Tag key={o} style={{ borderRadius: '30px' }}>
+              <Tag
+                key={o}
+                style={{
+                  fontFamily: 'Noto Sans Light',
+                  borderRadius: '25px',
+                  color: 'white',
+                  backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
+                }}
+              >
                 {o}
               </Tag>
             ))}
