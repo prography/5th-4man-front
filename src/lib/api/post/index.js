@@ -16,16 +16,19 @@ export const SendUrl = async (url, method, params, headers) => {
   }
   return re;
 };
-// 127.0.0.1:8000/team/?tag=python&tag=django&tag=java
 export const getSearchTeamList = async params => {
+  const tagArrayCheck = typeof params === 'object' && params.length;
+  const tags = tagArrayCheck ? params : [params];
+
   let query = '';
-  for (let i = 0; i < params.length; i++) {
-    if (params.length - 1 === i) {
-      query += 'tag=' + params[i];
+  for (let i = 0; i < tags.length; i++) {
+    if (tags.length - 1 === i) {
+      query += 'tag=' + tags[i];
     } else {
-      query += 'tag=' + params[i] + '&';
+      query += 'tag=' + tags[i] + '&';
     }
   }
+
   const re = await SendUrl(`${API_URL}/team/?${query}`, 'get');
   return re;
 };

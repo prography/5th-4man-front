@@ -5,7 +5,9 @@ import SearchButton from 'components/SearchButton';
 import * as api from 'lib/api/post';
 
 const SubSearchContainer = ({ tags }) => {
-  const [searchTags, setSearchTags] = useState(tags);
+  const tagArrayCheck = typeof tags === 'object' && tags.length;
+  const newTags = tagArrayCheck ? tags : [tags];
+  const [searchTags, setSearchTags] = useState(newTags);
   const [input, setInput] = useState('');
   const [selectTags, setSelectTags] = useState([]);
   const [query, setQuery] = useState('');
@@ -101,31 +103,29 @@ const SubSearchContainer = ({ tags }) => {
           검색 <Icon type="down" />
         </Button>
       </Dropdown>
-      {searchTags !== undefined
-        ? searchTags.map((tag, index) => {
-            const tagElem = (
-              <Tag
-                key={index}
-                color="white"
-                closable
-                onClose={e => {
-                  e.preventDefault();
-                  handleClose(tag);
-                }}
-                style={{
-                  fontFamily: 'Noto Sans Light',
-                  borderRadius: '25px',
-                  color: 'white',
-                  backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
-                }}
-              >
-                {tag}
-              </Tag>
-            );
+      {searchTags.map((tag, index) => {
+        const tagElem = (
+          <Tag
+            key={index}
+            color="white"
+            closable
+            onClose={e => {
+              e.preventDefault();
+              handleClose(tag);
+            }}
+            style={{
+              fontFamily: 'Noto Sans Light',
+              borderRadius: '25px',
+              color: 'white',
+              backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
+            }}
+          >
+            {tag}
+          </Tag>
+        );
 
-            return tagElem;
-          })
-        : ''}
+        return tagElem;
+      })}
     </>
   );
 };
