@@ -12,6 +12,9 @@ import {
   GET_MY_TEAM_LIST_REQUEST,
   GET_MY_TEAM_LIST_SUCCESS,
   GET_MY_TEAM_LIST_FAILURE,
+  GET_SEARCH_TEAM_LIST_REQUEST,
+  GET_SEARCH_TEAM_LIST_SUCCESS,
+  GET_SEARCH_TEAM_LIST_FAILURE,
 } from 'store/reducers/team';
 import * as PostAPI from 'lib/api/post';
 
@@ -61,6 +64,22 @@ function* getMyTeamList() {
   }
 }
 
+// 조건검색팀 데이터 불러오기
+function* getSearchList(data) {
+  try {
+    const items = yield call(PostAPI.getSearchTeamList, data.payload.tag);
+    // items로 데이터 전달
+
+    yield put({
+      type: GET_SEARCH_TEAM_LIST_SUCCESS,
+      items: items.data,
+      tags: data.payload.searchTags,
+    });
+  } catch (e) {
+    yield put({ type: GET_SEARCH_TEAM_LIST_FAILURE, message: e.message });
+  }
+}
+
 function* watchPopularList() {
   yield takeLatest(GET_POPULAR_LIST_REQUEST, getPopularList);
 }
@@ -77,11 +96,16 @@ function* watchMyTeamList() {
   yield takeLatest(GET_MY_TEAM_LIST_REQUEST, getMyTeamList);
 }
 
+function* watchSearchList() {
+  yield takeLatest(GET_SEARCH_TEAM_LIST_REQUEST, getSearchList);
+}
+
 export default function* root() {
   yield all([
     fork(watchPopularList),
     fork(watchRecentList),
     fork(watchMyApplyTeamList),
     fork(watchMyTeamList),
+    fork(watchSearchList),
   ]);
 }

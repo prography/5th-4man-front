@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as authUtils from 'utils/auth';
 
 const API_URL = 'https://api.gaegata.com';
 
@@ -15,6 +14,22 @@ export const SendUrl = async (url, method, params, headers) => {
   } catch (err) {
     console.log(err);
   }
+  return re;
+};
+export const getSearchTeamList = async params => {
+  const tagArrayCheck = typeof params === 'object' && params.length;
+  const tags = tagArrayCheck ? params : [params];
+
+  let query = '';
+  for (let i = 0; i < tags.length; i++) {
+    if (tags.length - 1 === i) {
+      query += `tag=${tags[i]}`;
+    } else {
+      query += `tag=${tags[i]}&`;
+    }
+  }
+
+  const re = await SendUrl(`${API_URL}/team/?${query}`, 'get');
   return re;
 };
 
@@ -73,7 +88,7 @@ export const createTeam = async params => {
 };
 
 export const getTeamList = async () => {
-  const re = await axios.get(`${API_URL}/team/`);
+  const re = await axios.get(`${API_URL}/team?ordering=-like_count`);
 
   return re;
 };
@@ -140,14 +155,19 @@ export const getMyTeamList = async () => {
   return re;
 };
 
-export const getTags = () => {
-  // const re = await axios.get('http://gaegata.fourman.store/tag/');
-  return [
-    {
-      name: 'React',
-    },
-    {
-      name: 'Vue',
-    },
-  ];
+export const getTags = async () => {
+  const re = await SendUrl(`${API_URL}/tag/`, 'get');
+  return re;
+};
+
+export const getTagData = async params => {
+  const re = await SendUrl(`${API_URL}/tag?search=${params}`, 'get');
+
+  return re;
+};
+
+export const insertTag = async params => {
+  const re = await SendUrl(`${API_URL}/tag/`, 'post', params);
+
+  return re;
 };

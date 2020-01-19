@@ -14,6 +14,7 @@ const AddForm = lazy(() => import('./pages/AddForm'));
 const TeamDetail = lazy(() => import('./pages/TeamDetail'));
 const TeamCreate = lazy(() => import('./pages/TeamCreate'));
 const MyPage = lazy(() => import('./pages/MyPage'));
+const TeamList = lazy(() => import('./pages/TeamList'));
 
 // 임시로 설문을 받기 위한 컴포넌트 생성
 const TopBanner = styled.div`
@@ -65,6 +66,7 @@ const Root = () => (
           />
           <Route exact path="/mypage/application/:sortby" component={MyPage} />
           <Route exact path="/mypage/own" component={MyPage} />
+          <Route exact path="/teamList" component={TeamList} />
         </Switch>
         <Footer />
       </div>

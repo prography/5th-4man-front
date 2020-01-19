@@ -35,18 +35,17 @@ function* watchRegister() {
   yield takeLatest(SIGN_UP_REQUEST, register);
 }
 
-function* addRigster(props) {
+function* addRigster({payload}) {
   try {
     const json = {
-      email: props.email,
-      introduction: props.introduce,
-      nickname: props.name,
-      userId: props.userId,
+      email: payload.email,
+      introduction: payload.introduction,
+      nickname: payload.nickname,
+      userId: payload.userId,
       headers: {
-        Authorization: `Bearer ${props.access}`,
+        Authorization: `Bearer ${payload.access}`,
       },
     };
-
     yield call(PostAPI.addRigster, json);
 
     yield put({

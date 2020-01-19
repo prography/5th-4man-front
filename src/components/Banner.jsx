@@ -1,16 +1,22 @@
 import React from 'react';
-// import TagSearch from 'containers/TagSearchCotainer';
+import TagSearch from 'containers/MainSearchCotainer';
 
 const Banner = () => {
   return (
     <section id="banner">
       <div className="bannerBg">
         <div className="container display-flex">
-          <div className="stack-choice-area display-flex justify-content-center align-items-center">
-            <div>
-              <h2 className="text-bold">서비스 준비 중입니다 🤔</h2>
-              {/* <TagSearch /> */}
+          <div className="stack-choice-area display-flex flex-direction-column justify-content-center align-items-center">
+            <div style={{ textAlign: 'center' }}>
+              <img
+                src={process.env.PUBLIC_URL + '/images/tagSearchImage.png'}
+                width="20%"
+                height="100%"
+                alt="태그 그림"
+              />
             </div>
+            <div style={{ fontSize: '30px', marginTop: '4%' }}>태그 검색</div>
+            <TagSearch />
           </div>
           <div className="banner-title">
             <h2 className="text-light">
