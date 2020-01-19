@@ -33,6 +33,11 @@ export const getSearchTeamList = async params => {
   return re;
 };
 
+export const getRecentApplyTeamUserList = async params => {
+  const re = await SendUrl(`${API_URL}/team/${params.id}/application/`);
+  return re;
+};
+
 export const loginGithubAuth = async params => {
   const re = await SendUrl(`${API_URL}/account/token/`, 'post', params);
 

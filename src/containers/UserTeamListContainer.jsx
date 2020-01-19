@@ -4,6 +4,7 @@ import TeamRow from 'components/TeamRow';
 
 import { Skeleton } from 'antd';
 
+import { OPEN_MODAL } from 'store/reducers/modal';
 import * as teamActions from 'store/reducers/team';
 
 const UserTeamListContainer = ({ teamType }) => {
@@ -19,9 +20,21 @@ const UserTeamListContainer = ({ teamType }) => {
 
   const { mypage } = useSelector(state => state.team);
 
+  const handleModal = id => {
+    dispatch({
+      type: OPEN_MODAL,
+      payload: { type: 'applyTeamUserList', data: { id } },
+    });
+  };
+
   return !mypage.loading ? (
     mypage.list.map(data => (
-      <TeamRow {...data} key={data.id} teamType={teamType} />
+      <TeamRow
+        {...data}
+        key={data.id}
+        teamType={teamType}
+        handleModal={handleModal}
+      />
     ))
   ) : (
     <Skeleton active />

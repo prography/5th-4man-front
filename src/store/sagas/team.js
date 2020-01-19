@@ -15,6 +15,9 @@ import {
   GET_SEARCH_TEAM_LIST_REQUEST,
   GET_SEARCH_TEAM_LIST_SUCCESS,
   GET_SEARCH_TEAM_LIST_FAILURE,
+  GET_RECENT_APPLY_TEAM_USER_LIST_REQUEST,
+  GET_RECENT_APPLY_TEAM_USER_LIST_FAILURE,
+  GET_RECENT_APPLY_TEAM_USER_LIST_SUCCESS,
 } from 'store/reducers/team';
 import * as PostAPI from 'lib/api/post';
 
@@ -79,6 +82,20 @@ function* getSearchList(data) {
     yield put({ type: GET_SEARCH_TEAM_LIST_FAILURE, message: e.message });
   }
 }
+function* getRecentApplyTeamUserList({ payload }) {
+  try {
+    const items = yield call(PostAPI.getRecentApplyTeamUserList, payload);
+    yield put({
+      type: GET_RECENT_APPLY_TEAM_USER_LIST_SUCCESS,
+      items: items.data,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_RECENT_APPLY_TEAM_USER_LIST_FAILURE,
+      message: e.message,
+    });
+  }
+}
 
 function* watchPopularList() {
   yield takeLatest(GET_POPULAR_LIST_REQUEST, getPopularList);
@@ -100,6 +117,13 @@ function* watchSearchList() {
   yield takeLatest(GET_SEARCH_TEAM_LIST_REQUEST, getSearchList);
 }
 
+function* watchRecentApplyTeamUserList() {
+  yield takeLatest(
+    GET_RECENT_APPLY_TEAM_USER_LIST_REQUEST,
+    getRecentApplyTeamUserList,
+  );
+}
+
 export default function* root() {
   yield all([
     fork(watchPopularList),
@@ -107,5 +131,6 @@ export default function* root() {
     fork(watchMyApplyTeamList),
     fork(watchMyTeamList),
     fork(watchSearchList),
+    fork(watchRecentApplyTeamUserList),
   ]);
 }

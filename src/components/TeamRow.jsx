@@ -99,7 +99,7 @@ const TeamRow = data => {
                   <Button
                     type="link"
                     icon="team"
-                    onClick={() => console.log('click!')}
+                    onClick={() => data.handleModal(data.id)}
                   >
                     신청자 관리
                   </Button>

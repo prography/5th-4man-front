@@ -13,6 +13,7 @@ export const CloseModal = () => ({
 const initialState = {
   openYn: false,
   type: null,
+  data: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const reducer = (state = initialState, action) => {
       case OPEN_MODAL: {
         draft.openYn = true;
         draft.type = action.payload.type;
+        draft.data = action.payload.data;
         return draft;
       }
       case CLOSE_MODAL: {
