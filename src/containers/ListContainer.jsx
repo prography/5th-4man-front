@@ -64,10 +64,10 @@ const ListContainer = ({ type = 'recent', tags }) => {
         <LoadingComponent />
       ) : (
         <div className="display-flex justify-content-center more-loading-team">
-          <button type="button" onClick={getList}>
+          {/* <button type="button" onClick={getList}>
             <span className="pr-10">팀 더보기</span>
             <Icon type="arrow-down" />
-          </button>
+          </button> */}
         </div>
       )}
     </div>
