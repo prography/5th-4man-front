@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TagSearch from 'components/TagSearch';
 import * as api from 'lib/api/post';
 import SearchButton from 'components/SearchButton';
+import { message } from 'antd';
 
 const MainSearchContainer = () => {
   // test api
@@ -26,11 +27,9 @@ const MainSearchContainer = () => {
   const handleQuery = tags => {
     let params = '';
     for (let i = 0; i < tags.length; i++) {
-      if (tags.length - 1 === i) {
-        params += 'tag=' + tags[i];
-      } else {
-        params += 'tag=' + tags[i] + '&';
-      }
+      tags.length - 1 === i
+        ? (params += 'tag=' + tags[i])
+        : (params += 'tag=' + tags[i] + '&');
     }
     setQuery(params);
   };
@@ -75,18 +74,22 @@ const MainSearchContainer = () => {
         if (getTag.data.length === 0) {
           setSelectTags([]);
         } else {
-          let selectTagList = [];
+          const selectTagList = [];
           for (let i = 0; i < getTag.data.length; i += 1) {
-            selectTagList = [...selectTags, getTag.data[i].name].filter(
-              (item, index) =>
-                [...selectTags, getTag.data[i].name].indexOf(item) === index,
-            );
+            selectTagList.push(getTag.data[i].name);
           }
-
           setSelectTags(selectTagList);
         }
+      } else {
+        setSelectTags([]);
       }
     } catch (err) {}
+  };
+
+  const handleSearchErrorMessage = () => {
+    if (searchTags.length === 0) {
+      message.error('태그를 한개 이상 입력하세요.', 1);
+    }
   };
 
   const addItem = async () => {
@@ -127,7 +130,10 @@ const MainSearchContainer = () => {
         selectTags={selectTags}
         tags={tags}
       />
-      <SearchButton query={query} />
+      <SearchButton
+        query={query}
+        handleSearchErrorMessage={handleSearchErrorMessage}
+      />
     </div>
   );
 };
