@@ -6,8 +6,10 @@ import {
   GET_RECENT_LIST_REQUEST,
   GET_RECENT_LIST_SUCCESS,
   GET_RECENT_LIST_FAILURE,
+  GET_MY_APPLY_TEAM_LIST_REQUEST,
+  GET_MY_APPLY_TEAM_LIST_SUCCESS,
+  GET_MY_APPLY_TEAM_LIST_FAILURE,
 } from 'store/reducers/team';
-
 import * as PostAPI from 'lib/api/post';
 
 // 인기팀 데이터 불러오기
@@ -34,6 +36,17 @@ function* getRecentList() {
   }
 }
 
+function* getMyApplyTeamList() {
+  try {
+    const items = yield call(PostAPI.getMyApplyTeamList);
+
+    // items로 데이터 전달
+    yield put({ type: GET_MY_APPLY_TEAM_LIST_SUCCESS, items: items.data });
+  } catch (e) {
+    yield put({ type: GET_MY_APPLY_TEAM_LIST_FAILURE, message: e.message });
+  }
+}
+
 function* watchPopularList() {
   yield takeLatest(GET_POPULAR_LIST_REQUEST, getPopularList);
 }
@@ -42,6 +55,14 @@ function* watchRecentList() {
   yield takeLatest(GET_RECENT_LIST_REQUEST, getRecentList);
 }
 
+function* watchMyApplyTeamList() {
+  yield takeLatest(GET_MY_APPLY_TEAM_LIST_REQUEST, getMyApplyTeamList);
+}
+
 export default function* root() {
-  yield all([fork(watchPopularList), fork(watchRecentList)]);
+  yield all([
+    fork(watchPopularList),
+    fork(watchRecentList),
+    fork(watchMyApplyTeamList),
+  ]);
 }

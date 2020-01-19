@@ -57,6 +57,12 @@ const Root = () => (
           <Route exact path="/addForm" component={AddForm} />
           <Route exact path="/teamCreate" component={TeamCreate} />
           <Route exact path="/mypage" component={MyPage} />
+          <Route
+            exact
+            path="/mypage/:menu(application|made)"
+            component={MyPage}
+          />
+          <Route exact path="/mypage/application/:sortby" component={MyPage} />
         </Switch>
         <Footer />
       </div>

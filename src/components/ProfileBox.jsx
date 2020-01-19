@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useSelector } from 'react-redux';
+import ProfileImage from 'components/ProfileImage';
 
 const ProfileWrap = styled.div`
   .profile-image-box {
@@ -35,17 +35,14 @@ const ProfileWrap = styled.div`
   }
 `;
 
-const MyPageContainer = () => {
+const ProfileBox = ({ name, url }) => {
   return (
     <ProfileWrap>
       <div className="profile-image-box">
         <div className="profile-image">
-          <img
-            src="https://avatars1.githubusercontent.com/u/23019698?s=460&v=4"
-            alt="profile-image"
-          />
+          <ProfileImage size="large" url={url} />
         </div>
-        <h3>정상협</h3>
+        <h3>{name}</h3>
       </div>
 
       <div className="menu-title">나의 개같하</div>
@@ -53,4 +50,4 @@ const MyPageContainer = () => {
   );
 };
 
-export default MyPageContainer;
+export default ProfileBox;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as authUtils from 'utils/auth';
 
 const API_URL = 'https://api.gaegata.com';
 
@@ -123,6 +124,21 @@ export const teamApplication = async (params, token) => {
       'Content-Type': 'application/json',
     },
   });
+
+  return re;
+};
+
+export const getMyApplyTeamList = async () => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const re = await SendUrl(
+    `${API_URL}/account/self/applied/teams/`,
+    'get',
+    {},
+    headers,
+  );
 
   return re;
 };

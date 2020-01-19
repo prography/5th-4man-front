@@ -57,3 +57,34 @@
 .ant-menu-inline {
   border-right: 0 !important;
 }
+
+.ant-menu-item > a::before {
+  background-color: unset !important;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: rgba($main-color-blue, 0.1) !important;
+}
+
+.ant-menu-item-selected > a,
+.ant-menu-item-selected > a:hover {
+  color: $main-color-blue !important;
+}
+
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border: 0 !important;
+}
+
+.ant-menu-submenu-selected {
+  color: $main-color-blue !important;
+}
+
+.ant-menu-submenu-title:hover {
+  color: $main-color-blue !important;
+}
+.ant-menu-item > a:hover {
+  color: $main-color-blue !important;
+}

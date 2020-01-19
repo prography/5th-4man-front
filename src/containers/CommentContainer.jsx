@@ -49,7 +49,6 @@ const CommentContainer = ({ team_id }) => {
       message.error('댓글 등록에 실패했습니다.');
     }
   };
-  console.log(comment.parent_comments);
 
   const handleUpdate = async data => {
     const params = {
