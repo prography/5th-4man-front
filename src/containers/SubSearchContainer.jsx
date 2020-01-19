@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Button, Icon, Menu, Tag } from 'antd';
+import { Dropdown, Button, Icon, Menu, Tag, message } from 'antd';
 import TagSearchInput from 'components/TagSearchInput';
 import SearchButton from 'components/SearchButton';
 import * as api from 'lib/api/post';
@@ -15,11 +15,9 @@ const SubSearchContainer = ({ tags }) => {
   const handleQuery = tags => {
     let params = '';
     for (let i = 0; i < tags.length; i++) {
-      if (tags.length - 1 === i) {
-        params += 'tag=' + tags[i];
-      } else {
-        params += 'tag=' + tags[i] + '&';
-      }
+      tags.length - 1 === i
+        ? (params += 'tag=' + tags[i])
+        : (params += 'tag=' + tags[i] + '&');
     }
     setQuery(params);
   };
@@ -40,6 +38,12 @@ const SubSearchContainer = ({ tags }) => {
         (item, index) => [...searchTags, selectedItems].indexOf(item) === index,
       ),
     );
+  };
+
+  const handleSearchErrorMessage = () => {
+    if (searchTags.length === 0) {
+      message.error('태그를 한개 이상 입력하세요.', 1);
+    }
   };
 
   const addItem = async () => {
@@ -68,16 +72,14 @@ const SubSearchContainer = ({ tags }) => {
         if (getTag.data.length === 0) {
           setSelectTags([]);
         } else {
-          let selectTagList = [];
+          const selectTagList = [];
           for (let i = 0; i < getTag.data.length; i += 1) {
-            selectTagList = [...selectTags, getTag.data[i].name].filter(
-              (item, index) =>
-                [...selectTags, getTag.data[i].name].indexOf(item) === index,
-            );
+            selectTagList.push(getTag.data[i].name);
           }
-
           setSelectTags(selectTagList);
         }
+      } else {
+        setSelectTags([]);
       }
     } catch (err) {}
   };
@@ -94,7 +96,10 @@ const SubSearchContainer = ({ tags }) => {
                 addItem={addItem}
                 onSelect={onSelect1}
               />
-              <SearchButton query={query} />
+              <SearchButton
+                query={query}
+                handleSearchErrorMessage={handleSearchErrorMessage}
+              />
             </div>
           </Menu>
         }
