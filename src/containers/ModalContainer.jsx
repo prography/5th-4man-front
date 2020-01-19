@@ -17,8 +17,7 @@ const ModalContainer = () => {
   const { openYn, type, data } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const CurrentModal = ModalType[type];
-  const el = document.createElement('div');
-  document.body.appendChild(el);
+  const el = document.getElementById('modal');
 
   const closeModal = () => {
     dispatch({ type: CLOSE_MODAL });
