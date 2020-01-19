@@ -2,8 +2,8 @@ import React from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import * as userActions from '../store/reducers/user';
 import swal from 'sweetalert';
+import * as userActions from '../store/reducers/user';
 
 const AddedForm = props => {
   const dispatch = useDispatch();
@@ -24,11 +24,14 @@ const AddedForm = props => {
 
         await dispatch(userActions.getAddRegisterAction(params));
 
-        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
-          () => {
-            window.location.href = '/';
-          },
-        );
+        swal(
+          '회원가입 성공',
+          '지금부터 같이 개발할 사람을 찾아보세요!',
+          'success',
+          { button: '확인' },
+        ).then(() => {
+          window.location.href = '/';
+        });
       }
     });
   };

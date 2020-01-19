@@ -112,7 +112,9 @@ const TeamCreateContainer = props => {
 
         const data = await api.createTeam(formdata);
 
-        swal('팀생성 완료!', 'success').then(() => {
+        swal('팀 생성 완료', '지금 바로 팀으로 이동해보세요.', 'success', {
+          button: '확인',
+        }).then(() => {
           window.location.href = `/team/${data.data.id}`;
         });
       }
@@ -278,7 +280,7 @@ const TeamCreateContainer = props => {
                               </div>
                             </div>
                           )
-                        : menu => <div></div>
+                        : menu => <div />
                     }
                   >
                     <Input

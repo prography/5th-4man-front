@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button, Icon } from 'antd';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import * as userActions from '../store/reducers/user';
 import * as PostAPI from 'lib/api/post';
 import swal from 'sweetalert';
+import * as userActions from '../store/reducers/user';
 
 const Register = props => {
   const [confirmDirty, setConfirmDirty] = useState(false);
@@ -57,7 +57,9 @@ const Register = props => {
     e.preventDefault();
 
     if (check === false) {
-      swal('이용약관에 동의해주세요.', '', 'info');
+      swal('경고', '이용약관 및 개인정보 처리방침에 동의해주세요.', 'info', {
+        buttons: '확인',
+      });
     }
 
     props.form.validateFields(async (err, values) => {
@@ -68,11 +70,14 @@ const Register = props => {
 
         await dispatch(userActions.getSignUpAction(params));
 
-        swal('회원가입 성공!', '개같하에 오신것을 환영합니다.', 'success').then(
-          () => {
-            window.location.href = '/';
-          },
-        );
+        swal(
+          '회원가입 성공',
+          '지금부터 같이 개발할 사람을 찾아보세요!',
+          'success',
+          { button: '확인' },
+        ).then(() => {
+          window.location.href = '/';
+        });
       }
     });
   };

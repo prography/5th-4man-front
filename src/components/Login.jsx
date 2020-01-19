@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, Icon } from 'antd';
-import * as userActions from '../store/reducers/user';
 import swal from 'sweetalert';
+import * as userActions from '../store/reducers/user';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,9 +16,16 @@ const Login = () => {
   };
   useEffect(() => {
     if (loginStatus === 'FAILURE') {
-      swal('로그인 실패!', '로그인 실패했습니다!', 'error');
+      swal(
+        '로그인 실패',
+        '아이디 또는 비밀번호가 올바르지 않습니다.',
+        'error',
+        { button: '확인' },
+      );
     } else if (loginStatus === 'SUCCESS') {
-      swal('로그인 완료!', '로그인 되었습니다!', 'success');
+      swal('로그인 완료', '환영합니다!', 'success', {
+        button: '확인',
+      });
     }
   }, [loginStatus]);
 
