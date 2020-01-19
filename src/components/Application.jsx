@@ -39,10 +39,6 @@ const Application = ({ form }) => {
             window.location.href = '/mypage';
           }
         });
-
-        return false;
-
-        dispatch({ type: CLOSE_MODAL });
       }
     });
   };
