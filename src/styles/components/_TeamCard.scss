@@ -24,6 +24,10 @@
 
     .progress-text {
       height: 0;
+
+      &-open {
+        height: 21px;
+      }
     }
   }
 }

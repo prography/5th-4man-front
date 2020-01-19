@@ -31,7 +31,7 @@ const Header = ({ location }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/">마이페이지</Link>
+                  <Link to="/mypage">마이페이지</Link>
                 </li>
               </>
             ) : (

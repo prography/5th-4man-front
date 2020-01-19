@@ -1,8 +1,8 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
+import * as PostAPI from 'lib/api/post';
 import * as actions from '../reducers/user';
 import { CLOSE_MODAL } from '../reducers/modal';
 import * as authUtils from '../../utils/auth';
-import * as PostAPI from 'lib/api/post';
 
 function* loginAuth(props) {
   try {
@@ -65,16 +65,20 @@ function* getMyUserDetail(token) {
     const data = yield call(PostAPI.myUserDetail, token);
 
     yield put({
-      type: actions.MY_USER_DETAIL_SUCCESS,
+      type: actions.USER_DETAIL_SUCCESS,
       payload: {
         userId: data.data.id,
         isLoggedIn: true,
         username: data.data.username,
+        introduction: data.data.introduction,
+        image: data.data.image,
+        is_github_authenticated: data.data.is_github_authenticated,
+        nickname: data.data.nickname,
       },
     });
   } catch (error) {
     yield put({
-      type: actions.MY_USER_DETAIL_FAILURE,
+      type: actions.USER_DETAIL_FAILURE,
     });
   }
 }
@@ -83,6 +87,7 @@ export default function* root() {
   yield all([fork(watchLoginAuth), fork(watchLoginGithubAuth)]);
 
   const token = authUtils.getToken();
+
   if (token) {
     authUtils.setToken(token);
     yield put({

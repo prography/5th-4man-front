@@ -1,6 +1,13 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
-import * as actions from '../reducers/user';
 import * as PostAPI from 'lib/api/post';
+import {
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
+  ADD_REGISTER_SUCCESS,
+  ADD_REGISTER_FAILURE,
+  ADD_REGISTER_REQUEST,
+} from '../reducers/user';
 
 function* register({ payload }) {
   try {
@@ -15,17 +22,17 @@ function* register({ payload }) {
     yield call(PostAPI.register, json);
 
     yield put({
-      type: actions.SIGN_UP_SUCCESS,
+      type: SIGN_UP_SUCCESS,
     });
   } catch (error) {
     yield put({
-      type: actions.SIGN_UP_FAILURE,
+      type: SIGN_UP_FAILURE,
     });
   }
 }
 
 function* watchRegister() {
-  yield takeLatest(actions.SIGN_UP_REQUEST, register);
+  yield takeLatest(SIGN_UP_REQUEST, register);
 }
 
 function* addRigster({payload}) {
@@ -42,17 +49,17 @@ function* addRigster({payload}) {
     yield call(PostAPI.addRigster, json);
 
     yield put({
-      type: actions.ADD_REGISTER_SUCCESS,
+      type: ADD_REGISTER_SUCCESS,
     });
   } catch (error) {
     yield put({
-      type: actions.ADD_REGISTER_FAILURE,
+      type: ADD_REGISTER_FAILURE,
     });
   }
 }
 
 function* watchAddRegister() {
-  yield takeLatest(actions.ADD_REGISTER_REQUEST, addRigster);
+  yield takeLatest(ADD_REGISTER_REQUEST, addRigster);
 }
 
 export default function* root() {

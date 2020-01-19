@@ -23,9 +23,9 @@ export const getSearchTeamList = async params => {
   let query = '';
   for (let i = 0; i < tags.length; i++) {
     if (tags.length - 1 === i) {
-      query += 'tag=' + tags[i];
+      query += `tag=${tags[i]}`;
     } else {
-      query += 'tag=' + tags[i] + '&';
+      query += `tag=${tags[i]}&`;
     }
   }
 
@@ -139,6 +139,18 @@ export const teamApplication = async (params, token) => {
       'Content-Type': 'application/json',
     },
   });
+
+  return re;
+};
+
+export const getMyApplyTeamList = async () => {
+  const re = await axios.get(`${API_URL}/account/self/applied/teams/`);
+
+  return re;
+};
+
+export const getMyTeamList = async () => {
+  const re = await axios.get(`${API_URL}/account/self/own/teams/`);
 
   return re;
 };

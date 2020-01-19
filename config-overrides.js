@@ -3,12 +3,16 @@
  * 필요한 코드만 라이브러리에서 가져와 번들링 시킴
  * 참고링크: https://ant.design/docs/react/use-with-create-react-app#Advanced-Guides
  */
-const { override, fixBabelImports } = require('customize-cra');
+const { override, fixBabelImports, addLessLoader } = require('customize-cra');
 
 module.exports = override(
   fixBabelImports('import', {
     libraryName: 'antd',
     libraryDirectory: 'es',
-    style: 'css',
+    style: true,
+  }),
+  addLessLoader({
+    javascriptEnabled: true,
+    modifyVars: { '@primary-color': '#5f76f3' },
   }),
 );

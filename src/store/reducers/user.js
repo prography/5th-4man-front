@@ -8,6 +8,10 @@ export const initialState = {
   access: '',
   isNew: false,
   usernameCheck: false,
+  introduction: '',
+  image: '',
+  is_github_authenticated: '',
+  nickname: '',
   loginStatus: 'INIT',
 };
 
@@ -35,9 +39,9 @@ export const AUTH_REQUEST = 'user/AUTH_REQUEST';
 export const AUTH_SUCCESS = 'user/AUTH_SUCCESS';
 export const AUTH_FAILURE = 'user/AUTH_FAILURE';
 
-export const MY_USER_DETAIL_REQUEST = 'user/MY_USER_DETAIL_REQUEST';
-export const MY_USER_DETAIL_SUCCESS = 'user/MY_USER_DETAIL_SUCCESS';
-export const MY_USER_DETAIL_FAILURE = 'user/MY_USER_DETAIL_FAILURE';
+export const USER_DETAIL_REQUEST = 'user/USER_DETAIL_REQUEST';
+export const USER_DETAIL_SUCCESS = 'user/USER_DETAIL_SUCCESS';
+export const USER_DETAIL_FAILURE = 'user/USER_DETAIL_FAILURE';
 
 export const LOG_OUT = 'user/LOG_OUT';
 
@@ -49,7 +53,6 @@ export const getSignUpAction = createAction(SIGN_UP_REQUEST);
 export const getUserCheckAction = createAction(USER_CHECK_REQUEST);
 export const getAddRegisterAction = createAction(ADD_REGISTER_REQUEST);
 export const getAuthAction = createAction(AUTH_REQUEST);
-export const getMyUserDetailAction = createAction(MY_USER_DETAIL_REQUEST);
 
 const reducer = (state = initialState, action) => {
   return produce(state, draft => {
@@ -137,16 +140,21 @@ const reducer = (state = initialState, action) => {
       case AUTH_FAILURE:
         return draft;
 
-      case MY_USER_DETAIL_REQUEST:
+      case USER_DETAIL_REQUEST:
         return draft;
 
-      case MY_USER_DETAIL_SUCCESS:
+      case USER_DETAIL_SUCCESS:
         draft.isLoggedIn = true;
         draft.userId = action.payload.userId;
         draft.username = action.payload.username;
+        draft.nickname = action.payload.nickname;
+        draft.introduction = action.payload.introduction;
+        draft.image = action.payload.image;
+        draft.is_github_authenticated = action.payload.is_github_authenticated;
+
         return draft;
 
-      case MY_USER_DETAIL_FAILURE:
+      case USER_DETAIL_FAILURE:
         return draft;
     }
   });

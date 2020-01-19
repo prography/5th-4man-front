@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import PageLoading from 'components/PageLoading';
 
 import styled from 'styled-components';
 
@@ -12,6 +13,7 @@ const Oauth = lazy(() => import('./pages/Oauth'));
 const AddForm = lazy(() => import('./pages/AddForm'));
 const TeamDetail = lazy(() => import('./pages/TeamDetail'));
 const TeamCreate = lazy(() => import('./pages/TeamCreate'));
+const MyPage = lazy(() => import('./pages/MyPage'));
 const TeamList = lazy(() => import('./pages/TeamList'));
 
 // 임시로 설문을 받기 위한 컴포넌트 생성
@@ -36,7 +38,7 @@ const TopBanner = styled.div`
 
 const Root = () => (
   <Router>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<PageLoading />}>
       <TopBanner className="display-flex justify-content-center align-item-center">
         페이지에 대한 평가를 마음껏 남겨주세요!
         <a
@@ -56,6 +58,14 @@ const Root = () => (
           <Route exact path="/team/:team_id" component={TeamDetail} />
           <Route exact path="/addForm" component={AddForm} />
           <Route exact path="/teamCreate" component={TeamCreate} />
+          <Route exact path="/mypage" component={MyPage} />
+          <Route
+            exact
+            path="/mypage/:menu(application|made)"
+            component={MyPage}
+          />
+          <Route exact path="/mypage/application/:sortby" component={MyPage} />
+          <Route exact path="/mypage/own" component={MyPage} />
           <Route exact path="/teamList" component={TeamList} />
         </Switch>
         <Footer />

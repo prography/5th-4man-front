@@ -11,8 +11,11 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.4.0",
     "immer": "^5.0.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-app-rewired": "^2.1.4",
     "react-dom": "^16.11.0",
@@ -43,6 +46,8 @@
       "react/prefer-stateless-function": 0,
       "react/jsx-one-expression-per-line": 0,
       "react/prop-types": 0,
+      "react/no-typos": 0,
+      "react/jsx-props-no-spreading": 0,
       "no-underscore-dangle": 0,
       "import/prefer-default-export": 0,
       "no-param-reassign": 0,
@@ -62,7 +67,9 @@
     "settings": {
       "import/resolver": {
         "node": {
-          "paths": ["src"]
+          "paths": [
+            "src"
+          ]
         }
       }
     }
