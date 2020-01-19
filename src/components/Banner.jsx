@@ -9,13 +9,12 @@ const Banner = () => {
           <div className="stack-choice-area display-flex flex-direction-column justify-content-center align-items-center">
             <div style={{ textAlign: 'center' }}>
               <img
-                src={process.env.PUBLIC_URL + '/images/tagSearchImage.png'}
-                width="20%"
-                height="100%"
+                src={`${process.env.PUBLIC_URL}/images/tagSearchImage.png`}
+                width="20"
                 alt="태그 그림"
               />
             </div>
-            <div style={{ fontSize: '30px', marginTop: '4%' }}>태그 검색</div>
+            <h2 className="tag-search-title">태그 검색</h2>
             <TagSearch />
           </div>
           <div className="banner-title">

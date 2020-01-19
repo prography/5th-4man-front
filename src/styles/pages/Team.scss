@@ -81,3 +81,19 @@
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .right-content {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 0 !important;
+    width: 100%;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.09);
+    z-index: 99;
+
+    .team-side-info {
+      display: none;
+    }
+  }
+}

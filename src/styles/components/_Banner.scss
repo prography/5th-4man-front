@@ -15,6 +15,11 @@ $banner-height: 440px;
       box-shadow: $box-shadow;
       border-radius: 10px;
       padding: 30px;
+
+      .tag-search-title {
+        font-size: 1rem;
+        margin-top: 10px;
+      }
     }
 
     .banner-title {
@@ -59,7 +64,7 @@ $banner-height: 440px;
         -webkit-box-shadow: $box-shadow;
         box-shadow: $box-shadow;
         border-radius: 3px;
-        padding: 30px;
+        padding: 10px 15px;
       }
     }
   }

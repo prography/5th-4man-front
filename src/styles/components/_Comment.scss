@@ -30,6 +30,10 @@
   border: 0;
 }
 
+.ant-comment-content-author-time * {
+  font-size: 0.75rem;
+}
+
 textarea.comment-input {
   overflow: hidden;
   overflow-wrap: break-word;

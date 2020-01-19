@@ -59,37 +59,35 @@ const TeamDetailContainer = ({ team_id }) => {
           <Col md={24} xl={8} className="right-content pb-10">
             <div className="fix-menu-wrap">
               <div className="fix-menu">
-                <Link
-                  to="#"
-                  className="leader-name display-inline-block main-color-blue"
-                >
-                  By. {leader.nickname}
-                </Link>
-                <h2 className="text-bold">{title}</h2>
-                <div className="tag-wrap mb-10 pb-20">
-                  {tags.map((o, idx) => (
-                    <Tag
-                      key={idx}
-                      style={{
-                        fontFamily: 'Noto Sans Light',
-                        borderRadius: '25px',
-                        color: 'white',
-                        backgroundImage:
-                          'linear-gradient(133deg, #5f76f3, #845ef7)',
-                      }}
-                    >
-                      {o}
-                    </Tag>
-                  ))}
+                <div className="team-side-info">
+                  <Link
+                    to="#"
+                    className="leader-name display-inline-block main-color-blue"
+                  >
+                    By. {leader.nickname}
+                  </Link>
+                  <h2 className="text-bold">{title}</h2>
+                  <div className="tag-wrap mb-10 pb-20">
+                    {tags.map((o, idx) => (
+                      <Tag
+                        key={idx}
+                        style={{
+                          fontFamily: 'Noto Sans Light',
+                          borderRadius: '25px',
+                          color: 'white',
+                          backgroundImage:
+                            'linear-gradient(133deg, #5f76f3, #845ef7)',
+                        }}
+                      >
+                        {o}
+                      </Tag>
+                    ))}
+                  </div>
                 </div>
                 <Row gutter={10} className="mb-10">
                   <Col span={12}>
                     <button type="button" className="display-block sub-btn">
-                      <Icon
-                        type="heart"
-                        className="heart-icon pr-10"
-                        // theme="filled"
-                      />
+                      <Icon type="heart" className="heart-icon pr-10" />
                       {like_count}
                     </button>
                   </Col>
@@ -100,6 +98,7 @@ const TeamDetailContainer = ({ team_id }) => {
                     </button>
                   </Col>
                 </Row>
+
                 <div>
                   <button
                     type="button"
