@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import * as moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import CardImage from 'components/CardImage';
 
-import { Row, Col, Tag } from 'antd';
+import { Row, Col, Tag, Button } from 'antd';
 
 const RowItem = styled.div`
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid #efefef;
+  &:not(:last-child) {
+    border-bottom: 1px solid #efefef;
+  }
   overflow: hidden;
   padding: 20px 0;
 
@@ -20,10 +24,16 @@ const RowItem = styled.div`
   .team-content {
     padding: 0 1rem;
 
-    h2 {
+    h2 > a {
+      color: #333;
       font-family: Noto Sans Medium;
       font-size: 1.125rem;
       margin-bottom: 10px;
+      margin-right: 5px;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     p {
@@ -55,27 +65,54 @@ const Description = styled.p`
   overflow: hidden;
 `;
 
+const statusLabel = {
+  승인대기: 'blue',
+  승인거절: 'red',
+  승인완료: 'green',
+  만료: 'orange',
+};
+
 const TeamRow = data => {
   return (
     <RowItem>
       <Row className="display-flex flex-direction-row">
         <Col span={6} className="team-image-wrap">
           <div className="image-wrap">
-            <CardImage imageUrl={data.image} animation />
+            <CardImage
+              imageUrl={data.image}
+              toUrl={`/team/${data.id}`}
+              animation
+            />
           </div>
         </Col>
         <Col span={18}>
           <div className="team-content">
             <div className="pt-10">
               <h2>
-                {data.title} <Tag color="blue">승인 대기</Tag>
+                <Link to={`/team/${data.id}`}>{data.title}</Link>
+                {data.teamType === 'application' && (
+                  <Tag color={statusLabel[data.application_status]}>
+                    {data.application_status}
+                  </Tag>
+                )}
+                {data.teamType === 'own' && (
+                  <Button
+                    type="link"
+                    icon="team"
+                    onClick={() => console.log('click!')}
+                  >
+                    신청자 관리
+                  </Button>
+                )}
               </h2>
               <TeamMeta>
                 <Description>{data.description}</Description>
               </TeamMeta>
               <p>
-                신청일자: 2019-12-31 &nbsp;&nbsp; 마감일자: 2020-01-31 <br />
-                좋아요 10 ∙ 댓글 30
+                신청일자: {moment(data.created_at).format('YYYY-MM-DD')}{' '}
+                &nbsp;&nbsp; 마감일자:{' '}
+                {moment(data.end_date).format('YYYY-MM-DD')} <br />
+                좋아요 {data.like_count} ∙ 댓글 {data.comments_count}
               </p>
               <p className="no-margin" />
             </div>

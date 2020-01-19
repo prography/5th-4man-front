@@ -2,10 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ProfileImage from 'components/ProfileImage';
+import { Tag } from 'antd';
 
 const ProfileWrap = styled.div`
   .profile-image-box {
-    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 
     .profile-image {
@@ -17,8 +20,20 @@ const ProfileWrap = styled.div`
       margin-bottom: 20px;
 
       img {
-        width: 100%;
+        width: 198px;
       }
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      span {
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+    }
+
+    p {
+      font-size: 0.8rem;
     }
   }
 
@@ -28,21 +43,19 @@ const ProfileWrap = styled.div`
     border-bottom: 1px solid #efefef;
     padding: 50px 20px 15px;
   }
-
-  .username {
-    color: blue;
-    font-size: 1rem;
-  }
 `;
 
-const ProfileBox = ({ name, url }) => {
+const ProfileBox = ({ username, introduction, nickname, image }) => {
   return (
     <ProfileWrap>
       <div className="profile-image-box">
         <div className="profile-image">
-          <ProfileImage size="large" url={url} />
+          <ProfileImage size="large" url={image} />
         </div>
-        <h3>{name}</h3>
+        <h3>
+          {nickname} <span>@{username}</span>
+        </h3>
+        <p>{introduction}</p>
       </div>
 
       <div className="menu-title">나의 개같하</div>

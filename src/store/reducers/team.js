@@ -19,12 +19,17 @@ export const GET_MY_APPLY_TEAM_LIST_SUCCESS =
 export const GET_MY_APPLY_TEAM_LIST_FAILURE =
   'team/GET_MY_APPLY_TEAM_LIST_FAILURE';
 
+export const GET_MY_TEAM_LIST_REQUEST = 'team/GET_MY_OWN_TEAM_LIST_REQUEST';
+export const GET_MY_TEAM_LIST_SUCCESS = 'team/GET_MY_TEAM_LIST_SUCCESS';
+export const GET_MY_TEAM_LIST_FAILURE = 'team/GET_MY_TEAM_LIST_FAILURE';
+
 // 리스트 가져오는 액션
 export const getPopularListAction = createAction(GET_POPULAR_LIST_REQUEST);
 export const getRecentListAction = createAction(GET_RECENT_LIST_REQUEST);
 export const getMyApplyTeamListAction = createAction(
   GET_MY_APPLY_TEAM_LIST_REQUEST,
 );
+export const getMyTeamListAction = createAction(GET_MY_TEAM_LIST_REQUEST);
 
 const initialListingSet = {
   list: [],
@@ -85,6 +90,21 @@ const reducer = (state = initialState, action) => {
         return draft;
       }
       case GET_MY_APPLY_TEAM_LIST_FAILURE: {
+        draft.mypage.loading = false;
+        return draft;
+      }
+
+      case GET_MY_TEAM_LIST_REQUEST: {
+        draft.mypage.loading = true;
+        return draft;
+      }
+      case GET_MY_TEAM_LIST_SUCCESS: {
+        draft.mypage.loading = false;
+        draft.mypage.list = action.items;
+
+        return draft;
+      }
+      case GET_MY_TEAM_LIST_FAILURE: {
         draft.mypage.loading = false;
         return draft;
       }

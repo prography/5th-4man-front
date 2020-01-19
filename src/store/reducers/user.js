@@ -8,6 +8,10 @@ export const initialState = {
   access: '',
   isNew: false,
   usernameCheck: false,
+  introduction: '',
+  image: '',
+  is_github_authenticated: '',
+  nickname: '',
 };
 
 export const LOG_IN_GITHUB_TOKEN_REQUEST = 'user/LOG_IN_GITHUB_TOKEN_REQUEST';

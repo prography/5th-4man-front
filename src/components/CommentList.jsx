@@ -19,6 +19,7 @@ const CommentList = ({
       parent,
       created_at,
       child_comments_count,
+      profileImage,
     }) => (
       <Comment
         key={id}
@@ -36,6 +37,7 @@ const CommentList = ({
         handleUpdate={handleUpdate}
         isLoggedIn={isLoggedIn}
         username={username}
+        profileImage={profileImage}
       />
     ),
   );

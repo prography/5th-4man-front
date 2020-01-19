@@ -10,7 +10,7 @@ import * as commentActions from '../store/reducers/comment';
 
 const CommentContainer = ({ team_id }) => {
   const { comment } = useSelector(state => state.comment);
-  const { isLoggedIn, username } = useSelector(state => state.user);
+  const { isLoggedIn, username, image } = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
@@ -94,6 +94,7 @@ const CommentContainer = ({ team_id }) => {
             handleUpdate={handleUpdate}
             isLoggedIn={isLoggedIn}
             username={username}
+            profileImage={image}
           />
         ) : (
           ''

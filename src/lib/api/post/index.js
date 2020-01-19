@@ -129,16 +129,13 @@ export const teamApplication = async (params, token) => {
 };
 
 export const getMyApplyTeamList = async () => {
-  const headers = {
-    'Content-Type': 'application/json',
-  };
+  const re = await axios.get(`${API_URL}/account/self/applied/teams/`);
 
-  const re = await SendUrl(
-    `${API_URL}/account/self/applied/teams/`,
-    'get',
-    {},
-    headers,
-  );
+  return re;
+};
+
+export const getMyTeamList = async () => {
+  const re = await axios.get(`${API_URL}/account/self/own/teams/`);
 
   return re;
 };

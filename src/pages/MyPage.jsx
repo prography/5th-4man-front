@@ -1,11 +1,11 @@
 import React from 'react';
-import ProfileBox from 'components/ProfileBox';
+import UserDetailContainer from 'containers/UserDetailContainer';
 import UserTeamListContainer from 'containers/UserTeamListContainer';
 import styled from 'styled-components';
 
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
-import { Menu, Icon, Row, Col } from 'antd';
+import { Menu, Icon, Row, Col, PageHeader } from 'antd';
 
 const { SubMenu } = Menu;
 
@@ -13,18 +13,28 @@ const MyPageWrapper = styled.div`
   padding: 60px 0;
 `;
 
+const RightContent = styled.div`
+  min-height: 700px;
+`;
+
 const MyPage = ({ match }) => {
+  const [, , menuType] = match.path.split('/');
+
   return (
     <div className="mypage-wrap">
       <MyPageWrapper>
         <div className="container">
-          <Row>
+          <Row gutter={60}>
             <Col md={24} xl={6} className="left-content pb-10">
-              <ProfileBox />
+              <UserDetailContainer />
               <Menu
                 mode="inline"
-                selectedKeys={[match.params.sortby || 'all']}
-                defaultOpenKeys={['application', 'made']}
+                selectedKeys={[
+                  `${menuType || 'application'}_${match.params.sortby ||
+                    'all'}`,
+                ]}
+                defaultOpenKeys={['application', 'own']}
+                className="mb-20"
               >
                 <SubMenu
                   key="application"
@@ -35,21 +45,12 @@ const MyPage = ({ match }) => {
                     </span>
                   }
                 >
-                  <Menu.Item key="all">
-                    <Link to="/mypage">전체</Link>
+                  <Menu.Item key="application_all">
+                    <Link to="/mypage/application/all">전체</Link>
                   </Menu.Item>
-                  {/* <Menu.Item key="wait">
-                    <Link to="/mypage/application/wait">승인 대기</Link>
-                  </Menu.Item>
-                  <Menu.Item key="success">
-                    <Link to="/mypage/application/success">승인 완료</Link>
-                  </Menu.Item>
-                  <Menu.Item key="failed">
-                    <Link to="/mypage/application/failed">승인 거절</Link>
-                  </Menu.Item> */}
                 </SubMenu>
                 <SubMenu
-                  key="made"
+                  key="own"
                   title={
                     <span>
                       <Icon type="user" />
@@ -57,14 +58,37 @@ const MyPage = ({ match }) => {
                     </span>
                   }
                 >
-                  <Menu.Item key="3">전체</Menu.Item>
-                  {/* <Menu.Item key="4">모집 중</Menu.Item>
-                  <Menu.Item key="5">마감 완료</Menu.Item> */}
+                  <Menu.Item key="own_all">
+                    <Link to="/mypage/own">전체</Link>
+                  </Menu.Item>
                 </SubMenu>
               </Menu>
             </Col>
-            <Col md={24} xl={18} className="left-content">
-              <UserTeamListContainer />
+            <Col md={24} xl={18}>
+              <RightContent>
+                <PageHeader
+                  className="no-padding pb-20"
+                  title="팀 리스트"
+                  subTitle="너 내 동료가 돼라"
+                />
+                <Route
+                  exact
+                  path="/mypage"
+                  render={() => (
+                    <UserTeamListContainer teamType="application" />
+                  )}
+                />
+                <Route
+                  path="/mypage/application/:sortby"
+                  render={() => (
+                    <UserTeamListContainer teamType="application" />
+                  )}
+                />
+                <Route
+                  path="/mypage/own"
+                  render={() => <UserTeamListContainer teamType="own" />}
+                />
+              </RightContent>
             </Col>
           </Row>
         </div>

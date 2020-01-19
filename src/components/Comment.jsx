@@ -1,8 +1,9 @@
 import React, { memo, useState } from 'react';
-import { Comment as AntComment, Avatar } from 'antd';
+import { Comment as AntComment } from 'antd';
 
 import CommentInput from 'components/CommentInput';
 import CommentList from 'components/CommentList';
+import ProfileImage from 'components/ProfileImage';
 
 import * as CommentActions from 'components/CommentActions';
 
@@ -20,6 +21,7 @@ const Comment = ({
   handleUpdate,
   isLoggedIn,
   username,
+  profileImage,
 }) => {
   const [openInput, setToggleInput] = useState(false);
   const [isChange, setIsChange] = useState(false);
@@ -74,14 +76,7 @@ const Comment = ({
         actions={actions()}
         author={<span className="comment-nickname">{author.nickname}</span>}
         datetime={created_at}
-        avatar={
-          <Avatar
-            //src="https://avatars1.githubusercontent.com/u/23019698?s=460&v=4"
-            src="#"
-          >
-            {author.username}
-          </Avatar>
-        }
+        avatar={<ProfileImage size="small" url={profileImage} />}
         content={
           !isChange ? (
             <div>
