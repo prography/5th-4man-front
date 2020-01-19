@@ -103,6 +103,7 @@ const TeamCreateContainer = props => {
           'end_date',
           values.end_date.format('YYYY-MM-DD HH:mm:ss'),
         );
+        formdata.append('kakao_chat_url', values.kakao_chat_url);
         formdata.append('access', access);
         formdata.append('image', image);
         for (let i = 0; i < searchTags.length; i++) {
@@ -171,7 +172,7 @@ const TeamCreateContainer = props => {
                         message: '5 - 50자 내로 작성해주세요.',
                       },
                     ],
-                  })(<Input size="large" placeholder="team title" />)}
+                  })(<Input placeholder="team title" />)}
                 </Form.Item>
 
                 <Form.Item label="팀 세부설명">
@@ -216,7 +217,21 @@ const TeamCreateContainer = props => {
                     ],
                   })(<DatePicker mode="date" format="YYYY-MM-DD" />)}
                 </Form.Item>
-
+                <Form.Item label="카카오톡 오픈채팅 링크">
+                  {getFieldDecorator('kakao_chat_url', {
+                    rules: [
+                      {
+                        required: true,
+                        message:
+                          '카카오톡 오픈채팅 링크는 필수로 입력해주세요.',
+                      },
+                      {
+                        pattern: /^https:\/\/open.kakao.com\//i,
+                        message: '정확한 오픈채팅 링크를 입력해주세요.',
+                      },
+                    ],
+                  })(<Input placeholder="kakao chat url" />)}
+                </Form.Item>
                 <Form.Item label="태그">
                   {searchTags.map((tag, index) => {
                     const isLongTag = tag.length > 6;
