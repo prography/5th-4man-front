@@ -1,6 +1,6 @@
 import React from 'react';
-import { Tag } from 'antd';
 import TagSearchInput from './TagSearchInput';
+import TagItem from './TagItem';
 
 const TagSearch = props => {
   const {
@@ -19,10 +19,12 @@ const TagSearch = props => {
     <div>
       {searchTags.map((tag, index) => {
         const tagElem = (
-          <Tag
+          <TagItem
+            tag={tag}
             key={index}
             color="white"
             closable
+            searchTags={searchTags}
             onClose={e => {
               e.preventDefault();
               handleClose(tag);
@@ -30,12 +32,10 @@ const TagSearch = props => {
             style={{
               fontFamily: 'Noto Sans Light',
               borderRadius: '25px',
-              color: 'white',
+              color: '#FFFFFF',
               backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
             }}
-          >
-            {tag}
-          </Tag>
+          />
         );
 
         return tagElem;
@@ -47,14 +47,16 @@ const TagSearch = props => {
         addItem={addItem}
         onSelect={onSelect}
       />
-      {tags.map((o, idx) => (
-        <Tag
+      {tags.map((tag, idx) => (
+        <TagItem
+          tag={tag}
           key={idx}
-          onClick={() => handleTagInput(o)}
-          style={{ borderRadius: '30px' }}
-        >
-          {o}
-        </Tag>
+          handleTagInput={handleTagInput}
+          style={{
+            fontFamily: 'Noto Sans Light',
+            borderRadius: '25px',
+          }}
+        />
       ))}
     </div>
   );

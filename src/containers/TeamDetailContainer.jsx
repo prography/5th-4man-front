@@ -1,14 +1,11 @@
 import React, { useEffect, useCallback, useMemo, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { Col, Row, Icon, Tabs, Tag } from 'antd';
-
+import { Col, Row, Icon, Tabs } from 'antd';
+import TagItem from 'components/TagItem';
 import CardImage from 'components/CardImage';
 import CommentContainer from 'containers/CommentContainer';
-
 import { OPEN_MODAL } from '../store/reducers/modal';
-
 import * as teamDetailActions from '../store/reducers/teamDetail';
 
 const TeamDetailContainer = ({ team_id }) => {
@@ -67,9 +64,10 @@ const TeamDetailContainer = ({ team_id }) => {
                 </Link>
                 <h2 className="text-bold">{title}</h2>
                 <div className="tag-wrap mb-10 pb-20">
-                  {tags.map((o, idx) => (
-                    <Tag
+                  {tags.map((tag, idx) => (
+                    <TagItem
                       key={idx}
+                      tag={tag}
                       style={{
                         fontFamily: 'Noto Sans Light',
                         borderRadius: '25px',
@@ -77,9 +75,7 @@ const TeamDetailContainer = ({ team_id }) => {
                         backgroundImage:
                           'linear-gradient(133deg, #5f76f3, #845ef7)',
                       }}
-                    >
-                      {o}
-                    </Tag>
+                    />
                   ))}
                 </div>
                 <Row gutter={10} className="mb-10">

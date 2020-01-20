@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Icon, Tag } from 'antd';
+import { Card, Icon } from 'antd';
 import * as moment from 'moment';
+import TagItem from 'components/TagItem';
 
 import CardImage from 'components/CardImage';
 import Progress from 'components/Progress';
@@ -35,18 +36,18 @@ const TeamCard = props => {
           <p className="description">{item.description}</p>
 
           <div>
-            {item.tags.map(o => (
-              <Tag
-                key={o}
+            {item.tags.map(tag => (
+              <TagItem
+                key={tag}
+                tag={tag}
+                closable={false}
                 style={{
                   fontFamily: 'Noto Sans Light',
                   borderRadius: '25px',
-                  color: 'white',
+                  color: '#FFFFFF',
                   backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
                 }}
-              >
-                {o}
-              </Tag>
+              />
             ))}
           </div>
         </div>

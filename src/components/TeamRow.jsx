@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import * as moment from 'moment';
 import { Link } from 'react-router-dom';
-
 import CardImage from 'components/CardImage';
-
-import { Row, Col, Tag, Button } from 'antd';
+import TagItem from 'components/TagItem';
+import { Row, Col, Button } from 'antd';
 
 const RowItem = styled.div`
   width: 100%;
@@ -91,9 +90,10 @@ const TeamRow = data => {
               <h2>
                 <Link to={`/team/${data.id}`}>{data.title}</Link>
                 {data.teamType === 'application' && (
-                  <Tag color={statusLabel[data.application_status]}>
-                    {data.application_status}
-                  </Tag>
+                  <TagItem
+                    color={statusLabel[data.application_status]}
+                    tag={data.application_status}
+                  />
                 )}
                 {data.teamType === 'own' && (
                   <Button
@@ -123,4 +123,4 @@ const TeamRow = data => {
   );
 };
 
-export default TeamRow;
+export default memo(TeamRow);
