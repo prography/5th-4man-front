@@ -6,6 +6,9 @@ import store from './store';
 import * as serviceWorker from './serviceWorker';
 import ModalContainer from './containers/ModalContainer';
 
+// moment 한글 설정
+import 'moment/locale/ko';
+
 import 'styles/main.scss';
 
 ReactDOM.render(

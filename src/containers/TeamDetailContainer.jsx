@@ -81,11 +81,7 @@ const TeamDetailContainer = ({ team_id }) => {
                 <Row gutter={10} className="mb-10">
                   <Col span={12}>
                     <button type="button" className="display-block sub-btn">
-                      <Icon
-                        type="heart"
-                        className="heart-icon pr-10"
-                        // theme="filled"
-                      />
+                      <Icon type="heart" className="heart-icon pr-10" />
                       {like_count}
                     </button>
                   </Col>
@@ -96,6 +92,7 @@ const TeamDetailContainer = ({ team_id }) => {
                     </button>
                   </Col>
                 </Row>
+
                 <div>
                   <button
                     type="button"

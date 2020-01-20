@@ -1,9 +1,11 @@
 import React, { memo, useState } from 'react';
-import { Comment as AntComment } from 'antd';
+import { Comment as AntComment, Tooltip } from 'antd';
 
 import CommentInput from 'components/CommentInput';
 import CommentList from 'components/CommentList';
 import ProfileImage from 'components/ProfileImage';
+
+import * as moment from 'moment';
 
 import * as CommentActions from 'components/CommentActions';
 
@@ -75,7 +77,11 @@ const Comment = ({
         className="team-comment"
         actions={actions()}
         author={<span className="comment-nickname">{author.nickname}</span>}
-        datetime={created_at}
+        datetime={
+          <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+            <span>{moment(created_at).fromNow()}</span>
+          </Tooltip>
+        }
         avatar={<ProfileImage size="small" url={profileImage} />}
         content={
           !isChange ? (

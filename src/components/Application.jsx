@@ -24,9 +24,21 @@ const Application = ({ form }) => {
 
         await PostAPI.teamApplication(params, access);
 
-        swal('신청완료', '신청 이력을 확인하시겠습니까?', 'success');
-
-        dispatch({ type: CLOSE_MODAL });
+        swal('신청완료', '신청 이력을 확인하시겠습니까?', 'success', {
+          buttons: {
+            cancel: {
+              text: '취소',
+              visible: true,
+            },
+            confirm: {
+              text: '확인',
+            },
+          },
+        }).then(confirm => {
+          if (confirm) {
+            window.location.href = '/mypage';
+          }
+        });
       }
     });
   };
