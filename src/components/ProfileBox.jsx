@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ProfileImage from 'components/ProfileImage';
-import { Tag } from 'antd';
 
 const ProfileWrap = styled.div`
   .profile-image-box {
@@ -36,13 +35,6 @@ const ProfileWrap = styled.div`
       font-size: 0.8rem;
     }
   }
-
-  .menu-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    border-bottom: 1px solid #efefef;
-    padding: 50px 20px 15px;
-  }
 `;
 
 const ProfileBox = ({ username, introduction, nickname, image }) => {
@@ -57,8 +49,6 @@ const ProfileBox = ({ username, introduction, nickname, image }) => {
         </h3>
         <p>{introduction}</p>
       </div>
-
-      <div className="menu-title">나의 개같하</div>
     </ProfileWrap>
   );
 };
