@@ -1,18 +1,28 @@
 import React, { useEffect, useCallback, useMemo, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Col, Row, Icon, Tabs } from 'antd';
+import { Col, Row, Icon, Tabs, Modal } from 'antd';
 import TagItem from 'components/TagItem';
 import CardImage from 'components/CardImage';
 import CommentContainer from 'containers/CommentContainer';
 import { OPEN_MODAL } from '../store/reducers/modal';
 import * as teamDetailActions from '../store/reducers/teamDetail';
+import { useState } from 'react';
 
 const TeamDetailContainer = ({ team_id }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
   const { isLoggedIn } = useSelector(state => state.user);
-
-  const { title, description, image, like_count, tags, leader } = team;
+  const [visible, setVisible] = useState(false);
+  const {
+    title,
+    description,
+    image,
+    like_count,
+    tags,
+    leader,
+    application_status,
+    chat_url,
+  } = team;
 
   const dispatch = useDispatch();
   const getData = useCallback(() => {
@@ -26,6 +36,18 @@ const TeamDetailContainer = ({ team_id }) => {
   const applyBtnType = useMemo(() => {
     return isLoggedIn ? 'application' : 'login';
   }, [isLoggedIn]);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = e => {
+    setVisible(false);
+  };
+
+  const handleCancel = e => {
+    setVisible(false);
+  };
 
   const { TabPane } = Tabs;
 
@@ -94,18 +116,38 @@ const TeamDetailContainer = ({ team_id }) => {
                 </Row>
 
                 <div>
-                  <button
-                    type="button"
-                    className="apply-btn display-block"
-                    onClick={() =>
-                      dispatch({
-                        type: OPEN_MODAL,
-                        payload: { type: applyBtnType },
-                      })
-                    }
+                  {application_status === '' ? (
+                    <button
+                      type="button"
+                      className="apply-btn display-block"
+                      onClick={() =>
+                        dispatch({
+                          type: OPEN_MODAL,
+                          payload: { type: applyBtnType },
+                        })
+                      }
+                    >
+                      {applyBtnMsg}
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="apply-btn display-block"
+                      onClick={showModal}
+                    >
+                      오픈채팅 링크 확인
+                    </button>
+                  )}
+                  <Modal
+                    title="오픈채팅 링크"
+                    visible={visible}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    okText="확인"
+                    cancelText="닫기"
                   >
-                    {applyBtnMsg}
-                  </button>
+                    {chat_url}
+                  </Modal>
                 </div>
               </div>
             </div>
