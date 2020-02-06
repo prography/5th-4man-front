@@ -37,10 +37,17 @@ const ApplyTeamUserListContainer = ({ data }) => {
     } catch (error) {}
   };
 
-  return !applyUser.loading ? (
+  return (
     <Row gutter={5} className="p-20">
       <Col md={24} xl={12}>
-        <ApplyUserTeamList {...applyUser} handleUserDetail={handleUserDetail} />
+        {!applyUser.loading ? (
+          <ApplyUserTeamList
+            {...applyUser}
+            handleUserDetail={handleUserDetail}
+          />
+        ) : (
+          ''
+        )}
       </Col>
       <Col md={24} xl={12}>
         <ApplyUserTeamDetail
@@ -51,8 +58,6 @@ const ApplyTeamUserListContainer = ({ data }) => {
         />
       </Col>
     </Row>
-  ) : (
-    <div></div>
   );
 };
 
