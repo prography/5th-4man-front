@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useMemo, memo } from 'react';
+import React, { useEffect, useCallback, useMemo, memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Row, Icon, Tabs, Modal } from 'antd';
@@ -7,7 +7,7 @@ import CardImage from 'components/CardImage';
 import CommentContainer from 'containers/CommentContainer';
 import { OPEN_MODAL } from '../store/reducers/modal';
 import * as teamDetailActions from '../store/reducers/teamDetail';
-import { useState } from 'react';
+import QRCode from 'qrcode.react';
 
 const TeamDetailContainer = ({ team_id }) => {
   const { team, loading } = useSelector(state => state.teamDetail);
@@ -129,13 +129,21 @@ const TeamDetailContainer = ({ team_id }) => {
                     >
                       {applyBtnMsg}
                     </button>
-                  ) : (
+                  ) : application_status === '승인완료' ? (
                     <button
                       type="button"
                       className="apply-btn display-block"
                       onClick={showModal}
                     >
                       오픈채팅 링크 확인
+                    </button>
+                  ) : application_status === '승인거절' ? (
+                    <button type="button" className="apply-btn display-block">
+                      승인거절
+                    </button>
+                  ) : (
+                    <button type="button" className="apply-btn display-block">
+                      승인대기
                     </button>
                   )}
                   <Modal
@@ -146,7 +154,15 @@ const TeamDetailContainer = ({ team_id }) => {
                     okText="확인"
                     cancelText="닫기"
                   >
-                    {chat_url}
+                    {chat_url === '' ? (
+                      <></>
+                    ) : (
+                      <>
+                        <QRCode value={chat_url} />
+                        <br />
+                        <a href={chat_url}>{chat_url}</a>
+                      </>
+                    )}
                   </Modal>
                 </div>
               </div>
