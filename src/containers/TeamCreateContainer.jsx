@@ -8,10 +8,10 @@ import {
   DatePicker,
   Upload,
   Modal,
-  Tag,
   AutoComplete,
   Divider,
 } from 'antd';
+import TagItem from 'components/TagItem';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import * as api from 'lib/api/post';
@@ -236,10 +236,10 @@ const TeamCreateContainer = props => {
                 </Form.Item>
                 <Form.Item label="태그">
                   {searchTags.map((tag, index) => {
-                    const isLongTag = tag.length > 6;
                     const tagElem = (
-                      <Tag
+                      <TagItem
                         key={index}
+                        tag={tag}
                         color="#5f76f3"
                         closable
                         onClose={e => {
@@ -247,9 +247,7 @@ const TeamCreateContainer = props => {
                           handleClose(tag);
                         }}
                         style={{ borderRadius: '30px' }}
-                      >
-                        {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-                      </Tag>
+                      />
                     );
 
                     return tagElem;

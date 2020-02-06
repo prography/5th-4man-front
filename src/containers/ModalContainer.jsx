@@ -5,18 +5,19 @@ import Modal from '../components/Modal';
 import { CLOSE_MODAL } from '../store/reducers/modal';
 import Login from '../components/Login';
 import Application from '../components/Application';
+import ApplyTeamUserList from './ApplyTeamUserListContainer';
 
 const ModalType = {
   login: Login,
   application: Application,
+  applyTeamUserList: ApplyTeamUserList,
 };
 
 const ModalContainer = () => {
-  const { openYn, type } = useSelector(state => state.modal);
+  const { openYn, type, data } = useSelector(state => state.modal);
   const dispatch = useDispatch();
   const CurrentModal = ModalType[type];
-  const el = document.createElement('div');
-  document.body.appendChild(el);
+  const el = document.getElementById('modal');
 
   const closeModal = () => {
     dispatch({ type: CLOSE_MODAL });
@@ -36,7 +37,7 @@ const ModalContainer = () => {
     <>
       {openYn && (
         <Modal size={type} close={closeModal}>
-          <CurrentModal />
+          <CurrentModal data={data} />
         </Modal>
       )}
     </>,

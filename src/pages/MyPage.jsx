@@ -17,6 +17,13 @@ const RightContent = styled.div`
   min-height: 700px;
 `;
 
+const MenuTitle = styled.div`
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: 1px solid #efefef;
+  padding: 50px 20px 15px;
+`;
+
 const MyPage = ({ match }) => {
   const [, , menuType] = match.path.split('/');
 
@@ -27,6 +34,7 @@ const MyPage = ({ match }) => {
           <Row gutter={60}>
             <Col md={24} xl={6} className="left-content pb-10">
               <UserDetailContainer />
+              <MenuTitle>나의 개같하</MenuTitle>
               <Menu
                 mode="inline"
                 selectedKeys={[

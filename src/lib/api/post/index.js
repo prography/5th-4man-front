@@ -16,6 +16,19 @@ export const SendUrl = async (url, method, params, headers) => {
   }
   return re;
 };
+
+export const updateApprove = async params => {
+  const re = await SendUrl(`${API_URL}/application/${params}/approve/`, 'post');
+
+  return re;
+};
+
+export const updateRefuse = async params => {
+  const re = await SendUrl(`${API_URL}/application/${params}/refuse/`, 'post');
+
+  return re;
+};
+
 export const getSearchTeamList = async params => {
   const tagArrayCheck = typeof params === 'object' && params.length;
   const tags = tagArrayCheck ? params : [params];
@@ -30,6 +43,11 @@ export const getSearchTeamList = async params => {
   }
 
   const re = await SendUrl(`${API_URL}/team/?${query}`, 'get');
+  return re;
+};
+
+export const getRecentApplyTeamUserList = async params => {
+  const re = await SendUrl(`${API_URL}/team/${params.id}/application/`);
   return re;
 };
 

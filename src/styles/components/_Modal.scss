@@ -9,8 +9,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
   z-index: 999;
+  padding-top: 7rem;
 }
 
 .modal-container .modal-content {
@@ -55,5 +55,9 @@
 }
 
 .modal-full {
+  width: 95%;
+}
+
+.modal-applyTeamUserList {
   width: 95%;
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Dropdown, Button, Icon, Menu, Tag, message } from 'antd';
+import { Dropdown, Button, Icon, Menu, message } from 'antd';
 import TagSearchInput from 'components/TagSearchInput';
 import SearchButton from 'components/SearchButton';
+import TagItem from 'components/TagItem';
 import * as api from 'lib/api/post';
 
 const SubSearchContainer = ({ tags }) => {
@@ -110,7 +111,8 @@ const SubSearchContainer = ({ tags }) => {
       </Dropdown>
       {searchTags.map((tag, index) => {
         const tagElem = (
-          <Tag
+          <TagItem
+            tag={tag}
             key={index}
             color="white"
             closable
@@ -124,9 +126,7 @@ const SubSearchContainer = ({ tags }) => {
               color: 'white',
               backgroundImage: 'linear-gradient(133deg, #5f76f3, #845ef7)',
             }}
-          >
-            {tag}
-          </Tag>
+          />
         );
 
         return tagElem;

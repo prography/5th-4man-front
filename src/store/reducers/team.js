@@ -10,6 +10,13 @@ export const GET_RECENT_LIST_REQUEST = 'team/GET_RECENT_LIST_REQUEST';
 export const GET_RECENT_LIST_SUCCESS = 'team/GET_RECENT_LIST_SUCCESS';
 export const GET_RECENT_LIST_FAILURE = 'team/GET_RECENT_LIST_FAILURE';
 
+export const GET_RECENT_APPLY_TEAM_USER_LIST_REQUEST =
+  'team/GET_RECENT_APPLY_TEAM_USER_LIST_REQUEST';
+export const GET_RECENT_APPLY_TEAM_USER_LIST_SUCCESS =
+  'team/GET_RECENT_APPLY_TEAM_USER_LIST_SUCCESS';
+export const GET_RECENT_APPLY_TEAM_USER_LIST_FAILURE =
+  'team/GET_RECENT_APPLY_TEAM_USER_LIST_FAILURE';
+
 export const GET_MY_APPLY_TEAM_LIST_REQUEST =
   'team/GET_MY_APPLY_TEAM_LIST_REQUEST';
 
@@ -41,6 +48,10 @@ export const getSearchTeamListAction = createAction(
   GET_SEARCH_TEAM_LIST_REQUEST,
 );
 
+export const getRecentApplyTeamUserList = createAction(
+  GET_RECENT_APPLY_TEAM_USER_LIST_REQUEST,
+);
+
 const initialListingSet = {
   list: [],
   loading: true,
@@ -54,6 +65,7 @@ const initialState = {
   recent: initialListingSet,
   mypage: initialListingSet,
   search: initialListingSet,
+  applyUser: initialListingSet,
 };
 
 // team reducer
@@ -134,6 +146,23 @@ const reducer = (state = initialState, action) => {
 
       case GET_SEARCH_TEAM_LIST_FAILURE: {
         draft.search.loading = false;
+        return draft;
+      }
+      // applyUser
+      case GET_RECENT_APPLY_TEAM_USER_LIST_REQUEST: {
+        draft.applyUser.loading = true;
+        return draft;
+      }
+
+      case GET_RECENT_APPLY_TEAM_USER_LIST_SUCCESS: {
+        draft.applyUser.list = action.items;
+        draft.applyUser.loading = false;
+
+        return draft;
+      }
+      case GET_RECENT_APPLY_TEAM_USER_LIST_FAILURE: {
+        draft.applyUser.loading = false;
+
         return draft;
       }
     }
